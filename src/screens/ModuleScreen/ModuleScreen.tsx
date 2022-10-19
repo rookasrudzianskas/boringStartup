@@ -7,6 +7,7 @@ const ModuleScreen = () => {
     return (
         <View style={styles.container}>
             <TopicNode />
+            <TopicNode />
         </View>
     );
 };
