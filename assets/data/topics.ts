@@ -16,7 +16,7 @@ export default [
                 id: '2',
                 title: 'JavaScript Let?',
                 url: "https://www.w3schools.com/js/js_let.asp",
-                completed: true,
+                completed: false,
             },
             {
                 id: '3',

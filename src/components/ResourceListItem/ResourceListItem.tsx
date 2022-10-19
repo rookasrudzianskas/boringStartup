@@ -21,7 +21,7 @@ const ResourceListItem = ({ resource, index }: ResourceListItemProps) => {
 
     return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={styles.container}>
-            <View style={styles.indexContainer}>
+            <View style={[styles.indexContainer, resource.completed && styles.completed]}>
                 <Text>{index + 1}</Text>
             </View>
             <Text>{resource?.title}</Text>
@@ -47,6 +47,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderRadius: 999,
         marginRight: 5,
+    },
+    completed: {
+        backgroundColor: Colors.light.primary,
+        borderColor: Colors.light.primary,
     },
     icon: {
        marginLeft: "auto",
