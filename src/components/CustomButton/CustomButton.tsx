@@ -1,6 +1,7 @@
 //@ts-nocheck
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, PressableProps} from 'react-native';
+import Colors from "../../constants/Colors";
 
 interface CustomButtonProps extends PressableProps {
     text: string;
@@ -18,7 +19,7 @@ export default CustomButton;
 
 const styles = StyleSheet.create({
    container: {
-
+       backgroundColor: Colors.light.primary,
    },
     text: {
 
