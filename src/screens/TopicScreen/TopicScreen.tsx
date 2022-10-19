@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, {useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import {Text, View, StyleSheet, Image, ScrollView} from 'react-native';
 import Colors from "../../constants/Colors";
 import ResourceListItem from "../../components/ResourceListItem";
@@ -16,6 +16,12 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     const onStartQuiz = () => {
         navigation.navigate("Quiz", {id: topicId});
     };
+
+    useEffect(() => {
+        if(topic) {
+            navigation.setOptions({ title: topic.title });
+        }
+    }, [topic]);
 
     useLayoutEffect(() => {
         if(!topic) return;
