@@ -1,4 +1,3 @@
-import topics from "../../assets/data/topics";
 import {Topic} from "../types/models";
 
 export const groupByLevel = (topics: Topic[]) => {
@@ -16,13 +15,6 @@ export const groupByLevel = (topics: Topic[]) => {
 }
 
 export const getCurrentActiveLevel = (levels: Topic[][]) => {
-    let currentLevel = 1;
     // levels.filter((levelTopics) => levelTopics.every((topic) => topic.progress >= 1)) @TODO maybe the better solution with Maximum level
-    levels.forEach((levelTopics) => {
-        const isLevelComplete  = levelTopics.every((topic) => topic.progress >= 1);
-        if(isLevelComplete) {
-            currentLevel++;
-        }
-    });
-    return currentLevel;
+    return levels.reduce((acc: number, levelTopics) => levelTopics.every((topic) => topic.progress >= 1) ? acc + 1 : acc, 0);
 }
