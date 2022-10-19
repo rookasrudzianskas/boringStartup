@@ -5,10 +5,7 @@ export default [
         icon: 'https://i.imgur.com/1YtX1YR.png',
         level: 1,
         progress: 1,
-        description: `# h1 Heading 8-)
-        **This is some bold text!**
-        This is normal text
-        `,
+        description: `# h1 Heading 8-) **This is some bold text!** This is normal text`,
         resources: [
             {
                 id: '1',

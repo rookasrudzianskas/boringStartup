@@ -4,8 +4,7 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {ResourceItem} from "../../types/models";
 import Colors from "../../constants/Colors";
 import {Ionicons} from "@expo/vector-icons";
-import { A } from '@expo/html-elements';
-import * as Linking from 'expo-linking';
+import Markdown from 'react-native-markdown-display';
 import * as WebBrowser from 'expo-web-browser';
 
 interface ResourceListItemProps {

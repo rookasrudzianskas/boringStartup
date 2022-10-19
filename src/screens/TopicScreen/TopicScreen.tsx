@@ -7,6 +7,7 @@ import {useNavigation, useRoute} from "@react-navigation/native";
 import {RootStackParamList} from "../../types/navigation";
 import topics from "../../../assets/data/topics";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
+import Markdown from "react-native-markdown-display";
 
 const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => {
     const topicId = route.params.id;
@@ -24,6 +25,9 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         <View className="" style={styles.container}>
             <Image />
             <Text style={styles.title}>Resources</Text>
+            <Markdown>
+                {topic?.description || 'Loading...'}
+            </Markdown>
             {topic.resources && (
                 <>
                     {topic?.resources.map((resource, index) => (
