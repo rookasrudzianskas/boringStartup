@@ -15,10 +15,13 @@ export const groupByLevel = (topics: Topic[]) => {
     return Object.values(levels);
 }
 
-export const getCurrentActiveLevel = (levels: Topic[]) => {
-    const currentLevel = 1;
+export const getCurrentActiveLevel = (levels: Topic[][]) => {
+    let currentLevel = 1;
     levels.forEach((levelTopics) => {
-        // @ts-ignore
-        const isLevelComplete  = levelTopics.every((topic) => topic.progress === 1);
+        const isLevelComplete  = levelTopics.every((topic) => topic.progress >= 1);
+        if(isLevelComplete) {
+            currentLevel++;
+        }
     });
+    return currentLevel;
 }
