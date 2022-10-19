@@ -23,7 +23,11 @@ const ResourceListItem = ({ resource, index, isLast }: ResourceListItemProps) =>
     return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={styles.container}>
             <View style={[styles.indexContainer, resource.completed && styles.completed]}>
-                <Text>{index + 1}</Text>
+                {resource.completed ? (
+                    <Ionicons name="checkmark" size={22} color="white" />
+                ) : (
+                    <Text>{index + 1}</Text>
+                )}
             </View>
             <Text>{resource?.title}</Text>
             <Ionicons name="open-outline" size={21} color="black" style={styles.icon} />
