@@ -1,6 +1,7 @@
 //@ts-nocheck
 import React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
+import Colors from "../../constants/Colors";
 
 const TopicNode = () => {
     return (
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
     circle: {
         width: 50,
         aspectRatio: 1,
-        backgroundColor: 'red',
+        backgroundColor: Colors.light.tertiary,
     },
     image: {
 
