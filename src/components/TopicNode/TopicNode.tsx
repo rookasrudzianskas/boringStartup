@@ -12,7 +12,7 @@ interface TopicNodeProps {
 const TopicNode = ({topic, isDisabled = true}: TopicNodeProps) => {
     return (
         <TouchableOpacity activeOpacity={0.7} style={styles.container}>
-            <View style={[styles.circle, {backgroundColor: isDisabled ? 'gray' : Colors.light.tertiary}]}>
+            <View style={[styles.circle, {backgroundColor: isDisabled ? Colors.light.dark : Colors.light.primary}]}>
                 <Image source={{uri: topic?.icon}} style={styles.image} />
             </View>
             <Text style={styles.title}>{topic?.title || 'Loading...'}</Text>
