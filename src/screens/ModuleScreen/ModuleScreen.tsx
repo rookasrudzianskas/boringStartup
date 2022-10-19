@@ -1,39 +1,28 @@
 //@ts-nocheck
 import React from 'react';
-import {Text, View, StyleSheet, Image} from 'react-native';
+import {Text, View, StyleSheet, Image, FlatList} from 'react-native';
 import TopicNode from "../../components/TopicNode";
 import TopicNodesRow from "../../components/TopicNodesRow";
 import topics from '../../../assets/data/topics.ts';
+import {groupByLevel} from "../../utils/levels";
 
-// const levels = {
-//     "1": [topic1],
-//     "2": [topic2, topic3],
-//     "3": [topic4],
-// }
-
-const levels: {[key: number]: []} = {}
-topics.forEach(topic => {
-    if (!levels[topic.level]) {
-        levels[topic.level] = [];
-    }
-    levels[topic.level].push(topic);
-});
+const levels = groupByLevel(topics);
 
 const ModuleScreen = () => {
     return (
         <View style={styles.container}>
-            <TopicNodesRow>
-                <TopicNode />
-            </TopicNodesRow>
 
-            <TopicNodesRow>
-                <TopicNode />
-                <TopicNode />
-            </TopicNodesRow>
-
-            <TopicNodesRow>
-                <TopicNode />
-            </TopicNodesRow>
+            <FlatList
+                data={levels}
+                keyExtractor={(item) => item[0].level.toString()} // @TODO does it work?
+                renderItem={({item}) => (
+                    <TopicNodesRow>
+                        {item.map((topic) => (
+                            <TopicNode key={topic.id} topic={topic} />
+                        ))}
+                    </TopicNodesRow>
+                )}
+            />
         </View>
     );
 };

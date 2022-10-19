@@ -2,14 +2,19 @@
 import React from 'react';
 import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Colors from "../../constants/Colors";
+import {Topic} from "../../types/models";
 
-const TopicNode = () => {
+interface TopicNodeProps {
+    topic: Topic;
+}
+
+const TopicNode = ({topic}: TopicNodeProps) => {
     return (
         <TouchableOpacity activeOpacity={0.7} style={styles.container}>
             <View style={styles.circle}>
-                <Image source={{uri: 'https://b.kisscc0.com/20180817/pye/kisscc0-mathematics-variable-mathematical-notation-functio-ftparen-5b7757b87b3934.2015057515345478965047.png'}} style={styles.image} />
+                <Image source={{uri: topic?.icon}} style={styles.image} />
             </View>
-            <Text style={styles.title}>Variables</Text>
+            <Text style={styles.title}>{topic?.title || 'Loading...'}</Text>
         </TouchableOpacity>
     );
 };
@@ -39,5 +44,6 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         fontSize: 16,
         fontWeight: '500',
+        textAlign: 'center',
     }
 });
