@@ -27,4 +27,11 @@ export default [
         level: 3,
         progress: 0,
     },
+    {
+        id: '5',
+        title: 'Variable',
+        icon: 'https://i.imgur.com/1YtX1YR.png',
+        level: 4,
+        progress: 0.3,
+    },
 ]

@@ -15,6 +15,7 @@ const ModuleScreen = () => {
             <FlatList
                 data={levels}
                 keyExtractor={(item) => item[0].level.toString()} // @TODO does it work?
+                showsVerticalScrollIndicator={false}
                 renderItem={({item}) => (
                     <TopicNodesRow>
                         {item.map((topic) => (
@@ -33,6 +34,5 @@ const styles = StyleSheet.create({
    container: {
        flex: 1,
        backgroundColor: 'white',
-       padding: 20,
    }
 });
