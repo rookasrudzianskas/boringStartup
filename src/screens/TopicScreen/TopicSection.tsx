@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React from 'react';
+import React, {PropsWithChildren} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
 interface TopicSectionProps extends React.FC {
@@ -7,7 +7,7 @@ interface TopicSectionProps extends React.FC {
     display?: boolean;
 }
 
-const TopicSection = ({title, children, display = false}: TopicSectionProps) => {
+const TopicSection = ({title, children, display = false}: PropsWithChildren<TopicSectionProps>) => {
     if(!display) {
         return null;
     }
