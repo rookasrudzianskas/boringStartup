@@ -10,8 +10,13 @@ const ModuleScreen = () => {
             <TopicNodesRow>
                 <TopicNode />
             </TopicNodesRow>
+
             <TopicNodesRow>
                 <TopicNode />
+                <TopicNode />
+            </TopicNodesRow>
+
+            <TopicNodesRow>
                 <TopicNode />
             </TopicNodesRow>
         </View>

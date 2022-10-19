@@ -19,12 +19,13 @@ export default TopicNode;
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        margin: 20
+        margin: 10, // Find the right one @TODO
+        width: "30%",
     },
     circle: {
-        width: 100,
+        width: "100%",
         aspectRatio: 1,
-        borderRadius: 50,
+        borderRadius: 999,
         backgroundColor: Colors.light.tertiary,
         justifyContent: 'center',
         alignItems: 'center',
