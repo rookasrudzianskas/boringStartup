@@ -4,14 +4,14 @@ export default [
         title: 'Variable',
         icon: 'https://i.imgur.com/1YtX1YR.png',
         level: 1,
-        progress: 0.3,
+        progress: 1,
     },
     {
         id: '2',
         title: 'If statement',
         icon: 'https://cdn2.iconfinder.com/data/icons/strategy-3/100/strategy-tactic-04-512.png',
         level: 2,
-        progress: 0,
+        progress: 0.8,
     },
     {
         id: '3',
