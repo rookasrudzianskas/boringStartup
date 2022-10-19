@@ -4,9 +4,11 @@ import {Text, View, StyleSheet, Image, FlatList} from 'react-native';
 import TopicNode from "../../components/TopicNode";
 import TopicNodesRow from "../../components/TopicNodesRow";
 import topics from '../../../assets/data/topics.ts';
-import {groupByLevel} from "../../utils/topics";
+import {getCurrentActiveLevel, groupByLevel} from "../../utils/topics";
 
 const levels = groupByLevel(topics);
+const currentLevel = getCurrentActiveLevel(levels);
+console.log(currentLevel);
 
 const ModuleScreen = () => {
     return (
