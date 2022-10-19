@@ -11,7 +11,6 @@ import {NativeStackScreenProps} from "@react-navigation/native-stack";
 const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => {
     const topicId = route.params.id;
     const topic = topics.find(topic => topic.id === topicId);
-    const navigation = useNavigation();
 
     useLayoutEffect(() => {
         if(!topic) return;
@@ -25,8 +24,8 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         <View className="" style={styles.container}>
             <Image />
             <Text style={styles.title}>Resources</Text>
-            {topic?.resources.map((resource) => (
-                <ResourceListItem resource={resource} key={resource.id} />
+            {topic?.resources.map((resource, index) => (
+                <ResourceListItem resource={resource} key={resource.id} index={index} />
             ))}
         </View>
     );
