@@ -22,6 +22,7 @@ const TopicNode = ({topic, isDisabled = true}: TopicNodeProps) => {
     );
 };
 
+
 export default TopicNode;
 
 const styles = StyleSheet.create({
