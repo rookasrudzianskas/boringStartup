@@ -23,7 +23,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     console.error = (error) => error.apply; // @TODO Disables the error message of Courier font, have to be replaced to Courier New
 
     return (
-        <ScrollView showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingBottom: 100}} className="" style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 100}} className="" style={styles.container}>
             <Image />
             <Text style={styles.title}>Intro</Text>
             <Markdown>
@@ -61,12 +61,5 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20
     },
-    title: {
-        fontSize: 20,
-        fontWeight: "500",
-        letterSpacing: 1,
-        marginTop: 20,
-        marginBottom: 25,
-        marginTop: 10
-    }
+
 });
