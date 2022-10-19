@@ -13,6 +13,10 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     const topicId = route.params.id;
     const topic = topics.find(topic => topic.id === topicId);
 
+    const onStartQuiz = () => {
+        navigation.navigate("Quiz", {id: topicId});
+    };
+
     useLayoutEffect(() => {
         if(!topic) return;
         navigation.setOptions({
@@ -55,7 +59,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                 )}
             </TopicSection>
 
-            <CustomButton text={'Start Quiz'} />
+            <CustomButton text={'Start Quiz'} onPress={onStartQuiz} />
 
         </ScrollView>
     );
