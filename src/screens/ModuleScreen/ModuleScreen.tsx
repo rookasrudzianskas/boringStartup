@@ -2,12 +2,19 @@
 import React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 import TopicNode from "../../components/TopicNode";
+import TopicNodesRow from "../../components/TopicNodesRow";
 
 const ModuleScreen = () => {
     return (
         <View style={styles.container}>
-            <TopicNode />
-            <TopicNode />
+            <TopicNodesRow>
+                <TopicNode />
+            </TopicNodesRow>
+            <TopicNodesRow>
+                <TopicNode />
+                <TopicNode />
+                <TopicNode />
+            </TopicNodesRow>
         </View>
     );
 };
