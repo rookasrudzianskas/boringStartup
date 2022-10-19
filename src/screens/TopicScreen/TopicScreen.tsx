@@ -25,6 +25,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     return (
         <ScrollView showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingBottom: 100}} className="" style={styles.container}>
             <Image />
+            <Text style={styles.title}>Intro</Text>
             <Markdown>
                 {topic?.description || 'Loading...'}
             </Markdown>
