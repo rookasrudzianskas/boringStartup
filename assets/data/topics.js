@@ -1,34 +1,31 @@
-export default [
+"use strict";
+exports.__esModule = true;
+exports["default"] = [
     {
         id: '1',
         title: 'Variable',
         icon: 'https://i.imgur.com/1YtX1YR.png',
         level: 1,
         progress: 1,
-        description: `
-**This is some bold text!**  
-This is normal text
-Declare \`const a = 123;\`
-\`\`\`
-console.log(a);`,
+        description: "\n# h1 Heading 8-)\n**This is some bold text!**  \nThis is normal text\nDeclare `const a = 123;`\n```",
         resources: [
             {
                 id: '1',
                 title: 'What is a variable?',
                 url: "https://www.w3schools.com/js/js_variables.asp",
-                completed: true,
+                completed: true
             },
             {
                 id: '2',
                 title: 'JavaScript Let?',
                 url: "https://www.w3schools.com/js/js_let.asp",
-                completed: false,
+                completed: false
             },
             {
                 id: '3',
                 title: 'JavaScript Const?',
                 url: "https://www.w3schools.com/js/js_const.asp",
-                completed: false,
+                completed: false
             },
         ]
     },
@@ -37,27 +34,27 @@ console.log(a);`,
         title: 'If statement',
         icon: 'https://cdn2.iconfinder.com/data/icons/strategy-3/100/strategy-tactic-04-512.png',
         level: 2,
-        progress: 0.8,
+        progress: 0.8
     },
     {
         id: '3',
         title: 'If-else statement',
         icon: 'https://cdn2.iconfinder.com/data/icons/strategy-3/100/strategy-tactic-04-512.png',
         level: 2,
-        progress: 0,
+        progress: 0
     },
     {
         id: '4',
         title: 'Loops',
         icon: 'https://cdn2.iconfinder.com/data/icons/strategy-3/100/strategy-tactic-04-512.png',
         level: 3,
-        progress: 0,
+        progress: 0
     },
     {
         id: '5',
         title: 'Variable',
         icon: 'https://i.imgur.com/1YtX1YR.png',
         level: 4,
-        progress: 0,
+        progress: 0
     },
-]
+];

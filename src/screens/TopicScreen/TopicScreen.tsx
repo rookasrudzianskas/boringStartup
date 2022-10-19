@@ -20,14 +20,15 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             title: topic?.title
         })
     }, []);
+    console.error = (error) => error.apply;
 
     return (
         <View className="" style={styles.container}>
             <Image />
-            <Text style={styles.title}>Resources</Text>
             <Markdown>
                 {topic?.description || 'Loading...'}
             </Markdown>
+            <Text style={styles.title}>Resources</Text>
             {topic.resources && (
                 <>
                     {topic?.resources.map((resource, index) => (
@@ -51,5 +52,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "500",
         letterSpacing: 1,
+        marginTop: 20,
     }
 });
