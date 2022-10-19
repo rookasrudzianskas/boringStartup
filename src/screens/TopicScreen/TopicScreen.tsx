@@ -1,15 +1,23 @@
 //@ts-nocheck
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Image} from 'react-native';
 
 const TopicScreen = () => {
     return (
-        <View>
-            <Text>
-                byrookas 🚀
-            </Text>
+        <View style={styles.container}>
+            <Image />
+            <Text style={styles.title}>Resources</Text>
         </View>
     );
 };
 
 export default TopicScreen;
+
+const styles = StyleSheet.create({
+    container: {
+
+    },
+    title: {
+
+    }
+});
