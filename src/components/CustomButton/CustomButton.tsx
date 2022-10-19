@@ -20,8 +20,14 @@ export default CustomButton;
 const styles = StyleSheet.create({
    container: {
        backgroundColor: Colors.light.primary,
+       padding: 10,
+       alignItems: 'center',
+       justifyContent: 'center',
+       borderRadius: 10,
    },
     text: {
-
+        color: Colors.light.white,
+        fontSize: 16,
+        fontWeight: '500',
     }
 });
