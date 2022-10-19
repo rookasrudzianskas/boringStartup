@@ -19,7 +19,7 @@ export default TopicNode;
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        backgroundColor: 'red',
+        margin: 10
     },
     circle: {
         width: 100,
@@ -31,6 +31,8 @@ const styles = StyleSheet.create({
 
     },
     title: {
-
+        marginVertical: 5,
+        fontSize: 16,
+        fontWeight: '600',
     }
 });
