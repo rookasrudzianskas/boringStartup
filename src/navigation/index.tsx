@@ -9,7 +9,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import ModuleScreen from '../screens/ModuleScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../../types';
+import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types/navigation';
 import LinkingConfiguration from './LinkingConfiguration';
 import ProfileScreen from "../screens/ProfileScreen";
 import TopicScreen from "../screens/TopicScreen";

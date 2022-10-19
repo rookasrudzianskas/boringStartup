@@ -1,7 +1,7 @@
 //@ts-nocheck
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import resource from '../../../assets/data/topics';
+import {ResourceItem} from "../../types/models";
 
 interface ResourceListItemProps {
     resource: ResourceItem;
@@ -11,11 +11,9 @@ const ResourceListItem = ({ resource }: ResourceListItemProps) => {
     return (
         <View>
             <View>
-                <Text>{resource?.title}</Text>
+                <Text></Text>
             </View>
-            <Text>
-                byrookas 🚀
-            </Text>
+            <Text>{resource?.title}</Text>
         </View>
     );
 };

@@ -4,6 +4,7 @@ export type Topic = {
     icon: string;
     level: number;
     progress: number;
+    resources?: ResourceItem[];
 }
 
 export type ResourceItem = {
