@@ -5,6 +5,10 @@ export default [
         icon: 'https://i.imgur.com/1YtX1YR.png',
         level: 1,
         progress: 1,
+        description: `# h1 Heading 8-)
+        **This is some bold text!**
+        This is normal text
+        `,
         resources: [
             {
                 id: '1',
@@ -22,7 +26,7 @@ export default [
                 id: '3',
                 title: 'JavaScript Const?',
                 url: "https://www.w3schools.com/js/js_const.asp",
-                completed: true,
+                completed: false,
             },
         ]
     },
