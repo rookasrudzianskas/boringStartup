@@ -20,7 +20,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             title: topic?.title
         })
     }, []);
-    console.error = (error) => error.apply; // Disables the error message of Courier font, have to be replaced to Courier New
+    console.error = (error) => error.apply; // @TODO Disables the error message of Courier font, have to be replaced to Courier New
 
     return (
         <ScrollView showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingBottom: 100}} className="" style={styles.container}>
