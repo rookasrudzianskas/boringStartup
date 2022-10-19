@@ -2,7 +2,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 
-const TopicTreeCell = () => {
+const TopicNode = () => {
     return (
         <View style={styles.container}>
             <View style={styles.circle}>
@@ -13,14 +13,16 @@ const TopicTreeCell = () => {
     );
 };
 
-export default TopicTreeCell;
+export default TopicNode;
 
 const styles = StyleSheet.create({
     container: {
 
     },
     circle: {
-
+        width: 50,
+        aspectRatio: 1,
+        backgroundColor: 'red',
     },
     image: {
 

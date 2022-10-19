@@ -1,12 +1,12 @@
 //@ts-nocheck
 import React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
-import TopicTreeCell from "../../components/TopicTreeCell";
+import TopicNode from "../../components/TopicNode";
 
 const ModuleScreen = () => {
     return (
         <View style={styles.container}>
-            <TopicTreeCell />
+            <TopicNode />
         </View>
     );
 };
