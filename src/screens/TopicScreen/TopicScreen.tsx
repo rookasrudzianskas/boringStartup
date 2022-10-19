@@ -3,12 +3,11 @@ import React, {useLayoutEffect} from 'react';
 import {Text, View, StyleSheet, Image, ScrollView} from 'react-native';
 import Colors from "../../constants/Colors";
 import ResourceListItem from "../../components/ResourceListItem";
-import {useNavigation, useRoute} from "@react-navigation/native";
-import {RootStackParamList} from "../../types/navigation";
 import topics from "../../../assets/data/topics";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import Markdown from "react-native-markdown-display";
 import TopicSection from "./TopicSection";
+import CustomButton from "../../components/CustomButton";
 
 const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => {
     const topicId = route.params.id;
@@ -55,6 +54,8 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                     </>
                 )}
             </TopicSection>
+
+            <CustomButton text={'Start Quiz'} />
 
         </ScrollView>
     );
