@@ -8,7 +8,7 @@ import {getCurrentActiveLevel, groupByLevel} from "../../utils/topics";
 
 const levels = groupByLevel(topics);
 const currentLevel = getCurrentActiveLevel(levels);
-console.log(currentLevel);
+// console.log(currentLevel);
 
 const ModuleScreen = () => {
     return (
@@ -22,7 +22,7 @@ const ModuleScreen = () => {
                 renderItem={({item}) => (
                     <TopicNodesRow>
                         {item.map((topic) => (
-                            <TopicNode key={topic.id} topic={topic} />
+                            <TopicNode key={topic.id} topic={topic} isDisabled={currentLevel < topic.level} />
                         ))}
                     </TopicNodesRow>
                 )}
