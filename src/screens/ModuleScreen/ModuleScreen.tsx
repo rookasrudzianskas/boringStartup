@@ -3,6 +3,7 @@ import React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 import TopicNode from "../../components/TopicNode";
 import TopicNodesRow from "../../components/TopicNodesRow";
+import topics from '../../../assets/data/topics.ts';
 
 const ModuleScreen = () => {
     return (
