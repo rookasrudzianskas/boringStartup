@@ -7,7 +7,7 @@ const TopicNode = () => {
     return (
         <TouchableOpacity activeOpacity={0.7} style={styles.container}>
             <View style={styles.circle}>
-                <Image style={styles.image} />
+                <Image source={{uri: 'https://b.kisscc0.com/20180817/pye/kisscc0-mathematics-variable-mathematical-notation-functio-ftparen-5b7757b87b3934.2015057515345478965047.png'}} style={styles.image} />
             </View>
             <Text style={styles.title}>Variables</Text>
         </TouchableOpacity>
@@ -19,20 +19,23 @@ export default TopicNode;
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        margin: 10
+        margin: 20
     },
     circle: {
         width: 100,
         aspectRatio: 1,
         borderRadius: 50,
         backgroundColor: Colors.light.tertiary,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     image: {
-
+        width: "50%",
+        aspectRatio: 1,
     },
     title: {
         marginVertical: 5,
         fontSize: 16,
-        fontWeight: '600',
+        fontWeight: '500',
     }
 });
