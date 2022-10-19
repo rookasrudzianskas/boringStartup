@@ -8,7 +8,7 @@ interface TopicNodesRowProps {
 
 const TopicNodesRow = ({children}: TopicNodesRowProps) => {
     return (
-        <View className="flex-row" >
+        <View className="flex-row w-full justify-center" >
             {children}
         </View>
     );

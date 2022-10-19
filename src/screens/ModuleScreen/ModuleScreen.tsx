@@ -13,7 +13,6 @@ const ModuleScreen = () => {
             <TopicNodesRow>
                 <TopicNode />
                 <TopicNode />
-                <TopicNode />
             </TopicNodesRow>
         </View>
     );
