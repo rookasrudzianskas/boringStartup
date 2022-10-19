@@ -15,7 +15,8 @@ interface ResourceListItemProps {
 
 const ResourceListItem = ({ resource, index }: ResourceListItemProps) => {
     const onPress = () => {
-        Linking.openURL(resource.url || 'www.w3schools.com');
+        // Linking.openURL(resource.url || 'www.w3schools.com');
+        WebBrowser.openBrowserAsync(resource?.url || 'https://expo.dev');
     }
 
     return (
