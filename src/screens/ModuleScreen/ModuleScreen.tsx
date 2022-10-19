@@ -1,15 +1,22 @@
 //@ts-nocheck
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Image} from 'react-native';
+import TopicTreeCell from "../../components/TopicTreeCell";
 
 const ModuleScreen = () => {
     return (
-        <View>
-            <Text>
-                byrookas 🚀
-            </Text>
+        <View style={styles.container}>
+            <TopicTreeCell />
         </View>
     );
 };
 
 export default ModuleScreen;
+
+const styles = StyleSheet.create({
+   container: {
+       flex: 1,
+       backgroundColor: 'white',
+       padding: 20,
+   }
+});
