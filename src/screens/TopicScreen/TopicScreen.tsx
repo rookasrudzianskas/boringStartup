@@ -24,9 +24,13 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         <View className="" style={styles.container}>
             <Image />
             <Text style={styles.title}>Resources</Text>
-            {topic?.resources.map((resource, index) => (
-                <ResourceListItem resource={resource} key={resource.id} index={index} />
-            ))}
+            {topic.resources && (
+                <>
+                    {topic?.resources.map((resource, index) => (
+                        <ResourceListItem resource={resource} key={resource.id} index={index} />
+                    ))}
+                </>
+            )}
         </View>
     );
 };
