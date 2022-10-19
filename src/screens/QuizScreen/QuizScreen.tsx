@@ -6,8 +6,8 @@ import Colors from "../../constants/Colors";
 const QuizScreen = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.question}>QuizScreen</Text>
-            <Image style={styles.questionImage} />
+            <Text style={styles.question}>What is the output?</Text>
+            <Image source={{uri: 'https://byrookas.com/image'}} style={styles.questionImage} />
 
         {/*    Choices */}
 
