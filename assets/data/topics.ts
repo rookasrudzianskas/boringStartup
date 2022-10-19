@@ -32,6 +32,6 @@ export default [
         title: 'Variable',
         icon: 'https://i.imgur.com/1YtX1YR.png',
         level: 4,
-        progress: 0.3,
+        progress: 0,
     },
 ]
