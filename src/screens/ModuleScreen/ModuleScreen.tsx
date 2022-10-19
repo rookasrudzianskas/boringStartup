@@ -5,6 +5,20 @@ import TopicNode from "../../components/TopicNode";
 import TopicNodesRow from "../../components/TopicNodesRow";
 import topics from '../../../assets/data/topics.ts';
 
+// const levels = {
+//     "1": [topic1],
+//     "2": [topic2, topic3],
+//     "3": [topic4],
+// }
+
+const levels: {[key: number]: []} = {}
+topics.forEach(topic => {
+    if (!levels[topic.level]) {
+        levels[topic.level] = [];
+    }
+    levels[topic.level].push(topic);
+});
+
 const ModuleScreen = () => {
     return (
         <View style={styles.container}>
