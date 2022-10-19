@@ -5,3 +5,10 @@ export type Topic = {
     level: number;
     progress: number;
 }
+
+export type ResourceItem = {
+    id: string;
+    title: string;
+    icon: string;
+    completed?: boolean;
+}

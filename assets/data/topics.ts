@@ -5,6 +5,26 @@ export default [
         icon: 'https://i.imgur.com/1YtX1YR.png',
         level: 1,
         progress: 1,
+        resources: [
+            {
+                id: '1',
+                title: 'What is a variable?',
+                url: "https://www.w3schools.com/js/js_variables.asp",
+                completed: true,
+            },
+            {
+                id: '2',
+                title: 'JavaScript Let?',
+                url: "https://www.w3schools.com/js/js_let.asp",
+                completed: true,
+            },
+            {
+                id: '3',
+                title: 'JavaScript Const?',
+                url: "https://www.w3schools.com/js/js_const.asp",
+                completed: true,
+            },
+        ]
     },
     {
         id: '2',
