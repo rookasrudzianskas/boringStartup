@@ -25,7 +25,7 @@ const ResourceListItem = ({ resource, index }: ResourceListItemProps) => {
                 <Text>{index + 1}</Text>
             </View>
             <Text>{resource?.title}</Text>
-            <Ionicons name="open-outline" size={24} color="black" style={styles.icon} />
+            <Ionicons name="open-outline" size={21} color="black" style={styles.icon} />
         </TouchableOpacity>
     );
 };
