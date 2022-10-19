@@ -3,6 +3,9 @@ import React, {useLayoutEffect} from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 import Colors from "../../constants/Colors";
 import {useNavigation} from "@react-navigation/native";
+import quiz from '../../../assets/data/quiz';
+
+const question = quiz[0];
 
 const QuizScreen = () => {
     const navigation = useNavigation();
