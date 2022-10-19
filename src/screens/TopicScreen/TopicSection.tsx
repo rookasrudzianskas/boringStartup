@@ -25,14 +25,12 @@ export default TopicSection;
 
 const styles = StyleSheet.create({
     container: {
-
+        marginBottom: 20
     },
     title: {
         fontSize: 20,
         fontWeight: "500",
         letterSpacing: 1,
-        marginTop: 20,
-        marginBottom: 25,
-        marginTop: 10
+        marginBottom: 20,
     }
 });
