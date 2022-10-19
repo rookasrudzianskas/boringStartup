@@ -4,7 +4,7 @@ import {Text, View, StyleSheet, Image, FlatList} from 'react-native';
 import TopicNode from "../../components/TopicNode";
 import TopicNodesRow from "../../components/TopicNodesRow";
 import topics from '../../../assets/data/topics.ts';
-import {groupByLevel} from "../../utils/levels";
+import {groupByLevel} from "../../utils/topics";
 
 const levels = groupByLevel(topics);
 
@@ -16,6 +16,7 @@ const ModuleScreen = () => {
                 data={levels}
                 keyExtractor={(item) => item[0].level.toString()} // @TODO does it work?
                 showsVerticalScrollIndicator={false}
+                bounces={true}
                 renderItem={({item}) => (
                     <TopicNodesRow>
                         {item.map((topic) => (

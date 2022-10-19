@@ -1,6 +1,7 @@
 import topics from "../../assets/data/topics";
+import {Topic} from "../types/models";
 
-export const groupByLevel = (topics: any[]) => {
+export const groupByLevel = (topics: Topic[]) => {
     // @TODO make this proper type
     const levels: {[key: number]: any[]} = {};
 
@@ -12,4 +13,8 @@ export const groupByLevel = (topics: any[]) => {
     });
 
     return Object.values(levels);
+}
+
+export const getCurrentActiveLevel = (topics: Topic[]) => {
+
 }
