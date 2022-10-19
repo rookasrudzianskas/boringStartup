@@ -4,9 +4,13 @@ import {Text, View, StyleSheet} from 'react-native';
 
 interface TopicSectionProps extends React.FC {
     title: string;
+    display?: boolean;
 }
 
-const TopicSection = ({title, children}: TopicSectionProps) => {
+const TopicSection = ({title, children, display = false}: TopicSectionProps) => {
+    if(!display) {
+        return null;
+    }
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{title || "Loading..."}</Text>
