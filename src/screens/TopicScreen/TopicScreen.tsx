@@ -3,15 +3,17 @@ import React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 import Colors from "../../constants/Colors";
 import ResourceListItem from "../../components/ResourceListItem";
-import resource from '../../../assets/data/topics';
+import topic from '../../../assets/data/topics';
+import {useRoute} from "@react-navigation/native";
 
 const TopicScreen = () => {
+    const route = useRoute();
+    const topicId = route.params?.id;
     return (
         <View className="pt-10" style={styles.container}>
             <Image />
             <Text style={styles.title}>Resources</Text>
-            <ResourceListItem />
-            <ResourceListItem />
+            {}
         </View>
     );
 };
