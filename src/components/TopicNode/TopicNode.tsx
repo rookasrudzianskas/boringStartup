@@ -4,6 +4,7 @@ import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Colors from "../../constants/Colors";
 import {Topic} from "../../types/models";
 import Svg, { Circle, Rect } from 'react-native-svg';
+import CircularProgress from "../CircularProgress";
 
 interface TopicNodeProps {
     topic: Topic;
@@ -14,20 +15,7 @@ const TopicNode = ({topic, isDisabled = true}: TopicNodeProps) => {
     return (
         <TouchableOpacity activeOpacity={isDisabled ? 1 : 0.7} style={styles.container}>
             <View style={[styles.progress]}>
-                <Svg width={'100'} height={'100'} style={styles.progressBar}>
-                    <Circle cx="50" cy="50" r="40" fill="#ddd" />
-                    <Circle
-                        origin="50, 50"
-                        rotation="-90"
-                        cx="50"
-                        cy="50"
-                        r="20"
-                        stroke="#0074d9"
-                        strokeWidth="40"
-                        fill="none"
-                        strokeDasharray="80, 160"
-                    />
-                </Svg>
+                <CircularProgress size={100} strokeWidth={10} progress={topic.progress} />
                 {/*<View style={[styles.circle, {backgroundColor: isDisabled ? Colors.light.dark : Colors.light.primary}]}>*/}
                 {/*    <Image source={{uri: topic?.icon}} style={styles.image} />*/}
                 {/*</View>*/}
