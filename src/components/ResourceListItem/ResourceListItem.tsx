@@ -4,7 +4,6 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {ResourceItem} from "../../types/models";
 import Colors from "../../constants/Colors";
 import {Ionicons} from "@expo/vector-icons";
-import Markdown from 'react-native-markdown-display';
 import * as WebBrowser from 'expo-web-browser';
 
 interface ResourceListItemProps {
@@ -42,7 +41,7 @@ export default ResourceListItem;
 const styles = StyleSheet.create({
    container: {
        flexDirection: "row",
-       marginVertical: 10,
+       marginBottom: 20,
        alignItems: 'center',
    },
     indexContainer: {

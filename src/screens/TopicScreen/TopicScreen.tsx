@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React, {useLayoutEffect} from 'react';
-import {Text, View, StyleSheet, Image} from 'react-native';
+import {Text, View, StyleSheet, Image, ScrollView} from 'react-native';
 import Colors from "../../constants/Colors";
 import ResourceListItem from "../../components/ResourceListItem";
 import {useNavigation, useRoute} from "@react-navigation/native";
@@ -20,10 +20,10 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             title: topic?.title
         })
     }, []);
-    console.error = (error) => error.apply;
+    console.error = (error) => error.apply; // Disables the error message of Courier font, have to be replaced to Courier New
 
     return (
-        <View className="" style={styles.container}>
+        <ScrollView showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingBottom: 100}} className="" style={styles.container}>
             <Image />
             <Markdown>
                 {topic?.description || 'Loading...'}
@@ -36,7 +36,19 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                     ))}
                 </>
             )}
-        </View>
+
+            <Text style={styles.title}>Context</Text>
+            <Markdown>{topic?.context || 'Loading...'}</Markdown>
+
+            <Text style={styles.title}>Practice</Text>
+            {topic.exercises && (
+                <>
+                    {topic?.resources.map((resource, index) => (
+                        <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === topic.resources.length} />
+                    ))}
+                </>
+            )}
+        </ScrollView>
     );
 };
 
@@ -53,5 +65,7 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         letterSpacing: 1,
         marginTop: 20,
+        marginBottom: 25,
+        marginTop: 10
     }
 });
