@@ -1,8 +1,7 @@
 import {Topic} from "../types/models";
 
-export const groupByLevel = (topics: Topic[]): Topic[][] => {
-    // @TODO make this proper type
-    const levels: {[key: number]: any[]} = {};
+export const groupByLevel = (topics: Topic[]) => {
+    const levels: {[key: number]: Topic[]} = {};
 
     topics.forEach((topic) => {
         if (!levels[topic.level]) {

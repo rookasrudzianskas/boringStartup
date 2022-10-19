@@ -11,11 +11,13 @@ interface TopicNodeProps {
 
 const TopicNode = ({topic, isDisabled = true}: TopicNodeProps) => {
     return (
-        <TouchableOpacity activeOpacity={0.7} style={styles.container}>
-            <View style={[styles.circle, {backgroundColor: isDisabled ? Colors.light.dark : Colors.light.primary}]}>
-                <Image source={{uri: topic?.icon}} style={styles.image} />
+        <TouchableOpacity activeOpacity={isDisabled ? 1 : 0.7} style={styles.container}>
+            <View style={[styles.progress]}>
+                <View style={[styles.circle, {backgroundColor: isDisabled ? Colors.light.dark : Colors.light.primary}]}>
+                    <Image source={{uri: topic?.icon}} style={styles.image} />
+                </View>
             </View>
-            <Text style={styles.title}>{topic?.title || 'Loading...'}</Text>
+                <Text style={styles.title}>{topic?.title || 'Loading...'}</Text>
         </TouchableOpacity>
     );
 };
@@ -29,6 +31,11 @@ const styles = StyleSheet.create({
         width: "30%",
         maxWidth: 150,
     },
+    progress: {
+        backgroundColor: Colors.light.dark,
+        padding: 10,
+        borderRadius: 999,
+    },
     circle: {
         width: "100%",
         aspectRatio: 1,
@@ -36,6 +43,8 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.light.tertiary,
         justifyContent: 'center',
         alignItems: 'center',
+        borderWidth: 3,
+        borderColor: Colors.light.background,
     },
     image: {
         width: "50%",
