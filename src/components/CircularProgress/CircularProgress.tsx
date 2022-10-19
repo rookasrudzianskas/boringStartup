@@ -7,12 +7,12 @@ interface CircularProgressProps {
     size: number;
     strokeWidth: number;
     progress: number;
+    children?: React.ReactNode;
 }
 
 
 const CircularProgress = (props: CircularProgressProps) => {
-    console.log(props);
-    const { size, strokeWidth, text, progress } = props;
+    const { size, strokeWidth, text, progress, children } = props;
     const radius = (size - strokeWidth) / 2;
     const circum = radius * 2 * Math.PI;
     const svgProgress = (1 - props.progress) * 100;
@@ -44,16 +44,7 @@ const CircularProgress = (props: CircularProgressProps) => {
                     {...{strokeWidth}}
                 />
 
-                {/* Text */}
-                <SVGText
-                    fontSize={props.textSize ? props.textSize : "10"}
-                    x={size / 2}
-                    y={size / 2 + (props.textSize ?  (props.textSize / 2) - 1 : 5)}
-                    textAnchor="middle"
-                    fill={props.textColor ? props.textColor : "#333333"}
-                >
-                    {text}
-                </SVGText>
+                {children}
             </Svg>
         </View>
     )
