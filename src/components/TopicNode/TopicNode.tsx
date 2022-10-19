@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         margin: 10, // Find the right one @TODO
         width: "30%",
+        maxWidth: 150,
     },
     circle: {
         width: "100%",
