@@ -27,7 +27,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             {topic.resources && (
                 <>
                     {topic?.resources.map((resource, index) => (
-                        <ResourceListItem resource={resource} key={resource.id} index={index} />
+                        <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === topic.resources.length} />
                     ))}
                 </>
             )}

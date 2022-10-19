@@ -11,9 +11,10 @@ import * as WebBrowser from 'expo-web-browser';
 interface ResourceListItemProps {
     resource: ResourceItem;
     index: number;
+    isLast?: boolean;
 }
 
-const ResourceListItem = ({ resource, index }: ResourceListItemProps) => {
+const ResourceListItem = ({ resource, index, isLast }: ResourceListItemProps) => {
     const onPress = () => {
         // Linking.openURL(resource.url || 'www.w3schools.com');
         WebBrowser.openBrowserAsync(resource?.url || 'https://expo.dev');
@@ -26,6 +27,9 @@ const ResourceListItem = ({ resource, index }: ResourceListItemProps) => {
             </View>
             <Text>{resource?.title}</Text>
             <Ionicons name="open-outline" size={21} color="black" style={styles.icon} />
+            {!isLast && (
+                <View style={[styles.lineIndicator, {backgroundColor: resource.completed ? Colors.light.primary : Colors.light.dark}]} />
+            )}
         </TouchableOpacity>
     );
 };
@@ -35,7 +39,7 @@ export default ResourceListItem;
 const styles = StyleSheet.create({
    container: {
        flexDirection: "row",
-       marginVertical: 5,
+       marginVertical: 10,
        alignItems: 'center',
    },
     indexContainer: {
@@ -54,5 +58,13 @@ const styles = StyleSheet.create({
     },
     icon: {
        marginLeft: "auto",
+    },
+    lineIndicator: {
+        position: 'absolute',
+        height: 20,
+        width: 2,
+        left: 15,
+        top: 30,
+        backgroundColor: Colors.light.primary,
     }
 });
