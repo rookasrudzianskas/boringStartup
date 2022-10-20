@@ -12,6 +12,7 @@
 import {useHeaderHeight} from "@react-navigation/elements";
 import React, {useMemo} from "react";
 import {NativeStackNavigationOptions} from "@react-navigation/native-stack";
+import {Platform} from "react-native";
 
 export default function useApplyHeaderWorkaround(setOptions: (options: NativeStackNavigationOptions) => void) {
     const headerHeight = useHeaderHeight();
@@ -26,6 +27,6 @@ export default function useApplyHeaderWorkaround(setOptions: (options: NativeSta
     );
 
     React.useLayoutEffect(() => {
-        IS_ANDROID && setOptions(androidHeaderFix);
+        Platform.OS === 'android' && setOptions(androidHeaderFix);
     }, [setOptions, androidHeaderFix]);
 }

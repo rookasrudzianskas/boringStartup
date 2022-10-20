@@ -9,8 +9,9 @@ import CustomButton from "../../components/CustomButton";
 import ProgressBar from "../../components/ProgressBar";
 import {RootStackScreenProps} from "../../types/navigation";
 import Animated, {
-    SlideInDown,
+    SlideInDown, SlideInUp,
 } from 'react-native-reanimated';
+import useApplyHeaderWorkaround from "../../hooks/useApplyHeaderWorkaround";
 
 const QuizScreen = ({navigation}: RootStackScreenProps<"Quiz">) => {
     const [questionIndex, setQuestionIndex] = useState(0);
@@ -19,6 +20,7 @@ const QuizScreen = ({navigation}: RootStackScreenProps<"Quiz">) => {
     const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean | undefined>(undefined);
     const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0);
     const isButtonDisabled = selectedAnswers.length === 0;
+    useApplyHeaderWorkaround(navigation.setOptions);
 
     useEffect(() => {
         if(questionIndex === quiz.length) {
