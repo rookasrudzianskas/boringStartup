@@ -35,11 +35,10 @@ const QuizScreen = () => {
         })
     }, []);
 
-    // console.log(question);
     console.error = (error) => error.apply; // @TODO Disables the error message of Courier font, have to be replaced to Courier New
 
     return (
-        <ScrollView contentContainerStyle={{paddingBottom: 100}} style={styles.container}>
+        <ScrollView contentContainerStyle={{paddingBottom: 100, minHeight: '100%'}} style={styles.container}>
             <Text style={styles.question}>{question?.question || 'Loading...'}</Text>
             {!!question.image && (
                 <Image resizeMode={'contain'} className="-mt-10" source={{uri: question.image}} style={styles.questionImage} />
@@ -67,7 +66,7 @@ export default QuizScreen;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex:  1,
         backgroundColor: Colors.light.white,
         padding: 10,
     },
@@ -84,6 +83,6 @@ const styles = StyleSheet.create({
         marginTop: 'auto',
     },
     button: {
-        marginVertical: 20,
+        marginVertical: 5,
     }
 });
