@@ -17,8 +17,14 @@ const QuizScreen = () => {
     const isButtonDisabled = selectedAnswers.length === 0;
 
     useEffect(() => {
+        if(questionIndex === quiz.length) {
+            // navigate to results screen
+            Alert.alert('Quiz Completed', 'You answered ' + answeredCorrectly + ' questions correctly.');
+            return;
+        }
         setQuestion(quiz[questionIndex]);
         setAnsweredCorrectly(undefined);
+        setSelectedAnswers([]);
     }, [questionIndex]);
 
     const onChoicePress = (choice: string) => {
@@ -68,17 +74,18 @@ const QuizScreen = () => {
                 {!!question.content && (<Markdown>{question.content}</Markdown>)}
 
                 {/*    Choices */}
-                {question.choices && (
-                    <>
-                        {question.choices.map((choice, index) => (
-                            <MultipleChoiceAnswer disabled={answeredCorrectly !== undefined} key={index} choice={choice} onPress={onChoicePress} isSelected={selectedAnswers.includes(choice)}/>
-                        ))}
-                    </>
-                )}
-                {/*    Button */}
-                <View style={styles.buttonContainer}>
-                    <CustomButton disabled={isButtonDisabled} text={'Submit'} onPress={onSubmit} style={styles.button} />
+                <View style={styles.choicesContainer}>
+                    {question.choices && (
+                        <>
+                            {question.choices.map((choice, index) => (
+                                <MultipleChoiceAnswer disabled={answeredCorrectly !== undefined} key={index} choice={choice} onPress={onChoicePress} isSelected={selectedAnswers.includes(choice)}/>
+                            ))}
+                        </>
+                    )}
                 </View>
+                {/*    Button */}
+
+                    <CustomButton disabled={isButtonDisabled} text={'Submit'} onPress={onSubmit} style={styles.button} />
 
             </ScrollView>
             {answeredCorrectly === true && (
@@ -115,7 +122,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 300,
     },
-    buttonContainer: {
+    choicesContainer: {
         marginTop: 'auto',
     },
     button: {
