@@ -7,9 +7,9 @@ interface CustomButtonProps extends PressableProps {
     text: string;
 }
 
-const CustomButton = ({ text, style, ...otherProps }: CustomButtonProps) => {
+const CustomButton = ({ text, style, disabled, ...otherProps }: CustomButtonProps) => {
     return (
-        <TouchableOpacity style={[styles.container, style as any]} activeOpacity={0.7} {...otherProps}>
+        <TouchableOpacity style={[styles.container, style as any, disabled && { backgroundColor: Colors.light.tabIconDefault}]} disabled={disabled} activeOpacity={0.7} {...otherProps}>
             <Text style={styles.text}>{text}</Text>
         </TouchableOpacity>
     );
