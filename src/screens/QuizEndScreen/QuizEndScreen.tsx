@@ -5,15 +5,15 @@ import {RootStackScreenProps} from "../../types/navigation";
 import LottieView from 'lottie-react-native';
 import CustomButton from "../../components/CustomButton";
 
-const QuizEndScreen = ({route}: RootStackScreenProps<"QuizEndScreen">) => {
+const QuizEndScreen = ({navigation, route}: RootStackScreenProps<"QuizEndScreen">) => {
     const {nOfQuestions, nOfCorrectAnswers} = route?.params;
+    const percentage = (nOfCorrectAnswers / nOfQuestions) * 100;
+    const isHappy = percentage > 70;
     const animation = useRef(null);
 
-    useEffect(() => {
-        // You can control the ref programmatically, rather than using autoPlay
-        // animation.current?.play();
-        // animation.current?.play();
-    }, []);
+    const onPress = () => {
+        navigation.navigate("Root");
+    }
 
     return (
         <View style={styles.animationContainer} className="justify-center items-center px-4">
@@ -27,13 +27,12 @@ const QuizEndScreen = ({route}: RootStackScreenProps<"QuizEndScreen">) => {
                     height: 400,
                     backgroundColor: 'whit',
                 }}
-                // Find more Lottie files at https://lottiefiles.com/featured
-                source={require('../../../assets/lottie-ani.json')}
+                source={isHappy ? require('../../../assets/lottie-ani-sad.json') : require('../../../assets/lottie-ani.json')}
             />
-            <Text className="text-4xl font-bold tracking-wider mt-20">{(nOfCorrectAnswers / nOfQuestions) * 100 || 'Loading...'}%</Text>
-            <Text className="text-2xl font-bold mt-2">{nOfCorrectAnswers} <Text className="text-purple-500"> - out of - </Text> {nOfQuestions || 'Loading..'}</Text>
+            <Text className={`text-5xl font-bold tracking-wider mt-20 ${isHappy ? 'text-green-300' : 'text-red-500'}`}>{percentage}%</Text>
+            <Text className="text-2xl font-bold mt-2">{nOfCorrectAnswers} <Text className={`${isHappy ? 'text-green-300' : 'text-red-500'}`}> - out of - </Text> {nOfQuestions || 'Loading..'}</Text>
             <View style={styles.buttonContainer}>
-                <CustomButton text={'Continue'} />
+                <CustomButton text={'Continue'} onPress={onPress} />
             </View>
         </View>
     );
