@@ -4,6 +4,7 @@ import {Text, View, StyleSheet, Image} from 'react-native';
 import Colors from "../../constants/Colors";
 import CustomButton from "../../components/CustomButton";
 
+
 const ProfileScreen = () => {
     return (
         <View style={styles.container}>
