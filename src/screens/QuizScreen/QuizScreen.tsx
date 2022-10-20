@@ -18,7 +18,11 @@ const QuizScreen = () => {
             if(currentSelectedAnswers.includes(choice)) {
                 return currentSelectedAnswers.filter(item => item !== choice);
             } else {
-                return [...currentSelectedAnswers, choice];
+                if(question.type === "MULTIPLE_ANSWERS") {
+                    return [...currentSelectedAnswers, choice];
+                } else {
+                    return [choice];
+                }
             }
         });
     }
