@@ -4,15 +4,16 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Colors from "../../constants/Colors";
 
 interface MultipleChoiceAnswerProps {
-    text: string;
+    choice: string;
     isSelected?: boolean;
+    onPress?: (choice: string) => void;
 }
 
-const MultipleChoiceAnswer = ({text, isSelected = false}: MultipleChoiceAnswerProps) => {
+const MultipleChoiceAnswer = ({choice, isSelected = false, onPress = () => {}}: MultipleChoiceAnswerProps) => {
     return (
-        <TouchableOpacity className="bg-gray-100" activeOpacity={0.7} style={[styles.container, isSelected ? { borderColor: Colors.light.primary } : {}]}>
+        <TouchableOpacity onPress={() => onPress(choice)} className="bg-gray-100" activeOpacity={0.7} style={[styles.container, isSelected ? { borderColor: Colors.light.primary } : {}]}>
             <Text className="font-semibold" style={styles.text}>
-                {text}
+                {choice}
             </Text>
         </TouchableOpacity>
     );

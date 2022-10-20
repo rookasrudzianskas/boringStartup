@@ -3,8 +3,8 @@ export default [
         id: '1',
         question: 'What is the output of the following code?',
         image: 'https://blog.chalarangelo.me/static/45cec8321df4bfe1f5a612530911b66b/fae55/1-NkDqIjUhKbfXA37K59kvkw.png',
-        options: ["0", "1", "2", "Error"],
-        correctOptions: ["Error"],
+        choices: ["0", "1", "2", "Error"],
+        correctAnswers: ["Error"],
     },
     {
         id: '2',
@@ -18,7 +18,7 @@ const getBirthday = () => {
 const b = getBirthday();
 console.log(b); d        
 `,
-        options: ["Good", "Bad", "Meh", "Error"],
-        correctOptions: ["Bad"],
+        choices: ["Good", "Bad", "Meh", "Error"],
+        correctAnswers: ["Bad"],
     },
 ]

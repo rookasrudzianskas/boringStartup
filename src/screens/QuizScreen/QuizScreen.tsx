@@ -14,11 +14,13 @@ const QuizScreen = () => {
     const [selectedAnswer, setSelectedAnswer] = useState<string[]>([]);
 
     const onChoicePress = (choice: string) => {
-        // if(selectedAnswer.includes(choice)) {
-        //     setSelectedAnswer(selectedAnswer.filter(item => item !== choice));
-        // } else {
-        //     setSelectedAnswer([...selectedAnswer, choice]);
-        // }
+        setSelectedAnswer(currentSelectedAnswers => {
+            if(currentSelectedAnswers.includes(choice)) {
+                return currentSelectedAnswers.filter(item => item !== choice);
+            } else {
+                return [...currentSelectedAnswers, choice];
+            }
+        });
     }
 
     useLayoutEffect(() => {
@@ -41,10 +43,10 @@ const QuizScreen = () => {
             {!!question.content && (<Markdown>{question.content}</Markdown>)}
 
         {/*    Choices */}
-            {question.options && (
+            {question.choices && (
                 <>
-                    {question.options.map((option, index) => (
-                        <MultipleChoiceAnswer key={index} text={option} onPress={onChoicePress} />
+                    {question.choices.map((choice, index) => (
+                        <MultipleChoiceAnswer key={index} choice={choice} onPress={onChoicePress} isSelected={selectedAnswer.includes(choice)}/>
                     ))}
                 </>
             )}
