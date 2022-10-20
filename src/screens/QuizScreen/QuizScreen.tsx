@@ -81,8 +81,9 @@ const QuizScreen = () => {
                 </View>
 
             </ScrollView>
-            <View style={styles.correctAnswerBox}>
-                <CustomButton text={'Submit'} onPress={onContinue} style={styles.button} />
+            <View className="bg-gray-100 rounded-t-xl px-4 pt-3 border border-gray-300 h-36" style={styles.correctAnswerBox}>
+                <Text style={styles.correctTitle}>Correct</Text>
+                <CustomButton text={'Continue'} onPress={onContinue} style={styles.button} />
             </View>
         </>
     );
@@ -113,10 +114,24 @@ const styles = StyleSheet.create({
     },
     correctAnswerBox: {
         position: 'absolute',
-        bottom: 50,
-        backgroundColor: Colors.light.background,
+        bottom: 0,
         width: '100%',
         left: 0,
         right: 0,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+    },
+    correctTitle: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: Colors.light.primary,
+        marginVertical: 10,
     }
 });
