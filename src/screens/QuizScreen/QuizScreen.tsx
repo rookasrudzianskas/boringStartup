@@ -11,7 +11,15 @@ const question = quiz[0];
 
 const QuizScreen = () => {
     const navigation = useNavigation();
-    const [selectedAnswer, setSelectedAnswer] = useState([]);
+    const [selectedAnswer, setSelectedAnswer] = useState<string[]>([]);
+
+    const onChoicePress = (choice: string) => {
+        // if(selectedAnswer.includes(choice)) {
+        //     setSelectedAnswer(selectedAnswer.filter(item => item !== choice));
+        // } else {
+        //     setSelectedAnswer([...selectedAnswer, choice]);
+        // }
+    }
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -36,7 +44,7 @@ const QuizScreen = () => {
             {question.options && (
                 <>
                     {question.options.map((option, index) => (
-                        <MultipleChoiceAnswer key={index} text={option} />
+                        <MultipleChoiceAnswer key={index} text={option} onPress={onChoicePress} />
                     ))}
                 </>
             )}
