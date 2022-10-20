@@ -102,14 +102,14 @@ const QuizScreen = ({navigation}: RootStackScreenProps<"Quiz">) => {
 
             </ScrollView>
             {answeredCorrectly === true && (
-                <Animated.View entering={SlideInDown} exiting={SlideInDown} className="bg-gray-100 rounded-t-xl px-4 pt-3 border border-gray-300 h-36" style={[styles.answerBox, styles.correctAnswerBox]}>
+                <Animated.View entering={SlideInDown.duration(2000)}  exiting={SlideInDown.duration(2000)} className="bg-gray-100 rounded-t-xl px-4 pt-3 border border-gray-300 h-36" style={[styles.answerBox, styles.correctAnswerBox]}>
                     <Text style={styles.correctTitle}>Correct</Text>
                     <CustomButton text={'Continue'} onPress={onContinue} style={styles.button} />
                 </Animated.View>
             )}
 
             {answeredCorrectly === false && (
-                <Animated.View entering={SlideInDown} exiting={SlideInDown} className="bg-gray-100 rounded-t-xl px-4 pt-3 h-36" style={[styles.answerBox, styles.wrongAnswerBox]}>
+                <Animated.View entering={SlideInDown.duration(2000)}  exiting={SlideInDown.duration(2000)} className="bg-gray-100 rounded-t-xl px-4 pt-3 h-36" style={[styles.answerBox, styles.wrongAnswerBox]}>
                     <Text style={styles.wrongTitle}>Bro wrong!</Text>
                     <CustomButton text={'Continue'} onPress={onContinue} style={styles.button} />
                 </Animated.View>
