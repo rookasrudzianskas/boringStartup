@@ -3,6 +3,7 @@ import React, {useEffect, useRef} from 'react';
 import {Text, View, StyleSheet, Button} from 'react-native';
 import {RootStackScreenProps} from "../../types/navigation";
 import LottieView from 'lottie-react-native';
+import CustomButton from "../../components/CustomButton";
 
 const QuizEndScreen = ({route}: RootStackScreenProps<"QuizEndScreen">) => {
     const {nOfQuestions, nOfCorrectAnswers} = route?.params;
@@ -15,7 +16,7 @@ const QuizEndScreen = ({route}: RootStackScreenProps<"QuizEndScreen">) => {
     }, []);
 
     return (
-        <View style={styles.animationContainer} className="justify-center items-center">
+        <View style={styles.animationContainer} className="justify-center items-center px-4">
             <LottieView
                 autoPlay
                 loop
@@ -27,10 +28,13 @@ const QuizEndScreen = ({route}: RootStackScreenProps<"QuizEndScreen">) => {
                     backgroundColor: 'whit',
                 }}
                 // Find more Lottie files at https://lottiefiles.com/featured
-                source="https://assets4.lottiefiles.com/packages/lf20_dXNLiFDtBY.json"
+                source={require('../../../assets/lottie-ani.json')}
             />
-            <Text className="text-4xl font-bold tracking-wider">{(nOfCorrectAnswers / nOfQuestions) * 100 || 'Loading...'}%</Text>
-            <Text className="text-xl font-bold mt-2">{nOfCorrectAnswers} / {nOfQuestions || 'Loading..'}</Text>
+            <Text className="text-4xl font-bold tracking-wider mt-20">{(nOfCorrectAnswers / nOfQuestions) * 100 || 'Loading...'}%</Text>
+            <Text className="text-2xl font-bold mt-2">{nOfCorrectAnswers} <Text className="text-purple-500"> - out of - </Text> {nOfQuestions || 'Loading..'}</Text>
+            <View style={styles.buttonContainer}>
+                <CustomButton text={'Continue'} />
+            </View>
         </View>
     );
 };
@@ -45,6 +49,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     buttonContainer: {
-        paddingTop: 20,
+        paddingTop: 100,
+        alignSelf: 'stretch',
     },
 });
