@@ -8,10 +8,13 @@ import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import Markdown from "react-native-markdown-display";
 import TopicSection from "./TopicSection";
 import CustomButton from "../../components/CustomButton";
+import useApplyHeaderWorkaround from "../../hooks/useApplyHeaderWorkaround";
 
 const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => {
     const topicId = route.params.id;
     const topic = topics.find(topic => topic.id === topicId);
+    // @TODO does it work?
+    useApplyHeaderWorkaround(navigation.setOptions);
 
     const onStartQuiz = () => {
         navigation.navigate("Quiz", {id: topicId});
