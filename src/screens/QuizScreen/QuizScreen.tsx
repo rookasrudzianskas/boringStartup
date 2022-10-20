@@ -2,15 +2,14 @@
 import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {Text, View, StyleSheet, Image, ScrollView, Alert} from 'react-native';
 import Colors from "../../constants/Colors";
-import {useNavigation} from "@react-navigation/native";
 import quiz from '../../../assets/data/quiz';
 import Markdown from "react-native-markdown-display";
 import MultipleChoiceAnswer from "../../components/MultipleChoiceAnswer";
 import CustomButton from "../../components/CustomButton";
 import ProgressBar from "../../components/ProgressBar";
+import {RootStackScreenProps} from "../../types/navigation";
 
-const QuizScreen = () => {
-    const navigation = useNavigation();
+const QuizScreen = ({navigation}: RootStackScreenProps<"Quiz">) => {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [question, setQuestion] = useState(quiz[questionIndex]);
     const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
@@ -21,7 +20,7 @@ const QuizScreen = () => {
     useEffect(() => {
         if(questionIndex === quiz.length) {
             // navigate to results screen
-            Alert.alert('Quiz Completed', 'You answered ' + numberOfCorrectAnswers + ' questions correctly.');
+            navigation.navigate("QuizEndScreen", { nOfQuestions: quiz.length, nOfCorrectAnswers: numberOfCorrectAnswers });
             return;
         }
         setQuestion(quiz[questionIndex]);

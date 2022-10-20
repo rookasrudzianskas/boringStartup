@@ -14,6 +14,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 import ProfileScreen from "../screens/ProfileScreen";
 import TopicScreen from "../screens/TopicScreen";
 import QuizScreen from "../screens/QuizScreen";
+import QuizEndScreen from "../screens/QuizEndScreen";
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -34,6 +35,7 @@ function RootNavigator() {
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Screen name="Topic" component={TopicScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Quiz" component={QuizScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="QuizEndScreen" component={QuizEndScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }
