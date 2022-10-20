@@ -7,8 +7,8 @@ import Navigation from './src/navigation';
 import { Amplify } from 'aws-amplify';
 import awsconfig from './src/aws-exports';
 import {withAuthenticator} from "aws-amplify-react-native/src/Auth";
-import {Colors} from "react-native/Libraries/NewAppScreen";
 import AmplifyTheme from 'aws-amplify-react-native/src/AmplifyTheme';
+import Colors from './src/constants/Colors';
 
 Amplify.configure({
     ...awsconfig, Analytics: { disabled: true } });
@@ -63,17 +63,17 @@ const customTheme = {
     ...AmplifyTheme,
     button: {
         ...AmplifyTheme.button,
-        backgroundColor: Colors.primary,
-        borderRadius: 100,
+        backgroundColor: Colors.light.primary,
+        borderRadius: 5,
     },
     buttonDisabled: {
         ...AmplifyTheme.buttonDisabled,
-        backgroundColor: '#5c78ff',
-        borderRadius: 100,
+        backgroundColor: Colors.light.tabIconDefault,
+        borderRadius: 5,
     },
     sectionFooterLink: {
         ...AmplifyTheme.sectionFooterLink,
-        color: Colors.primary,
+        color: Colors.light.primary,
     },
 }
 
