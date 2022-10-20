@@ -66,7 +66,7 @@ const QuizScreen = () => {
                 {question.choices && (
                     <>
                         {question.choices.map((choice, index) => (
-                            <MultipleChoiceAnswer key={index} choice={choice} onPress={onChoicePress} isSelected={selectedAnswers.includes(choice)}/>
+                            <MultipleChoiceAnswer disabled={answeredCorrectly !== undefined} key={index} choice={choice} onPress={onChoicePress} isSelected={selectedAnswers.includes(choice)}/>
                         ))}
                     </>
                 )}
