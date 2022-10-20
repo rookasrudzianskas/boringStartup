@@ -3,6 +3,7 @@ import React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 import Colors from "../../constants/Colors";
 import CustomButton from "../../components/CustomButton";
+import {Auth} from "aws-amplify";
 
 
 const ProfileScreen = () => {
@@ -13,7 +14,7 @@ const ProfileScreen = () => {
             </View>
                 <Text className="text-xl font-semibold mt-4">Rokas Rudzianskas</Text>
             <View style={styles.buttonContainer}>
-                <CustomButton text={'Sign out'} type={'TERTIARY'} />
+                <CustomButton text={'Sign out'} onPress={() => Auth.signOut()} type={'TERTIARY'} />
             </View>
         </View>
     );
