@@ -81,8 +81,13 @@ const QuizScreen = () => {
                 </View>
 
             </ScrollView>
-            <View className="bg-gray-100 rounded-t-xl px-4 pt-3 border border-gray-300 h-36" style={styles.correctAnswerBox}>
-                <Text style={styles.correctTitle}>Correct</Text>
+            {/*<View className="bg-gray-100 rounded-t-xl px-4 pt-3 border border-gray-300 h-36" style={[styles.answerBox, styles.correctAnswerBox]}>*/}
+            {/*    <Text style={styles.correctTitle}>Correct</Text>*/}
+            {/*    <CustomButton text={'Continue'} onPress={onContinue} style={styles.button} />*/}
+            {/*</View>*/}
+
+            <View className="bg-gray-100 rounded-t-xl px-4 pt-3 h-36" style={[styles.answerBox, styles.wrongAnswerBox]}>
+                <Text style={styles.wrongTitle}>Bro wrong!</Text>
                 <CustomButton text={'Continue'} onPress={onContinue} style={styles.button} />
             </View>
         </>
@@ -112,12 +117,14 @@ const styles = StyleSheet.create({
     button: {
         marginVertical: 5,
     },
-    correctAnswerBox: {
+    answerBox: {
         position: 'absolute',
         bottom: 0,
         width: '100%',
         left: 0,
         right: 0,
+        borderWidth: 1,
+        borderBottomWidth: 0,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -128,10 +135,23 @@ const styles = StyleSheet.create({
 
         elevation: 5,
     },
+    correctAnswerBox: {
+        borderColor: Colors.light.tertiary,
+    },
+    wrongAnswerBox: {
+        borderColor: Colors.light.secondary,
+    },
     correctTitle: {
         fontSize: 16,
         fontWeight: 'bold',
         color: Colors.light.primary,
+        marginVertical: 10,
+    },
+
+    wrongTitle: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: Colors.light.secondary,
         marginVertical: 10,
     }
 });
