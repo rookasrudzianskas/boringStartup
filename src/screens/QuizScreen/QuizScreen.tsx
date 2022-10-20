@@ -8,6 +8,10 @@ import MultipleChoiceAnswer from "../../components/MultipleChoiceAnswer";
 import CustomButton from "../../components/CustomButton";
 import ProgressBar from "../../components/ProgressBar";
 import {RootStackScreenProps} from "../../types/navigation";
+import Animated, {
+    SlideInDown,
+    SlideInUp,
+} from 'react-native-reanimated';
 
 const QuizScreen = ({navigation}: RootStackScreenProps<"Quiz">) => {
     const [questionIndex, setQuestionIndex] = useState(0);
@@ -94,17 +98,17 @@ const QuizScreen = ({navigation}: RootStackScreenProps<"Quiz">) => {
 
             </ScrollView>
             {answeredCorrectly === true && (
-                <View className="bg-gray-100 rounded-t-xl px-4 pt-3 border border-gray-300 h-36" style={[styles.answerBox, styles.correctAnswerBox]}>
+                <Animated.View entering={SlideInDown} className="bg-gray-100 rounded-t-xl px-4 pt-3 border border-gray-300 h-36" style={[styles.answerBox, styles.correctAnswerBox]}>
                     <Text style={styles.correctTitle}>Correct</Text>
                     <CustomButton text={'Continue'} onPress={onContinue} style={styles.button} />
-                </View>
+                </Animated.View>
             )}
 
             {answeredCorrectly === false && (
-                <View className="bg-gray-100 rounded-t-xl px-4 pt-3 h-36" style={[styles.answerBox, styles.wrongAnswerBox]}>
+                <Animated.View entering={SlideInDown} className="bg-gray-100 rounded-t-xl px-4 pt-3 h-36" style={[styles.answerBox, styles.wrongAnswerBox]}>
                     <Text style={styles.wrongTitle}>Bro wrong!</Text>
                     <CustomButton text={'Continue'} onPress={onContinue} style={styles.button} />
-                </View>
+                </Animated.View>
             )}
         </>
     );
