@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, {useLayoutEffect} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 import Colors from "../../constants/Colors";
 import {useNavigation} from "@react-navigation/native";
@@ -11,6 +11,7 @@ const question = quiz[0];
 
 const QuizScreen = () => {
     const navigation = useNavigation();
+    const [selectedAnswer, setSelectedAnswer] = useState([]);
 
     useLayoutEffect(() => {
         navigation.setOptions({

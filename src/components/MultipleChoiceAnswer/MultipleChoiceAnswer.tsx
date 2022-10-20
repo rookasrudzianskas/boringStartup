@@ -10,8 +10,8 @@ interface MultipleChoiceAnswerProps {
 
 const MultipleChoiceAnswer = ({text, isSelected = false}: MultipleChoiceAnswerProps) => {
     return (
-        <TouchableOpacity className="bg-gray-100" activeOpacity={0.7} style={styles.container}>
-            <Text style={styles.text}>
+        <TouchableOpacity className="bg-gray-100" activeOpacity={0.7} style={[styles.container, isSelected ? { borderColor: Colors.light.primary } : {}]}>
+            <Text className="font-semibold" style={styles.text}>
                 {text}
             </Text>
         </TouchableOpacity>
