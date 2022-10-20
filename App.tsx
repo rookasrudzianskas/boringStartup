@@ -34,17 +34,10 @@ const signUpConfig = {
     hideAllDefaults: true,
     signUpFields: [
         {
-            label: 'Full name',
-            key: 'name',
-            displayOrder: 1,
-            type: 'string',
-            placeholder: 'Full name',
-        },
-        {
             label: 'Email',
-            key: 'email',
+            key: 'username',
             required: true,
-            displayOrder: 2,
+            displayOrder: 1,
             type: 'string',
             placeholder: 'Email',
         },
@@ -52,7 +45,7 @@ const signUpConfig = {
             label: 'Password',
             key: 'password',
             required: true,
-            displayOrder: 4,
+            displayOrder: 2,
             type: 'password',
             placeholder: 'Password',
         }
