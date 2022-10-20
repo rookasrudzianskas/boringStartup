@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-boringstartup-staging-135701-authRole",
+      "UnauthRoleArn": "arn:aws:iam::605111547475:role/amplify-boringstartup-staging-135701-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::605111547475:role/amplify-boringstartup-staging-135701-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-boringstartup-staging-135701-deployment",
+      "UnauthRoleName": "amplify-boringstartup-staging-135701-unauthRole",
+      "StackName": "amplify-boringstartup-staging-135701",
+      "StackId": "arn:aws:cloudformation:us-east-1:605111547475:stack/amplify-boringstartup-staging-135701/12a7d110-507f-11ed-9143-0ead4def83c5",
+      "AmplifyAppId": "dlarzhahqr4sx"
+    },
+    "categories": {
+      "auth": {
+        "boringStartup": {}
+      }
+    }
+  }
+}
