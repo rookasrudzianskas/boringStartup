@@ -10,7 +10,6 @@ import ProgressBar from "../../components/ProgressBar";
 import {RootStackScreenProps} from "../../types/navigation";
 import Animated, {
     SlideInDown,
-    SlideInUp,
 } from 'react-native-reanimated';
 
 const QuizScreen = ({navigation}: RootStackScreenProps<"Quiz">) => {
