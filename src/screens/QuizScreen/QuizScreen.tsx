@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {Text, View, StyleSheet, Image, ScrollView, Alert} from 'react-native';
 import Colors from "../../constants/Colors";
 import {useNavigation} from "@react-navigation/native";
@@ -8,13 +8,18 @@ import Markdown from "react-native-markdown-display";
 import MultipleChoiceAnswer from "../../components/MultipleChoiceAnswer";
 import CustomButton from "../../components/CustomButton";
 
-const question = quiz[0];
-
 const QuizScreen = () => {
     const navigation = useNavigation();
+    const [questionIndex, setQuestionIndex] = useState(0);
+    const [question, setQuestion] = useState(quiz[questionIndex]);
     const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
     const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean | undefined>(undefined);
     const isButtonDisabled = selectedAnswers.length === 0;
+
+    useEffect(() => {
+        setQuestion(quiz[questionIndex]);
+        setAnsweredCorrectly(undefined);
+    }, [questionIndex]);
 
     const onChoicePress = (choice: string) => {
         setSelectedAnswers((currentSelectedAnswers) => {
@@ -40,7 +45,7 @@ const QuizScreen = () => {
     }
 
     const onContinue = () => {
-
+        setQuestionIndex((index) => index + 1);
     }
 
     useLayoutEffect(() => {
