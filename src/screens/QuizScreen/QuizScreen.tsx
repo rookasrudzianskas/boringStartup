@@ -17,11 +17,13 @@ const QuizScreen = () => {
         })
     }, []);
 
+    // console.log(question);
+
     return (
         <View style={styles.container}>
             <Text style={styles.question}>{question?.question || 'Loading...'}</Text>
             {!!question.image && (
-                <Image resizeMode={'contain'} className="-mt-10" source={{uri: question?.image}} style={styles.questionImage} />
+                <Image resizeMode={'contain'} className="-mt-10" source={{uri: question.image}} style={styles.questionImage} />
             )}
 
         {/*    Choices */}
