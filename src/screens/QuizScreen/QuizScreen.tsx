@@ -5,6 +5,7 @@ import Colors from "../../constants/Colors";
 import {useNavigation} from "@react-navigation/native";
 import quiz from '../../../assets/data/quiz';
 import Markdown from "react-native-markdown-display";
+import MultipleChoiceAnswer from "../../components/MultipleChoiceAnswer";
 
 const question = quiz[0];
 
@@ -31,7 +32,13 @@ const QuizScreen = () => {
             {!!question.content && (<Markdown>{question.content}</Markdown>)}
 
         {/*    Choices */}
-
+            {question.options && (
+                <>
+                    {question.options.map((option, index) => (
+                        <MultipleChoiceAnswer key={index} text={option} />
+                    ))}
+                </>
+            )}
         {/*    Button */}
         </View>
     );
