@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React, {useLayoutEffect, useState} from 'react';
-import {Text, View, StyleSheet, Image} from 'react-native';
+import {Text, View, StyleSheet, Image, ScrollView} from 'react-native';
 import Colors from "../../constants/Colors";
 import {useNavigation} from "@react-navigation/native";
 import quiz from '../../../assets/data/quiz';
@@ -39,7 +39,7 @@ const QuizScreen = () => {
     console.error = (error) => error.apply; // @TODO Disables the error message of Courier font, have to be replaced to Courier New
 
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={{paddingBottom: 100}} style={styles.container}>
             <Text style={styles.question}>{question?.question || 'Loading...'}</Text>
             {!!question.image && (
                 <Image resizeMode={'contain'} className="-mt-10" source={{uri: question.image}} style={styles.questionImage} />
@@ -56,8 +56,10 @@ const QuizScreen = () => {
                 </>
             )}
         {/*    Button */}
-            <CustomButton text={'Submit'} style={styles.button} />
-        </View>
+            <View style={styles.buttonContainer}>
+                <CustomButton text={'Submit'} style={styles.button} />
+            </View>
+        </ScrollView>
     );
 };
 
@@ -78,8 +80,10 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 300,
     },
-    button: {
+    buttonContainer: {
         marginTop: 'auto',
-        marginBottom: 35,
+    },
+    button: {
+        marginVertical: 20,
     }
 });
