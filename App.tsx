@@ -49,14 +49,6 @@ const signUpConfig = {
             placeholder: 'Email',
         },
         {
-            label: 'Username',
-            key: 'username',
-            required: true,
-            displayOrder: 3,
-            type: 'string',
-            placeholder: 'Username/handle',
-        },
-        {
             label: 'Password',
             key: 'password',
             required: true,
