@@ -14,11 +14,11 @@ const QuizScreen = () => {
     const [selectedAnswer, setSelectedAnswer] = useState<string[]>([]);
 
     const onChoicePress = (choice: string) => {
-        setSelectedAnswer(currentSelectedAnswers => {
+        setSelectedAnswer((currentSelectedAnswers) => {
             if(currentSelectedAnswers.includes(choice)) {
                 return currentSelectedAnswers.filter(item => item !== choice);
             } else {
-                if(question.type === "MULTIPLE_ANSWERS") {
+                if(question.correctAnswers.length > 1) {
                     return [...currentSelectedAnswers, choice];
                 } else {
                     return [choice];
