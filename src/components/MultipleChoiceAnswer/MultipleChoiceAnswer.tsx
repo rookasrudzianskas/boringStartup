@@ -15,6 +15,7 @@ const MultipleChoiceAnswer = ({choice, isSelected = false, onPress = () => {}}: 
             <Text className="font-semibold" style={[styles.text, isSelected ? { color: Colors.light.primary } : {}]}>
                 {choice}
             </Text>
+
         </TouchableOpacity>
     );
 };

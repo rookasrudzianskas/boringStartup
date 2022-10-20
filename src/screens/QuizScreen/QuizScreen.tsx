@@ -6,6 +6,7 @@ import {useNavigation} from "@react-navigation/native";
 import quiz from '../../../assets/data/quiz';
 import Markdown from "react-native-markdown-display";
 import MultipleChoiceAnswer from "../../components/MultipleChoiceAnswer";
+import CustomButton from "../../components/CustomButton";
 
 const question = quiz[0];
 
@@ -55,6 +56,7 @@ const QuizScreen = () => {
                 </>
             )}
         {/*    Button */}
+            <CustomButton text={'Submit'} style={styles.button} />
         </View>
     );
 };
@@ -75,5 +77,9 @@ const styles = StyleSheet.create({
     questionImage: {
         width: '100%',
         height: 300,
+    },
+    button: {
+        marginTop: 'auto',
+        marginBottom: 35,
     }
 });
