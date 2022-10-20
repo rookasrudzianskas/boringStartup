@@ -1,0 +1,10 @@
+{
+  "resourceName": "s3boringstartupstorage1d02bbb4",
+  "bucketName": "boringstartup-storage-1d02bbb4",
+  "policyUUID": "53fbced1",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "READ"
+  ]
+}

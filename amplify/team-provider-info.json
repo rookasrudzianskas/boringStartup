@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "boringStartup": {}
+      },
+      "storage": {
+        "s3boringstartupstorage1d02bbb4": {}
       }
     }
   }
