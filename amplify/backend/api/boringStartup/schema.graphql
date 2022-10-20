@@ -1,0 +1,32 @@
+type Quiz @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  QuizQuestions: [QuizQuestion] @hasMany(indexName: "byQuiz", fields: ["id"])
+}
+
+type QuizQuestion @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  question: String
+  image: String
+  content: String
+  choices: [String!]
+  correctAnswers: [String!]
+  quizID: ID! @index(name: "byQuiz")
+}
+
+type Resource @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  url: String
+  topicID: ID! @index(name: "byTopic")
+}
+
+type Topic @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  icon: String
+  level: Int!
+  description: String
+  Resources: [Resource] @hasMany(indexName: "byTopic", fields: ["id"])
+  Exercises: [Resource] @hasMany(indexName: "byTopic", fields: ["id"])
+  Quiz: Quiz @hasOne
+}
