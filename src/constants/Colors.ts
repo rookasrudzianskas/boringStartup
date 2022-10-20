@@ -10,6 +10,7 @@ export default {
 
     text: '#000',
     background: '#F5FBEF',
+    backgroundError: '#fbefef',
     white: '#fff',
     tint: tintColorLight,
     tabIconDefault: '#ccc',

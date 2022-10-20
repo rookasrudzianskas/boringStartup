@@ -33,6 +33,7 @@ const QuizScreen = () => {
     const onSubmit = () => {
         if(selectedAnswers.length !== question.correctAnswers.length) {
             setAnsweredCorrectly(false);
+            return;
         }
         const isCorrect = question.correctAnswers.every((answer) => selectedAnswers.includes(answer));
         setAnsweredCorrectly(isCorrect);
@@ -138,6 +139,7 @@ const styles = StyleSheet.create({
     },
     wrongAnswerBox: {
         borderColor: Colors.light.secondary,
+        backgroundColor: Colors.light.backgroundError,
     },
     correctTitle: {
         fontSize: 16,
