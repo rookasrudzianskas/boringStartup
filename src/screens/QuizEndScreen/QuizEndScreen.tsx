@@ -23,8 +23,8 @@ const QuizEndScreen = ({navigation, route}: RootStackScreenProps<"QuizEndScreen"
                 speed={1}
                 ref={animation}
                 style={{
-                    width: 400,
-                    height: 400,
+                    width: 350,
+                    height: 350,
                     backgroundColor: 'whit',
                 }}
                 source={isHappy ? require('../../../assets/lottie-ani-sad.json') : require('../../../assets/lottie-ani.json')}
