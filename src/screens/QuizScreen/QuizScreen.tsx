@@ -4,6 +4,7 @@ import {Text, View, StyleSheet, Image} from 'react-native';
 import Colors from "../../constants/Colors";
 import {useNavigation} from "@react-navigation/native";
 import quiz from '../../../assets/data/quiz';
+import Markdown from "react-native-markdown-display";
 
 const question = quiz[0];
 
@@ -18,6 +19,7 @@ const QuizScreen = () => {
     }, []);
 
     // console.log(question);
+    console.error = (error) => error.apply; // @TODO Disables the error message of Courier font, have to be replaced to Courier New
 
     return (
         <View style={styles.container}>
@@ -25,6 +27,8 @@ const QuizScreen = () => {
             {!!question.image && (
                 <Image resizeMode={'contain'} className="-mt-10" source={{uri: question.image}} style={styles.questionImage} />
             )}
+
+            {!!question.content && (<Markdown>{question.content}</Markdown>)}
 
         {/*    Choices */}
 
@@ -44,6 +48,7 @@ const styles = StyleSheet.create({
     question: {
         fontSize: 20,
         fontWeight: '500',
+        marginVertical: 10,
     },
     questionImage: {
         width: '100%',

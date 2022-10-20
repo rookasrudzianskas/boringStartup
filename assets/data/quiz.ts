@@ -2,6 +2,20 @@ export default [
     {
         id: '1',
         question: 'What is the output of the following code?',
-        image: 'https://quizapp-app.s3.us-east-1.amazonaws.com/1.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEH4aCmV1LW5vcnRoLTEiSDBGAiEA%2F%2Fu8nmRumQM2LHPRRlWbTbKr5TDH7DgIbjsuyjysKKACIQCyFggyMnCplg4OdDO3faZi0m57Sn6nYvAxDVc2CFY0oCrkAghYEAAaDDYwNTExMTU0NzQ3NSIMGLcyGfs9CAUlCEMAKsECDyyLatqI6577U1sSZas4hzrpg%2F7JqmOoZvIRVn8SzR3hkmEy9NrBiko9M6YofyCFsFUdOpCyAtXBWtRQBodWTXIIAkztGOkdN0jsMDh3mi8ofaxcCJ1VEw4xxZRMskr2h22vkTv4TpPZF57R1iTNF%2FXy8VFCIBX8lOD2T3pFRl2ncJoTQlNbqCPmiAddBCGO%2BG5gfe0Z7%2FnOoo8VTd1UxcYtCcJYxSpyDEzqvHChiQOcEafQuAfdgJ3nPkycQt0E2%2FArFeJK%2FoV0dE22t5rf8GXjjPhhN%2BkrWfFnmqkO5lhroMDfMuuNws09Bs7AORIkm6xzz%2BnSs3MAKz%2Bdtp58kk1m3bjE3Idh3boqaVUBn2RtGQHQdsEzOTCSbxf0jEAm1ZDrFa0pyCRXW12%2F6qQERTSTtyWfkoQRQh41%2Bu6j11vlMJXVw5oGOrICnsmlB%2FhKS%2FIof5bRcQRwXdYEsx9LtbeJtJfmxLj%2B%2BabfiMioihJOuVukxWlCzLNNy%2FRwlm8lqFChcJkrCF9uPEtJk74k4OZYYoiE1YVhQxPqCGRdCMERVYnFLCTSPZHwQ1Ffuv9IUBI4ikH0De2CvIScdbXFXwZtcD82ss7lRLmS0pfBW47nSma%2F97ZBSjIfk%2FnCQ138X1wk6C8dMrbsxY3gEVHzwbbpeDLqE0YqWuD14aErGwUp44GFs29mpsheipQS9y0yEgeWwfT7HSvna6XrXXHri6gZgZcNbDCdhm9bdMU7UJ4fGwviZyt5h0rELaQH1%2Fi80mGercD7GoDzGAW1HVS1gj1vqIfAhEXPM%2B6XpT1kMkFZ7nV0tWNpp%2FD7i79rbvL7EJTVyHC1Lc7w2jZ3&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221020T063224Z&X-Amz-SignedHeaders=host&X-Amz-Expires=299&X-Amz-Credential=ASIAYZY3VOZJ5V7UXUWB%2F20221020%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=d6a34346f6881714899004ce4655dee5aeb393a448a1f7f2a33cc8e915d40b68',
-    }
+        image: 'https://blog.chalarangelo.me/static/45cec8321df4bfe1f5a612530911b66b/fae55/1-NkDqIjUhKbfXA37K59kvkw.png',
+    },
+    {
+        id: '2',
+        question: 'What is the output of the following code?',
+        content: `
+\`\`\`
+const a = 18;
+const getBirthday = () => {
+    return a;
+};
+const b = getBirthday();
+console.log(b);
+            
+`,
+    },
 ]
