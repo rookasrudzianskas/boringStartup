@@ -12,7 +12,7 @@ interface MultipleChoiceAnswerProps {
 const MultipleChoiceAnswer = ({choice, isSelected = false, onPress = () => {}}: MultipleChoiceAnswerProps) => {
     return (
         <TouchableOpacity onPress={() => onPress(choice)} className="bg-gray-100" activeOpacity={0.7} style={[styles.container, isSelected ? { borderColor: Colors.light.primary } : {}]}>
-            <Text className="font-semibold" style={styles.text}>
+            <Text className="font-semibold" style={[styles.text, isSelected ? { color: Colors.light.primary } : {}]}>
                 {choice}
             </Text>
         </TouchableOpacity>
@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
 
     },
     text: {
-
+        color: Colors.light.text
     }
 });
