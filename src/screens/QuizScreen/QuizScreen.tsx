@@ -13,6 +13,7 @@ const question = quiz[0];
 const QuizScreen = () => {
     const navigation = useNavigation();
     const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
+    const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean | undefined>(undefined);
     const isButtonDisabled = selectedAnswers.length === 0;
 
     const onChoicePress = (choice: string) => {
@@ -29,19 +30,12 @@ const QuizScreen = () => {
         });
     }
 
-    const answeredCorrectly = () => {
-        if(selectedAnswers.length !== question.correctAnswers.length) {
-            return false;
-        }
-        return question.correctAnswers.every((answer) => selectedAnswers.includes(answer));
-    }
-
     const onSubmit = () => {
-        if(answeredCorrectly()) {
-            Alert.alert("Fire Bro!", "You got the question right!");
-        } else {
-            Alert.alert("Ooops!", "You got the question wrong!");
+        if(selectedAnswers.length !== question.correctAnswers.length) {
+            setAnsweredCorrectly(false);
         }
+        const isCorrect = question.correctAnswers.every((answer) => selectedAnswers.includes(answer));
+        setAnsweredCorrectly(isCorrect);
     }
 
     const onContinue = () => {
@@ -81,15 +75,19 @@ const QuizScreen = () => {
                 </View>
 
             </ScrollView>
-            {/*<View className="bg-gray-100 rounded-t-xl px-4 pt-3 border border-gray-300 h-36" style={[styles.answerBox, styles.correctAnswerBox]}>*/}
-            {/*    <Text style={styles.correctTitle}>Correct</Text>*/}
-            {/*    <CustomButton text={'Continue'} onPress={onContinue} style={styles.button} />*/}
-            {/*</View>*/}
+            {answeredCorrectly === true && (
+                <View className="bg-gray-100 rounded-t-xl px-4 pt-3 border border-gray-300 h-36" style={[styles.answerBox, styles.correctAnswerBox]}>
+                    <Text style={styles.correctTitle}>Correct</Text>
+                    <CustomButton text={'Continue'} onPress={onContinue} style={styles.button} />
+                </View>
+            )}
 
-            <View className="bg-gray-100 rounded-t-xl px-4 pt-3 h-36" style={[styles.answerBox, styles.wrongAnswerBox]}>
-                <Text style={styles.wrongTitle}>Bro wrong!</Text>
-                <CustomButton text={'Continue'} onPress={onContinue} style={styles.button} />
-            </View>
+            {answeredCorrectly === false && (
+                <View className="bg-gray-100 rounded-t-xl px-4 pt-3 h-36" style={[styles.answerBox, styles.wrongAnswerBox]}>
+                    <Text style={styles.wrongTitle}>Bro wrong!</Text>
+                    <CustomButton text={'Continue'} onPress={onContinue} style={styles.button} />
+                </View>
+            )}
         </>
     );
 };
