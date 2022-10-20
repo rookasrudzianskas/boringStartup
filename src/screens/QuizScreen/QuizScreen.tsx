@@ -38,7 +38,7 @@ const QuizScreen = () => {
     console.error = (error) => error.apply; // @TODO Disables the error message of Courier font, have to be replaced to Courier New
 
     return (
-        <ScrollView contentContainerStyle={{paddingBottom: 100, minHeight: '100%'}} style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 100, minHeight: '100%'}} style={styles.container}>
             <Text style={styles.question}>{question?.question || 'Loading...'}</Text>
             {!!question.image && (
                 <Image resizeMode={'contain'} className="-mt-10" source={{uri: question.image}} style={styles.questionImage} />
