@@ -7,6 +7,7 @@ import quiz from '../../../assets/data/quiz';
 import Markdown from "react-native-markdown-display";
 import MultipleChoiceAnswer from "../../components/MultipleChoiceAnswer";
 import CustomButton from "../../components/CustomButton";
+import ProgressBar from "../../components/ProgressBar";
 
 const QuizScreen = () => {
     const navigation = useNavigation();
@@ -14,12 +15,13 @@ const QuizScreen = () => {
     const [question, setQuestion] = useState(quiz[questionIndex]);
     const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
     const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean | undefined>(undefined);
+    const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0);
     const isButtonDisabled = selectedAnswers.length === 0;
 
     useEffect(() => {
         if(questionIndex === quiz.length) {
             // navigate to results screen
-            Alert.alert('Quiz Completed', 'You answered ' + answeredCorrectly + ' questions correctly.');
+            Alert.alert('Quiz Completed', 'You answered ' + numberOfCorrectAnswers + ' questions correctly.');
             return;
         }
         setQuestion(quiz[questionIndex]);
@@ -48,6 +50,9 @@ const QuizScreen = () => {
         }
         const isCorrect = question.correctAnswers.every((answer) => selectedAnswers.includes(answer));
         setAnsweredCorrectly(isCorrect);
+        if(isCorrect) {
+            setNumberOfCorrectAnswers((currentNumber) => currentNumber + 1);
+        }
     }
 
     const onContinue = () => {
@@ -65,6 +70,7 @@ const QuizScreen = () => {
 
     return (
         <>
+            <ProgressBar progress={questionIndex / quiz.length} />
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 50, flexGrow: 1}} style={styles.container}>
                 <Text style={styles.question}>{question?.question || 'Loading...'}</Text>
                 {!!question.image && (
