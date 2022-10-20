@@ -12,10 +12,11 @@ const question = quiz[0];
 
 const QuizScreen = () => {
     const navigation = useNavigation();
-    const [selectedAnswer, setSelectedAnswer] = useState<string[]>([]);
+    const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
+    const isButtonDisabled = selectedAnswers.length === 0;
 
     const onChoicePress = (choice: string) => {
-        setSelectedAnswer((currentSelectedAnswers) => {
+        setSelectedAnswers((currentSelectedAnswers) => {
             if(currentSelectedAnswers.includes(choice)) {
                 return currentSelectedAnswers.filter(item => item !== choice);
             } else {
@@ -54,13 +55,13 @@ const QuizScreen = () => {
             {question.choices && (
                 <>
                     {question.choices.map((choice, index) => (
-                        <MultipleChoiceAnswer key={index} choice={choice} onPress={onChoicePress} isSelected={selectedAnswer.includes(choice)}/>
+                        <MultipleChoiceAnswer key={index} choice={choice} onPress={onChoicePress} isSelected={selectedAnswers.includes(choice)}/>
                     ))}
                 </>
             )}
         {/*    Button */}
             <View style={styles.buttonContainer}>
-                <CustomButton text={'Submit'} style={styles.button} />
+                <CustomButton disabled={isButtonDisabled} text={'Submit'} onPress={onSubmit} style={styles.button} />
             </View>
         </ScrollView>
     );
