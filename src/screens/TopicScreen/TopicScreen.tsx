@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {Text, View, StyleSheet, Image, ScrollView, SafeAreaView} from 'react-native';
+import {Text, View, StyleSheet, Image, ScrollView, SafeAreaView, ActivityIndicator} from 'react-native';
 import Colors from "../../constants/Colors";
 import ResourceListItem from "../../components/ResourceListItem";
 import topics from "../../../assets/data/topics";
@@ -18,6 +18,15 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     const [userTopicProgress, setUserTopicProgress] = useState<UserTopicProgress>();
     const [resources, setResources] = useState<Resource[]>([]);
     const [exercises, setExercises] = useState<Exercise[]>([]);
+
+    useLayoutEffect(() => {
+        // @TODO does it work?
+        // if(!topic) return;
+        navigation.setOptions({
+            headerShown: true,
+            title: topic?.title || "Loading...",
+        })
+    }, []);
 
     // @TODO does it work?
     useApplyHeaderWorkaround(navigation.setOptions);
@@ -43,19 +52,21 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             const exercises = await DataStore.query(Exercise).then(exercises => exercises.filter((r => r.topicID === topic?.id)));
             setExercises(exercises);
             // ----------------------------
+            // Get user progress for this topic
             const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
             const userTopicProgresses = await DataStore.query(UserTopicProgress);
-            const userProgress = userTopicProgresses.find((tp) => tp.topicID === topic?.id && tp.userID === userData?.attributes.sub);
-            if(userTopicProgress) {
+            const userProgress = userTopicProgresses.find((tp) => tp.topicID === topic?.id && tp.sub === userData?.attributes.sub);
+            if(userProgress) {
                 setUserTopicProgress(userProgress);
             } else {
-                await DataStore.save(new UserTopicProgress({
+                const newUserProgress = await DataStore.save(new UserTopicProgress({
                     sub: userData?.attributes.sub,
                     completedResourceIDs: [],
                     completedExerciseIDs: [],
                     progress: 0,
                     topicID: topic?.id,
                 }))
+                setUserTopicProgress(newUserProgress);
             }
         }
         fetchTopicDetails();
@@ -69,14 +80,13 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         }
     };
 
-    useLayoutEffect(() => {
-        // @TODO does it work?
-        // if(!topic) return;
-        navigation.setOptions({
-            headerShown: true,
-            title: topic?.title || "Loading...",
-        })
-    }, []);
+    if(!topic && !userTopicProgress) {
+        return (
+            <View className="h-screen items-center justify-center">
+                <ActivityIndicator />
+            </View>
+        )
+    }
     console.error = (error) => error.apply; // @TODO Disables the error message of Courier font, have to be replaced to Courier New
 
     return (
