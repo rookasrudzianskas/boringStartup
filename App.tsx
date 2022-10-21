@@ -13,7 +13,6 @@ import Colors from './src/constants/Colors';
 Amplify.configure({
     ...awsconfig, Analytics: { disabled: true } });
 
-
 const App = () => {
     const isLoadingComplete = useCachedResources();
     const colorScheme = useColorScheme();
