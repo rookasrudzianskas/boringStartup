@@ -1,9 +1,8 @@
 //@ts-nocheck
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {Text, View, StyleSheet, Image, ScrollView, SafeAreaView, ActivityIndicator} from 'react-native';
+import {ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import Colors from "../../constants/Colors";
 import ResourceListItem from "../../components/ResourceListItem";
-import topics from "../../../assets/data/topics";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
 import Markdown from "react-native-markdown-display";
 import TopicSection from "./TopicSection";
@@ -89,13 +88,24 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                 updated.completedResourceIDs.push(resource.id);
                 const progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length + 1);
                 updated.progress = progress;
+                updated.icCompleted = progress === 1;
             }
         }));
         setUserTopicProgress(updated);
     }
 
     const onExerciseComplete = async (exercise: Exercise) => {
-
+        if(!userTopicProgress) return;
+        // recalculate progress
+        const updated = await DataStore.save(UserTopicProgress.copyOf(userTopicProgress, (updated) => {
+            if(!updated.completedExerciseIDs.includes(exercise.id)) {
+                updated.completedExerciseIDs.push(exercise.id);
+                const progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length + 1);
+                updated.progress = progress;
+                updated.icCompleted = progress === 1;
+            }
+        }));
+        setUserTopicProgress(updated);
     }
 
     if(!topic && !userTopicProgress) {
