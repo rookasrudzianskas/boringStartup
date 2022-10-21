@@ -6,6 +6,7 @@ import {Topic} from "../../types/models";
 import Svg, { Circle, Rect } from 'react-native-svg';
 import CircularProgress from "../CircularProgress";
 import {useNavigation} from "@react-navigation/native";
+import { S3Image } from 'aws-amplify-react-native';
 
 interface TopicNodeProps {
     topic: Topic;
@@ -26,7 +27,7 @@ const TopicNode = ({topic, isDisabled = true}: TopicNodeProps) => {
             <View style={[styles.progress]}>
                 <CircularProgress size={itemsWidth} strokeWidth={8} progress={topic.progress} />
                     <View style={[styles.circle, {width: itemsWidth - 20, backgroundColor: isDisabled ? Colors.light.dark : Colors.light.primary}]}>
-                        <Image source={{uri: topic?.icon}} style={styles.image} />
+                        <S3Image imgKey={topic.icon} source={{uri: topic?.icon}} style={styles.image} />
                     </View>
             </View>
                 <Text style={styles.title}>{topic?.title || 'Loading...'}</Text>
