@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, Image, TouchableOpacity, useWindowDimensions} from 'react-native';
 import Colors from "../../constants/Colors";
 import {Topic} from "../../types/models";
@@ -8,6 +8,8 @@ import CircularProgress from "../CircularProgress";
 import {useNavigation} from "@react-navigation/native";
 import { S3Image } from 'aws-amplify-react-native';
 import {AntDesign} from "@expo/vector-icons";
+import {Auth, DataStore} from "aws-amplify";
+import {UserTopicProgress} from "../../models";
 
 interface TopicNodeProps {
     topic: Topic;
@@ -16,8 +18,18 @@ interface TopicNodeProps {
 
 const TopicNode = ({topic, isDisabled = false}: TopicNodeProps) => {
     const {width} = useWindowDimensions();
+    const [progress, setProgress] = useState(0);
     const navigation = useNavigation();
     const  itemsWidth = width / 3 - 30;
+
+    useEffect(() => {
+        if(!topic) return;
+        (async () => {
+            const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
+            const userTopicProgresses = DataStore.query(UserTopicProgress);
+            const userProgress = userTopicProgresses.find(tp => tp.find((tp) => tp.topicID === topic?.id && tp.sub === userData?.attributes.sub));
+        })();
+    }, [topic]);
 
     const onPress = () => {
         navigation.navigate('Topic', { id: topic.id });
