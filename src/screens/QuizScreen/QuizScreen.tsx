@@ -13,8 +13,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import useApplyHeaderWorkaround from "../../hooks/useApplyHeaderWorkaround";
 import {styles} from "./QuizScreen.styles";
-import {DataStore} from "aws-amplify";
-import {Quiz, QuizQuestion} from "../../models";
+import {Auth, DataStore} from "aws-amplify";
+import {Quiz, QuizQuestion, QuizResult, UserTopicProgress} from "../../models";
 import {S3Image} from "aws-amplify-react-native";
 
 const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
@@ -22,6 +22,7 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [questions, setQuestions] = useState<QuizQuestion[]>([]);
     const question = questions[questionIndex];
+    const [previousResults, setPreviousResults] = useState<QuizResult | undefined>();
 
     const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
     const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean | undefined>(undefined);
@@ -41,8 +42,23 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
             setQuestions(questions);
         }
         fetchQuestions();
+
+        const fetchPreviousResults = async () => {
+            // get previous results
+            const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
+            const quizResults = await DataStore.query(QuizResult);
+            const quizResult = quizResults.find((qr) => qr.quizID === quiz?.id && qr.sub === userData?.attributes.sub);
+            setPreviousResults(quizResult);
+        }
+        fetchPreviousResults();
+
         const subscription = DataStore.observe(QuizQuestion).subscribe(() => fetchQuestions());
-        return () => subscription.unsubscribe();
+        const subscriptionForPreviousResults = DataStore.observe(UserTopicProgress).subscribe(() => fetchPreviousResults());
+
+        return () => {
+            subscription.unsubscribe();
+            subscriptionForPreviousResults.unsubscribe();
+        };
     }, [quiz]);
 
     useEffect(() => {
