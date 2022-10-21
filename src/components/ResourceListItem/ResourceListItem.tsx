@@ -18,6 +18,7 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {} }: Re
         // Linking.openURL(resource.url || 'www.w3schools.com');
         if(!resource.url) return;
         WebBrowser.openBrowserAsync(resource?.url || 'https://expo.dev');
+        onComplete(resource);
     }
 
     return (

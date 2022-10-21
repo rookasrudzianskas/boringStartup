@@ -81,6 +81,21 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         }
     };
 
+    const onResourceComplete = async (resource: Resource) => {
+        if(!userTopicProgress) return;
+        // recalculate progress
+        const updated = await DataStore.save(UserTopicProgress.copyOf(userTopicProgress, (updated) => {
+            if(!updated.completedResourceIDs.includes(resource.id)) {
+                updated.completedResourceIDs.push(resource.id);
+            }
+        }));
+        setUserTopicProgress(updated);
+    }
+
+    const onExerciseComplete = async (exercise: Exercise) => {
+
+    }
+
     if(!topic && !userTopicProgress) {
         return (
             <View className="h-screen items-center justify-center">
@@ -104,7 +119,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                     {resources && (
                         <>
                             {resources.map((resource, index) => (
-                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === resources.length} />
+                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === resources.length} onComplete={onResourceComplete} />
                             ))}
                         </>
                     )}
@@ -119,7 +134,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                     {exercises && (
                         <>
                             {exercises.map((exercise, index) => (
-                                <ResourceListItem resource={exercise} key={exercise.id} index={index} isLast={index + 1 === exercises.length} />
+                                <ResourceListItem resource={exercise} key={exercise.id} index={index} isLast={index + 1 === exercises.length} onComplete={onExerciseComplete} />
                             ))}
                         </>
                     )}
