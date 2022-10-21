@@ -4,10 +4,10 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Colors from "../../constants/Colors";
 import {Ionicons} from "@expo/vector-icons";
 import * as WebBrowser from 'expo-web-browser';
-import {Resource} from "../../models";
+import {Exercise, Resource} from "../../models";
 
 interface ResourceListItemProps {
-    resource: Resource;
+    resource: Resource | Exercise;
     index: number;
     isLast?: boolean;
 }

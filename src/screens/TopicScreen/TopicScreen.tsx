@@ -16,7 +16,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     const topicId = route.params.id;
     const [topic, setTopic] = useState<Topic[]>();
     const [resources, setResources] = useState<Resource[]>([]);
-    const [exercise, setExercise] = useState<Exercise[]>([]);
+    const [exercises, setExercises] = useState<Exercise[]>([]);
 
     // @TODO does it work?
     useApplyHeaderWorkaround(navigation.setOptions);
@@ -39,6 +39,12 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             setResources(resource);
         }
         fetchResource();
+
+        const fetchExercises = async () => {
+            const exercises = await DataStore.query(Exercise).then(exercises => exercises.filter((r => r.topicID === topic?.id)));
+            setExercises(exercises);
+        }
+        fetchExercises();
     }, [topic]);
 
     const onStartQuiz = () => {
@@ -78,11 +84,11 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                     <Markdown>{topic?.context || 'Loading...'}</Markdown>
                 </TopicSection>
 
-                <TopicSection title={'Practice'} display={!!topic?.exercises}>
-                    {topic?.exercises && (
+                <TopicSection title={'Practice'} display={!!exercises.length}>
+                    {exercises && (
                         <>
-                            {topic?.resources.map((resource, index) => (
-                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === topic.resources.length} />
+                            {exercises.map((exercise, index) => (
+                                <ResourceListItem resource={exercise} key={exercise.id} index={index} isLast={index + 1 === exercise.length} />
                             ))}
                         </>
                     )}
