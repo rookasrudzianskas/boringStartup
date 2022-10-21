@@ -9,12 +9,13 @@ import Markdown from "react-native-markdown-display";
 import TopicSection from "./TopicSection";
 import CustomButton from "../../components/CustomButton";
 import useApplyHeaderWorkaround from "../../hooks/useApplyHeaderWorkaround";
-import {Exercise, Resource, Topic} from "../../models";
+import {Exercise, Resource, Topic, UserTopicProgress} from "../../models";
 import {DataStore} from "aws-amplify";
 
 const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => {
     const topicId = route.params.id;
     const [topic, setTopic] = useState<Topic[]>();
+    const [userTopicProgress, setUserTopicProgress] = useState<UserTopicProgress>();
     const [resources, setResources] = useState<Resource[]>([]);
     const [exercises, setExercises] = useState<Exercise[]>([]);
 
@@ -34,17 +35,16 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             navigation.setOptions({ title: topic.title });
         }
 
-        const fetchResource = async () => {
+        const fetchTopicDetails = async () => {
             const resource = await DataStore.query(Resource).then(resources => resources.filter(resource => resource.topicID === topic?.id));
             setResources(resource);
-        }
-        fetchResource();
-
-        const fetchExercises = async () => {
+            // ----------------------------
             const exercises = await DataStore.query(Exercise).then(exercises => exercises.filter((r => r.topicID === topic?.id)));
             setExercises(exercises);
         }
-        fetchExercises();
+        fetchTopicDetails();
+
+
     }, [topic]);
 
     const onStartQuiz = () => {
