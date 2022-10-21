@@ -10,7 +10,7 @@ import TopicSection from "./TopicSection";
 import CustomButton from "../../components/CustomButton";
 import useApplyHeaderWorkaround from "../../hooks/useApplyHeaderWorkaround";
 import {Exercise, Resource, Topic, UserTopicProgress} from "../../models";
-import {DataStore} from "aws-amplify";
+import {Auth, DataStore} from "aws-amplify";
 
 const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => {
     const topicId = route.params.id;
@@ -36,11 +36,27 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         }
 
         const fetchTopicDetails = async () => {
+            if(!topic) return;
             const resource = await DataStore.query(Resource).then(resources => resources.filter(resource => resource.topicID === topic?.id));
             setResources(resource);
             // ----------------------------
             const exercises = await DataStore.query(Exercise).then(exercises => exercises.filter((r => r.topicID === topic?.id)));
             setExercises(exercises);
+            // ----------------------------
+            const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
+            const userTopicProgresses = await DataStore.query(UserTopicProgress);
+            const userProgress = userTopicProgresses.find((tp) => tp.topicID === topic?.id && tp.userID === userData?.attributes.sub);
+            if(userTopicProgress) {
+                setUserTopicProgress(userProgress);
+            } else {
+                await DataStore.save(new UserTopicProgress({
+                    sub: userData?.attributes.sub,
+                    completedResourceIDs: [],
+                    completedExerciseIDs: [],
+                    progress: 0,
+                    topicID: topic?.id,
+                }))
+            }
         }
         fetchTopicDetails();
 
