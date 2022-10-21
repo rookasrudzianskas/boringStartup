@@ -47,7 +47,8 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
             // get previous results
             const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
             const quizResults = await DataStore.query(QuizResult);
-            const quizResult = quizResults.find((qr) => qr.quizID === quiz?.id && qr.sub === userData?.attributes.sub);
+            const myQuizResult = quizResults.filter((qr) => qr.quizID === quiz?.id && qr.sub === userData?.attributes.sub);
+            const lastTry = myQuizResult.reduce((acc: number, curr) => Math.max(curr.try, acc), 0);
             setPreviousResults(quizResult);
         }
         fetchPreviousResults();
