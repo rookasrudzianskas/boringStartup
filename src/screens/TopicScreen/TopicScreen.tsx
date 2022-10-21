@@ -86,9 +86,8 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         const updated = await DataStore.save(UserTopicProgress.copyOf(userTopicProgress, (updated) => {
             if(!updated.completedResourceIDs.includes(resource.id)) {
                 updated.completedResourceIDs.push(resource.id);
-                const progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length + 1);
+                const progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
                 updated.progress = progress;
-                updated.icCompleted = progress === 1;
             }
         }));
         setUserTopicProgress(updated);
@@ -100,9 +99,8 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         const updated = await DataStore.save(UserTopicProgress.copyOf(userTopicProgress, (updated) => {
             if(!updated.completedExerciseIDs.includes(exercise.id)) {
                 updated.completedExerciseIDs.push(exercise.id);
-                const progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length + 1);
+                const progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
                 updated.progress = progress;
-                updated.icCompleted = progress === 1;
             }
         }));
         setUserTopicProgress(updated);
