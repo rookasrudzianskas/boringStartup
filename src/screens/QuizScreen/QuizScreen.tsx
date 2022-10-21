@@ -22,7 +22,6 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [questions, setQuestions] = useState<QuizQuestion[]>([]);
     const question = questions[questionIndex];
-    const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
     const [previousResults, setPreviousResults] = useState<QuizResult | undefined>();
 
     const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
@@ -46,6 +45,7 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
 
         const fetchPreviousResults = async () => {
             // get previous results
+            const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
             const quizResults = await DataStore.query(QuizResult);
             const quizResult = quizResults.find((qr) => qr.quizID === quiz?.id && qr.sub === userData?.attributes.sub);
             setPreviousResults(quizResult);
@@ -62,23 +62,28 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
     }, [quiz]);
 
     useEffect(() => {
-        if(questionIndex === questions.length && questionIndex > 1) {
-            // @TODO does not work if restart
-            DataStore.save(new QuizResult({
-                sub: userData?.attributes.sub,
-                nofQuestions: questions.length,
-                nofCorrectAnswers: numberOfCorrectAnswers,
-                percentage: numberOfCorrectAnswers / questions.length,
-                failedQuestionsIDs: [], // TODO add them
-                try: previousResults?.try + 1 || 1,
-                quizID: quiz?.id,
-            }))
-            // navigate to results screen
-            setAnsweredCorrectly(undefined);
-            setSelectedAnswers([]);
-            navigation.navigate("QuizEndScreen", { nOfQuestions: questions.length, nOfCorrectAnswers: numberOfCorrectAnswers });
-            return;
-        }
+        (async () => {
+            if(questionIndex === questions.length && questionIndex > 1) {
+                const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
+                // @TODO does not work if restart
+                if(quiz && userData) {
+                    await DataStore.save(new QuizResult({
+                        sub: userData?.attributes.sub,
+                        nofQuestions: questions.length,
+                        nofCorrectAnswers: numberOfCorrectAnswers,
+                        percentage: numberOfCorrectAnswers / questions.length,
+                        failedQuestionsIDs: [], // TODO add them
+                        try: previousResults ? previousResults.try + 1 : 1,
+                        quizID: quiz?.id,
+                    }))
+                }
+                // navigate to results screen
+                setAnsweredCorrectly(undefined);
+                setSelectedAnswers([]);
+                navigation.navigate("QuizEndScreen", { nOfQuestions: questions.length, nOfCorrectAnswers: numberOfCorrectAnswers });
+                return;
+            }
+        })();
         // setQuestion(quiz[questionIndex]);
         setAnsweredCorrectly(undefined);
         setSelectedAnswers([]);
