@@ -1,16 +1,33 @@
 //@ts-nocheck
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, Image, FlatList} from 'react-native';
 import TopicNode from "../../components/TopicNode";
 import TopicNodesRow from "../../components/TopicNodesRow";
 import topics from '../../../assets/data/topics.ts';
 import {getCurrentActiveLevel, groupByLevel} from "../../utils/topics";
+import {Topic} from "../../types/models";
+import {DataStore} from "aws-amplify";
 
 const levels = groupByLevel(topics);
 const currentLevel = getCurrentActiveLevel(levels);
 // console.log(currentLevel);
 
 const ModuleScreen = () => {
+    const [topics, setTopics] = useState<Topic[]>([]);
+
+    const fetchTopics = async () => {
+        const topics = await DataStore.query(Topic);
+        setTopics(topics);
+    }
+
+    useEffect(() => {
+        fetchTopics();
+        const subscription = DataStore.observe(Topic).subscribe(() => fetchTopics());
+        return () => subscription.unsubscribe();
+    }, []);
+
+    console.log(topics);
+
     return (
         <View style={styles.container}>
 
