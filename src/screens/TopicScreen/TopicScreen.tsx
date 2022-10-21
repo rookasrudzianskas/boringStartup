@@ -30,6 +30,10 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     }, [topicId]);
 
     useEffect(() => {
+        if(topic) {
+            navigation.setOptions({ title: topic.title });
+        }
+
         const fetchResource = async () => {
             const resource = await DataStore.query(Resource).then(resources => resources.filter(resource => resource.topicID === topic?.id));
             setResources(resource);
@@ -40,12 +44,6 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     const onStartQuiz = () => {
         navigation.navigate("Quiz", {id: topicId});
     };
-
-    useEffect(() => {
-        if(topic) {
-            navigation.setOptions({ title: topic.title });
-        }
-    }, [topic]);
 
     useLayoutEffect(() => {
         if(!topic) return;
