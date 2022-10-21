@@ -25,7 +25,7 @@ const ModuleScreen = () => {
         // return () => subscription.unsubscribe();
     }, []);
 
-    // @TODO maybe the better solution with Maximum level
+    // @TODO Current levels are not coded yet
     // useEffect(() => {
     //     setCurrentLevel(getCurrentActiveLevel(levels));
     // }, [levels]);
