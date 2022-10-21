@@ -144,6 +144,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                     {exercises && (
                         <>
                             {exercises.map((exercise, index) => (
+                                // @TODO resource or exercise?
                                 <ResourceListItem resource={exercise} key={exercise.id} index={index} isLast={index + 1 === exercises.length} onComplete={onExerciseComplete}  isCompleted={userTopicProgress?.completedExerciseIDs.includes(exercise?.id)} />
                             ))}
                         </>
