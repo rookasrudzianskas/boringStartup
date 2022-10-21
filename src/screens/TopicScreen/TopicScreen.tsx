@@ -87,6 +87,8 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         const updated = await DataStore.save(UserTopicProgress.copyOf(userTopicProgress, (updated) => {
             if(!updated.completedResourceIDs.includes(resource.id)) {
                 updated.completedResourceIDs.push(resource.id);
+                const progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length + 1);
+                updated.progress = progress;
             }
         }));
         setUserTopicProgress(updated);
