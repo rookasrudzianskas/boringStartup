@@ -1,13 +1,13 @@
 //@ts-nocheck
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-import {ResourceItem} from "../../types/models";
 import Colors from "../../constants/Colors";
 import {Ionicons} from "@expo/vector-icons";
 import * as WebBrowser from 'expo-web-browser';
+import {Resource} from "../../models";
 
 interface ResourceListItemProps {
-    resource: ResourceItem;
+    resource: Resource;
     index: number;
     isLast?: boolean;
 }
@@ -15,6 +15,7 @@ interface ResourceListItemProps {
 const ResourceListItem = ({ resource, index, isLast }: ResourceListItemProps) => {
     const onPress = () => {
         // Linking.openURL(resource.url || 'www.w3schools.com');
+        if(!resource.url) return;
         WebBrowser.openBrowserAsync(resource?.url || 'https://expo.dev');
     }
 
@@ -28,7 +29,7 @@ const ResourceListItem = ({ resource, index, isLast }: ResourceListItemProps) =>
                 )}
             </View>
             <Text>{resource?.title}</Text>
-            <Ionicons name="open-outline" size={21} color="black" style={styles.icon} />
+            {resource?.url && (<Ionicons name="open-outline" size={21} color="black" style={styles.icon} />)}
             {!isLast && (
                 <View style={[styles.lineIndicator, {backgroundColor: resource.completed ? Colors.light.primary : Colors.light.dark}]} />
             )}

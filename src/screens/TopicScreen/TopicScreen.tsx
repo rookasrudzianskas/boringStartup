@@ -66,11 +66,11 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                     </Markdown>
                 </TopicSection>
 
-                <TopicSection display={!!topic?.resources} title={'Resources'} >
-                    {topic?.resources && (
+                <TopicSection display={!!resources.length} title={'Resources'} >
+                    {resources && (
                         <>
-                            {topic?.resources.map((resource, index) => (
-                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === topic.resources.length} />
+                            {resources.map((resource, index) => (
+                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === resources.length} />
                             ))}
                         </>
                     )}
