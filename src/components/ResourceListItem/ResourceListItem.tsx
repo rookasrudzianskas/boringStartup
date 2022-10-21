@@ -11,9 +11,10 @@ interface ResourceListItemProps {
     index: number;
     isLast?: boolean;
     onComplete?: (resource: Resource | Exercise) => void;
+    isCompleted?: boolean;
 }
 
-const ResourceListItem = ({ resource, index, isLast, onComplete = () => {} }: ResourceListItemProps) => {
+const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCompleted = false }: ResourceListItemProps) => {
     const onPress = () => {
         // Linking.openURL(resource.url || 'www.w3schools.com');
         if(!resource.url) return;
@@ -23,8 +24,8 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {} }: Re
 
     return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={styles.container}>
-            <View style={[styles.indexContainer, resource.completed && styles.completed]}>
-                {resource.completed ? (
+            <View style={[styles.indexContainer, isCompleted && styles.completed]}>
+                {isCompleted ? (
                     <Ionicons name="checkmark" size={22} color="white" />
                 ) : (
                     <Text>{index + 1}</Text>
@@ -33,7 +34,7 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {} }: Re
             <Text>{resource?.title}</Text>
             {resource?.url && (<Ionicons name="open-outline" size={21} color="black" style={styles.icon} />)}
             {!isLast && (
-                <View style={[styles.lineIndicator, {backgroundColor: resource.completed ? Colors.light.primary : Colors.light.dark}]} />
+                <View style={[styles.lineIndicator, {backgroundColor: isCompleted ? Colors.light.primary : Colors.light.dark}]} />
             )}
         </TouchableOpacity>
     );

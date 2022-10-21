@@ -129,7 +129,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                     {resources && (
                         <>
                             {resources.map((resource, index) => (
-                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === resources.length} onComplete={onResourceComplete} />
+                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === resources.length} onComplete={onResourceComplete} isCompleted={userTopicProgress?.completedResourceIDs.includes(resource?.id)} />
                             ))}
                         </>
                     )}
@@ -144,7 +144,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                     {exercises && (
                         <>
                             {exercises.map((exercise, index) => (
-                                <ResourceListItem resource={exercise} key={exercise.id} index={index} isLast={index + 1 === exercises.length} onComplete={onExerciseComplete} />
+                                <ResourceListItem resource={exercise} key={exercise.id} index={index} isLast={index + 1 === exercises.length} onComplete={onExerciseComplete}  isCompleted={userTopicProgress?.completedExerciseIDs.includes(exercise?.id)} />
                             ))}
                         </>
                     )}
