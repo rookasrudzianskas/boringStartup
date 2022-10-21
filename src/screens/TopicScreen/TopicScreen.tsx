@@ -1,6 +1,6 @@
 //@ts-nocheck
-import React, {useEffect, useLayoutEffect} from 'react';
-import {Text, View, StyleSheet, Image, ScrollView} from 'react-native';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {Text, View, StyleSheet, Image, ScrollView, SafeAreaView} from 'react-native';
 import Colors from "../../constants/Colors";
 import ResourceListItem from "../../components/ResourceListItem";
 import topics from "../../../assets/data/topics";
@@ -9,12 +9,23 @@ import Markdown from "react-native-markdown-display";
 import TopicSection from "./TopicSection";
 import CustomButton from "../../components/CustomButton";
 import useApplyHeaderWorkaround from "../../hooks/useApplyHeaderWorkaround";
+import {Topic} from "../../models";
+import {DataStore} from "aws-amplify";
 
 const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => {
     const topicId = route.params.id;
-    const topic = topics.find(topic => topic.id === topicId);
+    const [topic, setTopic] = useState<Topic[]>();
+
     // @TODO does it work?
     useApplyHeaderWorkaround(navigation.setOptions);
+
+    useEffect(() => {
+        const fetchTopic = async () => {
+            const topic = await DataStore.query(Topic, topicId);
+            setTopic(topic);
+        }
+        fetchTopic();
+    }, [topicId]);
 
     const onStartQuiz = () => {
         navigation.navigate("Quiz", {id: topicId});
@@ -37,39 +48,41 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
 
     return (
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 100, flexGrow: 1}} className="" style={styles.container}>
-            <Image />
-            <TopicSection display={!!topic?.description} title={'Intro'} >
-                <Markdown>
-                    {topic?.description || 'Loading...'}
-                </Markdown>
-            </TopicSection>
+            <SafeAreaView>
+                <Image />
+                <TopicSection display={!!topic?.description} title={'Intro'} >
+                    <Markdown>
+                        {topic?.description || 'Loading...'}
+                    </Markdown>
+                </TopicSection>
 
-            <TopicSection display={!!topic?.resources} title={'Resources'} >
-                {topic?.resources && (
-                    <>
-                        {topic?.resources.map((resource, index) => (
-                            <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === topic.resources.length} />
-                        ))}
-                    </>
-                )}
-            </TopicSection>
+                <TopicSection display={!!topic?.resources} title={'Resources'} >
+                    {topic?.resources && (
+                        <>
+                            {topic?.resources.map((resource, index) => (
+                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === topic.resources.length} />
+                            ))}
+                        </>
+                    )}
+                </TopicSection>
 
-            <TopicSection title={'Context'} display={!!topic?.context}>
-                <Markdown>{topic?.context || 'Loading...'}</Markdown>
-            </TopicSection>
+                <TopicSection title={'Context'} display={!!topic?.context}>
+                    <Markdown>{topic?.context || 'Loading...'}</Markdown>
+                </TopicSection>
 
-            <TopicSection title={'Practice'} display={!!topic?.exercises}>
-                {topic?.exercises && (
-                    <>
-                        {topic?.resources.map((resource, index) => (
-                            <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === topic.resources.length} />
-                        ))}
-                    </>
-                )}
-            </TopicSection>
+                <TopicSection title={'Practice'} display={!!topic?.exercises}>
+                    {topic?.exercises && (
+                        <>
+                            {topic?.resources.map((resource, index) => (
+                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === topic.resources.length} />
+                            ))}
+                        </>
+                    )}
+                </TopicSection>
 
-            <CustomButton text={'Start Quiz'} onPress={onStartQuiz} />
+                <CustomButton text={'Start Quiz'} onPress={onStartQuiz} />
 
+            </SafeAreaView>
         </ScrollView>
     );
 };
