@@ -17,6 +17,9 @@
       },
       "storage": {
         "s3boringstartupstorage1d02bbb4": {}
+      },
+      "api": {
+        "boringStartup": {}
       }
     }
   }

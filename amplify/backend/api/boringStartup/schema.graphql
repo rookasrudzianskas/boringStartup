@@ -38,4 +38,24 @@ type Topic @model @auth(rules: [{allow: public}]) {
   Exercises: [Exercise] @hasMany(indexName: "byTopic", fields: ["id"])
   Quiz: Quiz @hasOne
 }
- 
+
+type UserTopicProgress @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  sub: String!
+  completedResourceIDs: [ID!]!
+  completedExerciseIDs: [ID!]!
+  progress: Float!
+  isCompleted: Boolean
+  topicID: ID!
+}
+
+type QuizResult @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  sub: String!
+  nofQuestions: Int!
+  nofCorrectAnswers: Int!
+  percentage: Float!
+  failedQuestionsIDs: [ID!]
+  try: Int!
+  quizID: ID!
+}
