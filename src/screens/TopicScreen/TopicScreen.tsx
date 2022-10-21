@@ -45,7 +45,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             </TopicSection>
 
             <TopicSection display={!!topic?.resources} title={'Resources'} >
-                {topic.resources && (
+                {topic?.resources && (
                     <>
                         {topic?.resources.map((resource, index) => (
                             <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === topic.resources.length} />
@@ -59,7 +59,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             </TopicSection>
 
             <TopicSection title={'Practice'} display={!!topic?.exercises}>
-                {topic.exercises && (
+                {topic?.exercises && (
                     <>
                         {topic?.resources.map((resource, index) => (
                             <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === topic.resources.length} />

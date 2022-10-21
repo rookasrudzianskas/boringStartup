@@ -14,7 +14,7 @@ interface TopicNodeProps {
     isDisabled?: boolean;
 }
 
-const TopicNode = ({topic, isDisabled = true}: TopicNodeProps) => {
+const TopicNode = ({topic, isDisabled = false}: TopicNodeProps) => {
     const {width} = useWindowDimensions();
     const navigation = useNavigation();
     const  itemsWidth = width / 3 - 30;
