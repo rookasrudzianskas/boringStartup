@@ -45,10 +45,6 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
         return () => subscription.unsubscribe();
     }, [quiz]);
 
-    // console.log(questions, 'questions');
-
-    // console.log(quiz, quizId);
-
     useEffect(() => {
         if(questionIndex === questions.length && questionIndex > 1) {
             // @TODO does not work if restart
