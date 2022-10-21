@@ -52,10 +52,11 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     };
 
     useLayoutEffect(() => {
-        if(!topic) return;
+        // @TODO does it work?
+        // if(!topic) return;
         navigation.setOptions({
             headerShown: true,
-            title: topic?.title
+            title: topic?.title || "Loading...",
         })
     }, []);
     console.error = (error) => error.apply; // @TODO Disables the error message of Courier font, have to be replaced to Courier New
