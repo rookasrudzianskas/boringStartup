@@ -9,12 +9,14 @@ import Markdown from "react-native-markdown-display";
 import TopicSection from "./TopicSection";
 import CustomButton from "../../components/CustomButton";
 import useApplyHeaderWorkaround from "../../hooks/useApplyHeaderWorkaround";
-import {Topic} from "../../models";
+import {Exercise, Resource, Topic} from "../../models";
 import {DataStore} from "aws-amplify";
 
 const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => {
     const topicId = route.params.id;
     const [topic, setTopic] = useState<Topic[]>();
+    const [resources, setResources] = useState<Resource[]>([]);
+    const [exercise, setExercise] = useState<Exercise[]>([]);
 
     // @TODO does it work?
     useApplyHeaderWorkaround(navigation.setOptions);
@@ -26,6 +28,14 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         }
         fetchTopic();
     }, [topicId]);
+
+    useEffect(() => {
+        const fetchResource = async () => {
+            const resource = await DataStore.query(Resource).then(resources => resources.filter(resource => resource.topicID === topic?.id));
+            setResources(resource);
+        }
+        fetchResource();
+    }, [topic]);
 
     const onStartQuiz = () => {
         navigation.navigate("Quiz", {id: topicId});
