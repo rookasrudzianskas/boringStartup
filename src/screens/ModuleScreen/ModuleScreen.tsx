@@ -5,15 +5,15 @@ import TopicNode from "../../components/TopicNode";
 import TopicNodesRow from "../../components/TopicNodesRow";
 import topics from '../../../assets/data/topics.ts';
 import {getCurrentActiveLevel, groupByLevel} from "../../utils/topics";
-import {Topic} from "../../types/models";
 import {DataStore} from "aws-amplify";
+import {Topic} from "../../models";
 
 const levels = groupByLevel(topics);
 const currentLevel = getCurrentActiveLevel(levels);
 // console.log(currentLevel);
 
 const ModuleScreen = () => {
-    const [topics, setTopics] = useState<Topic[]>([]);
+    const [levels, setLevels] = useState<Topic[]>([]);
 
     const fetchTopics = async () => {
         const topics = await DataStore.query(Topic);
@@ -22,8 +22,8 @@ const ModuleScreen = () => {
 
     useEffect(() => {
         fetchTopics();
-        const subscription = DataStore.observe(Topic).subscribe(() => fetchTopics());
-        return () => subscription.unsubscribe();
+        // const subscription = DataStore.observe(Topic).subscribe(() => fetchTopics());
+        // return () => subscription.unsubscribe();
     }, []);
 
     console.log(topics);
