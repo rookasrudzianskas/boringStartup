@@ -7,6 +7,7 @@ import Svg, { Circle, Rect } from 'react-native-svg';
 import CircularProgress from "../CircularProgress";
 import {useNavigation} from "@react-navigation/native";
 import { S3Image } from 'aws-amplify-react-native';
+import {AntDesign} from "@expo/vector-icons";
 
 interface TopicNodeProps {
     topic: Topic;
@@ -27,7 +28,11 @@ const TopicNode = ({topic, isDisabled = true}: TopicNodeProps) => {
             <View style={[styles.progress]}>
                 <CircularProgress size={itemsWidth} strokeWidth={8} progress={topic.progress} />
                     <View style={[styles.circle, {width: itemsWidth - 20, backgroundColor: isDisabled ? Colors.light.dark : Colors.light.primary}]}>
-                        <S3Image imgKey={topic.icon} source={{uri: topic?.icon}} style={styles.image} />
+                        {topic.icon ? (
+                            <S3Image imgKey={topic.icon} source={{uri: topic?.icon}} style={styles.image} />
+                        ) : (
+                            <AntDesign name="questioncircleo" size={35} color="black" />
+                        )}
                     </View>
             </View>
                 <Text style={styles.title}>{topic?.title || 'Loading...'}</Text>
