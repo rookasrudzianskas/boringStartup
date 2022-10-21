@@ -1,5 +1,9 @@
 import { ModelInit, MutableModel } from "@aws-amplify/datastore";
 
+type ExerciseMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type QuizMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -16,9 +20,21 @@ type TopicMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+export declare class Exercise {
+  readonly id: string;
+  readonly title: string;
+  readonly url?: string | null;
+  readonly topicID: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<Exercise, ExerciseMetaData>);
+  static copyOf(source: Exercise, mutator: (draft: MutableModel<Exercise, ExerciseMetaData>) => MutableModel<Exercise, ExerciseMetaData> | void): Exercise;
+}
+
 export declare class Quiz {
   readonly id: string;
   readonly QuizQuestions?: (QuizQuestion | null)[] | null;
+  readonly name: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Quiz, QuizMetaData>);
@@ -57,7 +73,7 @@ export declare class Topic {
   readonly level: number;
   readonly description?: string | null;
   readonly Resources?: (Resource | null)[] | null;
-  readonly Exercises?: (Resource | null)[] | null;
+  readonly Exercises?: (Exercise | null)[] | null;
   readonly Quiz?: Quiz | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

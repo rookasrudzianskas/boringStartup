@@ -1,5 +1,87 @@
 export const schema = {
     "models": {
+        "Exercise": {
+            "name": "Exercise",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "title": {
+                    "name": "title",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "url": {
+                    "name": "url",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "topicID": {
+                    "name": "topicID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Exercises",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byTopic",
+                        "fields": [
+                            "topicID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Quiz": {
             "name": "Quiz",
             "fields": {
@@ -23,6 +105,13 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "quizID"
                     }
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -309,7 +398,7 @@ export const schema = {
                     "name": "Exercises",
                     "isArray": true,
                     "type": {
-                        "model": "Resource"
+                        "model": "Exercise"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -385,5 +474,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "fa717be4479ce880f3f5b2fbdc23c3cd"
+    "version": "862392ba841d7c1fd9c9d9ca150a14ec"
 };
