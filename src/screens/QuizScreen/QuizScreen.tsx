@@ -69,7 +69,7 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
             if(currentSelectedAnswers.includes(choice)) {
                 return currentSelectedAnswers.filter(item => item !== choice);
             } else {
-                if(question?.correctAnswers?.length || 0 > 1) {
+                if(question?.correctAnswers && question?.correctAnswers?.length > 1) {
                     return [...currentSelectedAnswers, choice];
                 } else {
                     return [choice];
