@@ -24,6 +24,7 @@ const TopicNode = ({topic, isDisabled = false}: TopicNodeProps) => {
 
     useEffect(() => {
         // if(!topic) return;
+        // @TODO subscribe on the user progress changes -- IMPROVEMENT
         (async () => {
             const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
             const userTopicProgresses = await DataStore.query(UserTopicProgress);
