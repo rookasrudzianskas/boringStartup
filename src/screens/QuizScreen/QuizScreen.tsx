@@ -14,10 +14,11 @@ import Animated, {
 import useApplyHeaderWorkaround from "../../hooks/useApplyHeaderWorkaround";
 import {styles} from "./QuizScreen.styles";
 import {DataStore} from "aws-amplify";
-import {Quiz} from "../../models";
+import {Quiz, QuizQuestion} from "../../models";
 
 const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
     const [quiz, setQuiz] = useState<Quiz | undefined>();
+    const [questions, setQuestions] = useState<QuizQuestion[]>([]);
 
     const [questionIndex, setQuestionIndex] = useState(0);
     // const [question, setQuestion] = useState(quiz[questionIndex]);
@@ -32,7 +33,20 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
         DataStore.query(Quiz, quizId).then(setQuiz);
     }, [quizId]);
 
-    console.log(quiz, quizId);
+    useEffect(() => {
+        if(!quiz) return;
+        const fetchQuestions = async () => {
+            const questions = await DataStore.query(QuizQuestion).then(questions => questions.filter((q) => q.quizID === quiz?.id));
+            setQuestions(questions);
+        }
+        fetchQuestions();
+        const subscription = DataStore.observe(QuizQuestion).subscribe(() => fetchQuestions());
+        return () => subscription.unsubscribe();
+    }, [quiz]);
+
+    // console.log(questions, 'questions');
+
+    // console.log(quiz, quizId);
 
     // useEffect(() => {
     //     if(questionIndex === quiz.length) {
