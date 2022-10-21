@@ -10,9 +10,10 @@ interface ResourceListItemProps {
     resource: Resource | Exercise;
     index: number;
     isLast?: boolean;
+    onComplete?: (resource: Resource | Exercise) => void;
 }
 
-const ResourceListItem = ({ resource, index, isLast }: ResourceListItemProps) => {
+const ResourceListItem = ({ resource, index, isLast, onComplete = () => {} }: ResourceListItemProps) => {
     const onPress = () => {
         // Linking.openURL(resource.url || 'www.w3schools.com');
         if(!resource.url) return;

@@ -56,6 +56,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
             const userTopicProgresses = await DataStore.query(UserTopicProgress);
             const userProgress = userTopicProgresses.find((tp) => tp.topicID === topic?.id && tp.sub === userData?.attributes.sub);
+            // Checks if there's progress. If not, create a new one
             if(userProgress) {
                 setUserTopicProgress(userProgress);
             } else {
