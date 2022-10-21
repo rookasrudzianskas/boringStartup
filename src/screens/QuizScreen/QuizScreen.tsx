@@ -32,7 +32,7 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
         DataStore.query(Quiz, quizId).then(setQuiz);
     }, [quizId]);
 
-    console.log(quiz);
+    console.log(quiz, quizId);
 
     // useEffect(() => {
     //     if(questionIndex === quiz.length) {
