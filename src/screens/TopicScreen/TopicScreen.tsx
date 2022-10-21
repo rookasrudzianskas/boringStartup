@@ -80,9 +80,10 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                     )}
                 </TopicSection>
 
-                <TopicSection title={'Context'} display={!!topic?.context}>
-                    <Markdown>{topic?.context || 'Loading...'}</Markdown>
-                </TopicSection>
+                {/* @TODO Fix Context section */}
+                {/*<TopicSection title={'Context'} display={!!topic?.context}>*/}
+                {/*    <Markdown>{topic?.context || 'Loading...'}</Markdown>*/}
+                {/*</TopicSection>*/}
 
                 <TopicSection title={'Practice'} display={!!exercises.length}>
                     {exercises && (
