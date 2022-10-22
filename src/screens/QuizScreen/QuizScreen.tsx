@@ -27,6 +27,7 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
     const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
     const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean | undefined>(undefined);
     const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0);
+    const [wrongAnswersIDs, setWrongAnswersIDs] = useState<string[]>([]);
     const isButtonDisabled = selectedAnswers.length === 0;
     const quizId = route.params.id;
     useApplyHeaderWorkaround(navigation.setOptions);
@@ -34,6 +35,12 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
     useEffect(() => {
         DataStore.query(Quiz, quizId).then(setQuiz);
     }, [quizId]);
+
+    useEffect(() => {
+        if(!answeredCorrectly && wrongAnswersIDs.includes(question.id)) {
+            setWrongAnswersIDs([...wrongAnswersIDs, question.id]);
+        }
+    }, [answeredCorrectly])
 
     useEffect(() => {
         if(!quiz) return;
@@ -48,7 +55,7 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
             const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
             const quizResults = await DataStore.query(QuizResult);
             const myQuizResult = quizResults.filter((qr) => qr.quizID === quiz?.id && qr.sub === userData?.attributes.sub);
-            const previousResult = myQuizResult.reduce((acc: number, curr) => curr.try > acc.try ? curr : acc);
+            const previousResult = myQuizResult.reduce((acc: undefined | QuizResult, curr) => !acc || curr.try > acc.try ? curr : acc, undefined);
             setPreviousResults(previousResult);
         }
         fetchPreviousResults();
@@ -73,7 +80,7 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
                         nofQuestions: questions.length,
                         nofCorrectAnswers: numberOfCorrectAnswers,
                         percentage: numberOfCorrectAnswers / questions.length,
-                        failedQuestionsIDs: [], // TODO add them
+                        failedQuestionsIDs: wrongAnswersIDs,
                         try: previousResults ? previousResults.try + 1 : 1,
                         quizID: quiz?.id,
                     }))
