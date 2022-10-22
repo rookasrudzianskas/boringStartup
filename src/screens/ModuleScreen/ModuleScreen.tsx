@@ -30,8 +30,6 @@ const ModuleScreen = () => {
     //     setCurrentLevel(getCurrentActiveLevel(levels));
     // }, [levels]);
 
-    // console.log("LEVELS>>>>", levels);
-
     return (
         <View style={styles.container}>
 
