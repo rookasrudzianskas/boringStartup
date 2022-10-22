@@ -19,7 +19,6 @@ const ModuleScreen = () => {
             const _levels = groupByLevel(topics);
             setLevels(_levels);
         }
-
         fetchTopics();
         // const subscription = DataStore.observe(Topic).subscribe(() => fetchTopics());
         // return () => subscription.unsubscribe();
