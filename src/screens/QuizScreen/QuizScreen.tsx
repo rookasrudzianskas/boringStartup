@@ -92,7 +92,6 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
                 return;
             }
         })();
-        // setQuestion(quiz[questionIndex]);
         setAnsweredCorrectly(undefined);
         setSelectedAnswers([]);
     }, [questionIndex]);
