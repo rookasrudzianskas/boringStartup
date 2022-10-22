@@ -16,13 +16,26 @@ const ModuleScreen = () => {
     useEffect(() => {
         const fetchTopics = async () => {
             const topics = await DataStore.query(Topic);
-            const _levels = groupByLevel(topics);
+
+            const topicsWithProgress = await addProgressToTopics(topics);
+
+            const _levels = groupByLevel(topicsWithProgress);
             setLevels(_levels);
         }
         fetchTopics();
         // const subscription = DataStore.observe(Topic).subscribe(() => fetchTopics());
         // return () => subscription.unsubscribe();
     }, []);
+
+    const addProgressToTopics = (topics: Topic[]) => {
+        return topics.map(addProgressToTopic);
+    }
+
+    const addProgressToTopic = (topic: Topic) => {
+        console.log("THIS IS TOPIC>>>>>", topic);
+        return topic;
+    }
+
 
     // @TODO Current levels are not coded yet
     // useEffect(() => {
@@ -34,7 +47,7 @@ const ModuleScreen = () => {
 
             <FlatList
                 data={levels}
-                keyExtractor={(item) => item[0].level.toString()} // @TODO does it work?
+                keyExtractor={(item) => item[0].level?.toString()} // @TODO does it work?
                 showsVerticalScrollIndicator={false}
                 bounces={true}
                 renderItem={({item}) => (
