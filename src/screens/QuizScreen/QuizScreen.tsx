@@ -37,7 +37,7 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
     }, [quizId]);
 
     useEffect(() => {
-        if(!answeredCorrectly && wrongAnswersIDs.includes(question.id)) {
+        if(answeredCorrectly === false && !wrongAnswersIDs.includes(question.id)) {
             setWrongAnswersIDs([...wrongAnswersIDs, question.id]);
         }
     }, [answeredCorrectly])
