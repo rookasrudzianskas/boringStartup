@@ -1,3 +1,4 @@
+//@ts-nocheck
 import {Topic} from "../models";
 
 export const groupByLevel = (topics: Topic[]) => {
