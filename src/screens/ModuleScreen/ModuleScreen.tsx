@@ -6,6 +6,9 @@ import TopicNodesRow from "../../components/TopicNodesRow";
 import {getCurrentActiveLevel, groupByLevel} from "../../utils/topics";
 import {DataStore} from "aws-amplify";
 import {Topic} from "../../models";
+import {LogBox}  from "react-native";
+
+LogBox.ignoreLogs(['DataStore - subscriptionError Connection failed: Connection handshake error']);
 
 // console.log(currentLevel);
 
