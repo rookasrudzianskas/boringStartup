@@ -7,10 +7,12 @@ import {groupByLevel} from "../../utils/topics";
 import {Auth, DataStore} from "aws-amplify";
 import {QuizResult, Topic} from "../../models";
 
+type TopicWithResult = Topic & { quizResult?: QuizResult };
+
 LogBox.ignoreLogs(['DataStore - subscriptionError Connection failed: Connection handshake error', 'DataStore {"cause": {"error": {"errors"']);
 
 const ModuleScreen = () => {
-    const [levels, setLevels] = useState<Topic[][]>([]);
+    const [levels, setLevels] = useState<TopicWithResult[][]>([]);
     const [currentLevel, setCurrentLevel] = useState<number>(0);
 
     useEffect(() => {
@@ -27,7 +29,7 @@ const ModuleScreen = () => {
         // return () => subscription.unsubscribe();
     }, []);
 
-    const addProgressToTopics = async (topics: Topic[]) => {
+    const addProgressToTopics = async (topics: Topic[]): Promise<TopicWithResult[]> => {
         return await Promise.all(topics.map(addProgressToTopic));
     }
 
