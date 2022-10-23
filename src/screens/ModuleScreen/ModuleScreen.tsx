@@ -39,8 +39,12 @@ const ModuleScreen = () => {
             return topic;
         }
         const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
-        const userResult = (await DataStore.query(QuizResult)).filter(result => result.quizID === topic.Quiz?.id && result.sub === userData?.attributes.sub);
-        console.log("THIS IS >>>>", userResult);
+        const userResults = (await DataStore.query(QuizResult)).filter(result => result.quizID === topic.Quiz?.id && result.sub === userData?.attributes.sub);
+        if(userResults.length === 0) {
+            // user has not started the quiz yet
+            return topic;
+        }
+        const bestResult = userResults.reduce((best, result) => result.percentage > best.percentage ? result : best);
         return topic;
     }
 
