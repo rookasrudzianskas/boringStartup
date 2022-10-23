@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, Image, TouchableOpacity, useWindowDimensions} from 'react-native';
 import Colors from "../../constants/Colors";
-import {Topic} from "../../types/models";
+import {Topic, TopicWithResult} from "../../types/models";
 import Svg, { Circle, Rect } from 'react-native-svg';
 import CircularProgress from "../CircularProgress";
 import {useNavigation} from "@react-navigation/native";
@@ -12,7 +12,7 @@ import {Auth, DataStore} from "aws-amplify";
 import {UserTopicProgress} from "../../models";
 
 interface TopicNodeProps {
-    topic: Topic;
+    topic: TopicWithResult;
     isDisabled?: boolean;
 }
 
@@ -47,6 +47,9 @@ const TopicNode = ({topic, isDisabled = false}: TopicNodeProps) => {
                         ) : (
                             <AntDesign name="questioncircleo" size={35} color="black" />
                         )}
+                        <View className="absolute -bottom-5 -right-3 bg-green-500/50 rounded-full w-7 h-7 items-center justify-center">
+                            <Text className="text-[9px] font-semibold">90%</Text>
+                        </View>
                     </View>
             </View>
                 <Text style={styles.title}>{topic?.title || 'Loading...'}</Text>

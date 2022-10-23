@@ -6,8 +6,7 @@ import TopicNodesRow from "../../components/TopicNodesRow";
 import {groupByLevel} from "../../utils/topics";
 import {Auth, DataStore} from "aws-amplify";
 import {QuizResult, Topic} from "../../models";
-
-type TopicWithResult = Topic & { quizResult?: QuizResult };
+import {TopicWithResult} from "../../types/models";
 
 LogBox.ignoreLogs(['DataStore - subscriptionError Connection failed: Connection handshake error', 'DataStore {"cause": {"error": {"errors"']);
 
