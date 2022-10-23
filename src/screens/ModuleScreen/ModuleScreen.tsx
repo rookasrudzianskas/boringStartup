@@ -9,8 +9,6 @@ import {QuizResult, Topic} from "../../models";
 
 LogBox.ignoreLogs(['DataStore - subscriptionError Connection failed: Connection handshake error', 'DataStore {"cause": {"error": {"errors"']);
 
-// console.log(currentLevel);
-
 const ModuleScreen = () => {
     const [levels, setLevels] = useState<Topic[][]>([]);
     const [currentLevel, setCurrentLevel] = useState<number>(0);
@@ -45,9 +43,10 @@ const ModuleScreen = () => {
             return topic;
         }
         const bestResult = userResults.reduce((best, result) => result.percentage > best.percentage ? result : best);
-        return topic;
+        return { ...topic, quizResult: bestResult };
     }
 
+    console.log("THESE ARE LEVELS>>>>>>", levels);
 
     // @TODO Current levels are not coded yet
     // useEffect(() => {
