@@ -6,7 +6,7 @@ interface TopicNodesRowProps {
     children: React.ReactNode;
 }
 
-const TopicNodesRow: React.FC = ({children}: TopicNodesRowProps) => {
+const TopicNodesRow: React.FC<{children: React.ReactNode}> = ({children}: TopicNodesRowProps) => {
     return (
         <View className="flex-row w-full justify-center" >
             {children}
