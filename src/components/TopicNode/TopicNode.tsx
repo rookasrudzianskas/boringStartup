@@ -37,6 +37,8 @@ const TopicNode = ({topic, isDisabled = false}: TopicNodeProps) => {
         navigation.navigate('Topic', { id: topic.id });
     }
 
+    const quizPassed = topic.quizResult && topic.quizResult?.percentage >= 0.9;
+
     return (
         <TouchableOpacity disabled={isDisabled} onPress={onPress} activeOpacity={isDisabled ? 1 : 0.7} style={[styles.container, {width: itemsWidth}]}>
             <View style={[styles.progress]}>
@@ -47,7 +49,7 @@ const TopicNode = ({topic, isDisabled = false}: TopicNodeProps) => {
                         ) : (
                             <AntDesign name="questioncircleo" size={35} color="black" />
                         )}
-                        <View className="absolute -bottom-3 -right-2 bg-blue-500/70 rounded-full w-7 h-7 items-center justify-center border border-white border-[2px]">
+                        <View className={`absolute -bottom-3 -right-2 ${quizPassed ? 'bg-blue-500/70' : 'bg-gray-500/70'} rounded-full w-7 h-7 items-center justify-center border border-white border-[2px]`}>
                             <AntDesign name="Trophy" size={14} color="white" />
                         </View>
                     </View>
