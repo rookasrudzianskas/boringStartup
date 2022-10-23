@@ -1,12 +1,11 @@
 //@ts-nocheck
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, Image, FlatList} from 'react-native';
+import {FlatList, LogBox, StyleSheet, View} from 'react-native';
 import TopicNode from "../../components/TopicNode";
 import TopicNodesRow from "../../components/TopicNodesRow";
-import {getCurrentActiveLevel, groupByLevel} from "../../utils/topics";
+import {groupByLevel} from "../../utils/topics";
 import {Auth, DataStore} from "aws-amplify";
 import {QuizResult, Topic} from "../../models";
-import {LogBox}  from "react-native";
 
 LogBox.ignoreLogs(['DataStore - subscriptionError Connection failed: Connection handshake error', 'DataStore {"cause": {"error": {"errors"']);
 
@@ -31,16 +30,18 @@ const ModuleScreen = () => {
     }, []);
 
     const addProgressToTopics = async (topics: Topic[]) => {
-        return topics.map(addProgressToTopic);
+        return await Promise.all(topics.map(addProgressToTopic));
     }
 
     const addProgressToTopic = async (topic: Topic) => {
         if(!topic.Quiz) {
+            console.log('No quiz for topic', topic);
             return topic;
         }
         const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
         const userResult = (await DataStore.query(QuizResult)).filter(result => result.quizID === topic.Quiz?.id && result.sub === userData?.attributes.sub);
-        console.log(userResult);
+        console.log("THIS IS >>>>", userResult);
+        return topic;
     }
 
 
