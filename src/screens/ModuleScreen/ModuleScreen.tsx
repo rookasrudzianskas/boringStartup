@@ -5,7 +5,7 @@ import TopicNode from "../../components/TopicNode";
 import TopicNodesRow from "../../components/TopicNodesRow";
 import {getCurrentActiveLevel, groupByLevel} from "../../utils/topics";
 import {DataStore} from "aws-amplify";
-import {Topic} from "../../models";
+import {QuizResult, Topic} from "../../models";
 import {LogBox}  from "react-native";
 
 LogBox.ignoreLogs(['DataStore - subscriptionError Connection failed: Connection handshake error', 'DataStore {"cause": {"error": {"errors"']);
@@ -30,13 +30,15 @@ const ModuleScreen = () => {
         // return () => subscription.unsubscribe();
     }, []);
 
-    const addProgressToTopics = (topics: Topic[]) => {
+    const addProgressToTopics = async (topics: Topic[]) => {
         return topics.map(addProgressToTopic);
     }
 
-    const addProgressToTopic = (topic: Topic) => {
-        console.log("THIS IS TOPIC>>>>>", topic);
-        return topic;
+    const addProgressToTopic = async (topic: Topic) => {
+        if(!topic.Quiz) {
+            return topic;
+        }
+        const userResult = await DataStore.query(QuizResult);
     }
 
 
