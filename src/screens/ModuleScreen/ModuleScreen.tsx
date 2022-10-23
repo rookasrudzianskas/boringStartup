@@ -35,7 +35,7 @@ const ModuleScreen = () => {
 
     const addProgressToTopic = async (topic: Topic) => {
         if(!topic.Quiz) {
-            console.log('No quiz for topic', topic.id, topic.Quiz);
+            // console.log('No quiz for topic', topic.id, topic.Quiz);
             return topic;
         }
         const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
