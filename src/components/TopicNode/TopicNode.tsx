@@ -49,6 +49,7 @@ const TopicNode = ({topic, isDisabled = false}: TopicNodeProps) => {
                         ) : (
                             <AntDesign name="questioncircleo" size={35} color="black" />
                         )}
+                        {/* needs to be fixed @TODO*/}
                         <View className={`absolute -bottom-3 -right-2 ${topic?.isQuizPassed ? 'bg-blue-500/70' : 'bg-gray-400/70'} rounded-full w-7 h-7 items-center justify-center border border-white border-[2px]`}>
                             <AntDesign name="Trophy" size={14} color="white" />
                         </View>
