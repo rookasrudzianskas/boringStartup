@@ -4,7 +4,7 @@ import {Text, View, StyleSheet, Image, FlatList} from 'react-native';
 import TopicNode from "../../components/TopicNode";
 import TopicNodesRow from "../../components/TopicNodesRow";
 import {getCurrentActiveLevel, groupByLevel} from "../../utils/topics";
-import {DataStore} from "aws-amplify";
+import {Auth, DataStore} from "aws-amplify";
 import {QuizResult, Topic} from "../../models";
 import {LogBox}  from "react-native";
 
@@ -38,7 +38,9 @@ const ModuleScreen = () => {
         if(!topic.Quiz) {
             return topic;
         }
-        const userResult = await DataStore.query(QuizResult);
+        const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
+        const userResult = (await DataStore.query(QuizResult)).filter(result => result.quizID === topic.Quiz?.id && result.sub === userData?.attributes.sub);
+        console.log(userResult);
     }
 
 
