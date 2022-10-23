@@ -47,8 +47,8 @@ const TopicNode = ({topic, isDisabled = false}: TopicNodeProps) => {
                         ) : (
                             <AntDesign name="questioncircleo" size={35} color="black" />
                         )}
-                        <View className="absolute -bottom-5 -right-3 bg-green-500/50 rounded-full w-7 h-7 items-center justify-center">
-                            <Text className="text-[9px] font-semibold">90%</Text>
+                        <View className="absolute -bottom-3 -right-2 bg-blue-500/70 rounded-full w-7 h-7 items-center justify-center">
+                            <AntDesign name="Trophy" size={14} color="white" />
                         </View>
                     </View>
             </View>
