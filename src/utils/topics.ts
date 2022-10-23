@@ -1,5 +1,6 @@
 //@ts-nocheck
 import {Topic} from "../models";
+import {TopicWithResult} from "../types/models";
 
 export const groupByLevel = (topics: Topic[]) => {
     const levels: {[key: number]: Topic[]} = {};
@@ -14,8 +15,8 @@ export const groupByLevel = (topics: Topic[]) => {
     return Object.values(levels);
 }
 
-// export const getCurrentActiveLevel = (levels: Topic[][]) => {
-//     // levels.filter((levelTopics) => levelTopics.every((topic) => topic.progress >= 1)) @TODO maybe the better solution with Maximum level
-//     // @ts-ignore
-//     return levels.reduce((acc: number, levelTopics) => levelTopics.every((topic) => topic.progress >= 1) ? acc + 1 : acc, 1);
-// }
+export const getCurrentActiveLevel = (levels: TopicWithResult[][]) => {
+    // levels.filter((levelTopics) => levelTopics.every((topic) => topic.progress >= 1))
+    // @ts-ignore
+    return levels.reduce((acc: number, levelTopics) => levelTopics.every((topic) => topic.isQuizPassed) ? acc + 1 : acc, 1);
+}

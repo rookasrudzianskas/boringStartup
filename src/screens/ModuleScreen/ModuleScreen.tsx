@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, LogBox, StyleSheet, View} from 'react-native';
 import TopicNode from "../../components/TopicNode";
 import TopicNodesRow from "../../components/TopicNodesRow";
-import {groupByLevel} from "../../utils/topics";
+import {getCurrentActiveLevel, groupByLevel} from "../../utils/topics";
 import {Auth, DataStore} from "aws-amplify";
 import {QuizResult, Topic} from "../../models";
 import {TopicWithResult} from "../../types/models";
@@ -21,6 +21,7 @@ const ModuleScreen = () => {
             const topicsWithProgress = await addProgressToTopics(topics);
 
             const _levels = groupByLevel(topicsWithProgress);
+            setCurrentLevel(getCurrentActiveLevel(_levels));
             setLevels(_levels);
         }
         fetchTopics();
@@ -34,7 +35,7 @@ const ModuleScreen = () => {
 
     const addProgressToTopic = async (topic: Topic) => {
         if(!topic.Quiz) {
-            // console.log('No quiz for topic', topic.id, topic.Quiz);
+            console.log('No quiz for topic', topic.id, topic.Quiz);
             return topic;
         }
         const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
@@ -44,15 +45,9 @@ const ModuleScreen = () => {
             return topic;
         }
         const bestResult = userResults.reduce((best, result) => result.percentage > best.percentage ? result : best);
-        return { ...topic, quizResult: bestResult };
+        return { ...topic, quizResult: bestResult, isQuizPassed: bestResult && bestResult.percentage >= 0.9};
     }
 
-    console.log("THESE ARE LEVELS>>>>>>", levels);
-
-    // @TODO Current levels are not coded yet
-    // useEffect(() => {
-    //     setCurrentLevel(getCurrentActiveLevel(levels));
-    // }, [levels]);
 
     return (
         <View style={styles.container}>
@@ -66,7 +61,7 @@ const ModuleScreen = () => {
                     <TopicNodesRow>
                         {item.map((topic) => (
                             <TopicNode key={topic.id} topic={topic}
-                                       // isDisabled={currentLevel < topic.level}
+                                       isDisabled={currentLevel < topic.level}
                             />
                         ))}
                     </TopicNodesRow>

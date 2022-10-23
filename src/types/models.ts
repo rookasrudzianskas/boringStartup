@@ -7,4 +7,4 @@ export type ResourceItem = {
     completed?: boolean;
 }
 
-export type TopicWithResult = Topic & { quizResult?: QuizResult };
+export type TopicWithResult = Topic & { quizResult?: QuizResult, isQuizPassed?: boolean };

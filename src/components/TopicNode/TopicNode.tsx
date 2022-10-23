@@ -22,6 +22,8 @@ const TopicNode = ({topic, isDisabled = false}: TopicNodeProps) => {
     const navigation = useNavigation();
     const  itemsWidth = width / 3 - 30;
 
+    // console.log('TopicNode', topic.isQuizPassed);
+
     useEffect(() => {
         // if(!topic) return;
         // @TODO subscribe on the user progress changes -- IMPROVEMENT
@@ -37,19 +39,17 @@ const TopicNode = ({topic, isDisabled = false}: TopicNodeProps) => {
         navigation.navigate('Topic', { id: topic.id });
     }
 
-    const quizPassed = topic.quizResult && topic.quizResult?.percentage >= 0.9;
-
     return (
         <TouchableOpacity disabled={isDisabled} onPress={onPress} activeOpacity={isDisabled ? 1 : 0.7} style={[styles.container, {width: itemsWidth}]}>
             <View style={[styles.progress]}>
                 <CircularProgress size={itemsWidth} strokeWidth={8} progress={progress} />
-                    <View style={[styles.circle, {width: itemsWidth - 20, backgroundColor: isDisabled ? Colors.light.dark : Colors.light.primary}]}>
+                    <View style={[styles.circle, {width: itemsWidth - 20, backgroundColor: isDisabled ? Colors.light.tabIconDefault : Colors.light.primary}]}>
                         {topic.icon ? (
                             <S3Image imgKey={topic.icon} source={{uri: topic?.icon}} style={styles.image} />
                         ) : (
                             <AntDesign name="questioncircleo" size={35} color="black" />
                         )}
-                        <View className={`absolute -bottom-3 -right-2 ${quizPassed ? 'bg-blue-500/70' : 'bg-gray-500/70'} rounded-full w-7 h-7 items-center justify-center border border-white border-[2px]`}>
+                        <View className={`absolute -bottom-3 -right-2 ${topic?.isQuizPassed ? 'bg-blue-500/70' : 'bg-gray-400/70'} rounded-full w-7 h-7 items-center justify-center border border-white border-[2px]`}>
                             <AntDesign name="Trophy" size={14} color="white" />
                         </View>
                     </View>
