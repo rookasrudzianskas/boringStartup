@@ -5,6 +5,7 @@ import Colors from "../../constants/Colors";
 import {Ionicons} from "@expo/vector-icons";
 import * as WebBrowser from 'expo-web-browser';
 import {Exercise, Resource} from "../../models";
+import {Analytics} from "aws-amplify";
 
 interface ResourceListItemProps {
     resource: Resource | Exercise;
@@ -20,6 +21,10 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
         if(!resource.url) return;
         WebBrowser.openBrowserAsync(resource?.url || 'https://expo.dev');
         onComplete(resource);
+        Analytics.record({
+            name: resource instanceof Exercise ? 'exerciseOpened' : 'resourceOpened',
+            attributes: { id: resource.id }
+        });
     }
 
     return (

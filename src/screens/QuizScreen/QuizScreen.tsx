@@ -13,7 +13,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import useApplyHeaderWorkaround from "../../hooks/useApplyHeaderWorkaround";
 import {styles} from "./QuizScreen.styles";
-import {Auth, DataStore} from "aws-amplify";
+import {Analytics, Auth, DataStore} from "aws-amplify";
 import {Quiz, QuizQuestion, QuizResult, UserTopicProgress} from "../../models";
 import {S3Image} from "aws-amplify-react-native";
 
@@ -31,6 +31,15 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
     const isButtonDisabled = selectedAnswers.length === 0;
     const quizId = route.params.id;
     useApplyHeaderWorkaround(navigation.setOptions);
+
+    useEffect(() => {
+        if(quizId) {
+            Analytics.record({
+                name: 'quizOpened',
+                attributes: { id: quizId }
+            })
+        }
+    }, [quizId]);
 
     useEffect(() => {
         DataStore.query(Quiz, quizId).then(setQuiz);
@@ -83,7 +92,12 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
                         failedQuestionsIDs: wrongAnswersIDs,
                         try: previousResults ? previousResults.try + 1 : 1,
                         quizID: quiz?.id,
-                    }))
+                    }));
+
+                    Analytics.record({
+                        name: 'quizFinished',
+                        attributes: { id: quizId, percentage: numberOfCorrectAnswers / questions.length }
+                    })
                 }
                 // navigate to results screen
                 setAnsweredCorrectly(undefined);

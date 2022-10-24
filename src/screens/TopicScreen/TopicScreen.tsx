@@ -24,11 +24,13 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     const [completedResourceIDs, setCompletedResourceIDs] = useState<string[]>([]);
 
     useEffect(() => {
-        Analytics.record({
-            name: 'topicOpened',
-            attributes: { topicId: topicId, name: topic?.name }
-        });
-    }, []);
+        if(topicId) {
+            Analytics.record({
+                name: 'topicOpened',
+                attributes: { id: topicId }
+            });
+        }
+    }, [topicId]);
 
     useLayoutEffect(() => {
         // @TODO does it work?
