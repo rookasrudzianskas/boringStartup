@@ -80,21 +80,21 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     }, [topic]);
 
 
-    useEffect(() => {
-        if(!userTopicProgress) return;
-        const sub = DataStore.observeQuery(UserTopicProgress, (c) =>
-            c.id("eq", userTopicProgress.id)
-        ).subscribe(({items}) => {
-            console.log("Subscription");
-            console.log(items);
-            setUserTopicProgress(items[0]);
-            updateTopicProgress(topicId, items[0]);
-        });
-
-        return () => {
-            sub.unsubscribe();
-        }
-    }, [userTopicProgress?.id])
+    // useEffect(() => {
+    //     if(!userTopicProgress) return;
+    //     const sub = DataStore.observeQuery(UserTopicProgress, (c) =>
+    //         c.id("eq", userTopicProgress.id)
+    //     ).subscribe(({items}) => {
+    //         console.log("Subscription");
+    //         console.log(items);
+    //         setUserTopicProgress(items[0]);
+    //         updateTopicProgress(topicId, items[0]);
+    //     });
+    //
+    //     return () => {
+    //         sub.unsubscribe();
+    //     }
+    // }, [userTopicProgress?.id])
 
     const onStartQuiz = () => {
         if(topic?.topicQuizId) {
@@ -106,17 +106,18 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         if(loading || !userTopicProgress || userTopicProgress.completedResourceIDs.includes(resource.id)) {
             console.log("Loading or already completed");
             return;
-        };
+        }
         // recalculate progress
         setLoading(true);
-        const updated = await DataStore.save(UserTopicProgress.copyOf(userTopicProgress, (updated) => {
-            updated.completedResourceIDs.push(resource.id);
-            const progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
-            updated.progress = progress;
-        }));
-        // setUserTopicProgress(updated);
-        // // console.log("TOPIC", topicId)
-        // updateTopicProgress(topicId, updated);
+        const original = await DataStore.query(UserTopicProgress, userTopicProgress.id);
+        if(original) {
+            const updated = await DataStore.save(UserTopicProgress.copyOf(original, (updated) => {
+                updated.completedResourceIDs = [...updated.completedResourceIDs, resource.id];
+                updated.progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
+            }));
+            setUserTopicProgress(updated);
+            updateTopicProgress(topicId, updated);
+        }
         setLoading(false);
     }
 
@@ -124,15 +125,16 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         if(loading || !userTopicProgress || userTopicProgress.completedExerciseIDs.includes(exercise.id)) return;
         // recalculate progress
         setLoading(true);
-        const updated = await DataStore.save(UserTopicProgress.copyOf(userTopicProgress, (updated) => {
-            updated.completedExerciseIDs = [...updated.completedExerciseIDs, exercise.id];
-            console.log(updated.completedExerciseIDs)
-            updated.progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
-        }));
-        // console.log("UPDATED", updated)
-        // setUserTopicProgress(updated);
-        // // console.log("TOPIC", topicId)
-        // updateTopicProgress(topicId, updated);
+        const original = await DataStore.query(UserTopicProgress, userTopicProgress.id);
+        if(original) {
+            const updated = await DataStore.save(original.copyOf(userTopicProgress, (updated) => {
+                updated.completedExerciseIDs = [...updated.completedExerciseIDs, exercise.id];
+                console.log(updated.completedExerciseIDs)
+                updated.progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
+            }));
+            setUserTopicProgress(updated);
+            updateTopicProgress(topicId, updated);
+        }
         setLoading(false);
     }
 
