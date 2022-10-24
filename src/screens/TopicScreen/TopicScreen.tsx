@@ -127,7 +127,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         setLoading(true);
         const original = await DataStore.query(UserTopicProgress, userTopicProgress.id);
         if(original) {
-            const updated = await DataStore.save(original.copyOf(userTopicProgress, (updated) => {
+            const updated = await DataStore.save(UserTopicProgress.copyOf(original, (updated) => {
                 updated.completedExerciseIDs = [...updated.completedExerciseIDs, exercise.id];
                 console.log(updated.completedExerciseIDs)
                 updated.progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
