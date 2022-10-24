@@ -21,7 +21,7 @@ exports.handler = async (event) => {
     };
 
     const users = await docClient.scan(params).promise();
-    console.log('Sending notification to:', users.Items.length(), "users", JSON.stringify(users));
+    console.log('Sending notification to:', users.Items.length, "users", JSON.stringify(users));
     // send notification to all users
     await Promise.all(users.Items.map(user => user?.expoNotificationToken && sendPushNotification(user.expoNotificationToken)));
     // later personalize the message based on the user progress. @TODO
@@ -33,7 +33,7 @@ async function sendPushNotification(expoPushToken) {
     const message = {
         to: expoPushToken,
         sound: 'default',
-        title: 'Original Title',
+        title: 'Do not forget to complete your task',
         body: 'And here is the body!',
         data: { someData: 'goes here' },
     };
