@@ -113,27 +113,32 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             return;
         }
         // recalculate progress
-        setLoading(true);
-        const ids = [...completedResourceIDs, resource.id]
+        // setLoading(true);
+        // const ids = [...completedResourceIDs, resource.id]
 
-        const updated = await DataStore.save(UserTopicProgress.copyOf(userTopicProgress, (updated) => {
-            updated.completedResourceIDs = ids;
-            const progress = getNextProgress();
-            updated.progress = progress;
-        }));
-        setCompletedResourceIDs(ids);
-        setUserTopicProgress(updated);
-        updateTopicProgress(topicId, updated);
-        setLoading(false);
+        // const updated = await DataStore.save(UserTopicProgress.copyOf(userTopicProgress, (updated) => {
+        //     updated.completedResourceIDs = ids;
+        //     const progress = getNextProgress();
+        //     updated.progress = progress;
+        // }));
+        setCompletedResourceIDs((existing) => existing.includes(resource.id)) ? existing : [...existing, resource.id];
+        // updateTopicProgress(topicId, updated);
+        // setLoading(false);
     }
 
+
     useEffect(() => {
+        if(!userTopicProgress || completedResourceIDs.length === userTopicProgress?.completedResourceIDs.length) return;
+        setLoading(true);
         (async () => {
             const updated = await DataStore.save(
                 UserTopicProgress.copyOf(userTopicProgress, (updated) => {
-                updated.completedResourceIDs = ids;
+                updated.completedResourceIDs = completedResourceIDs;
                 updated.progress = getNextProgress();
             }));
+            setUserTopicProgress(updated);
+            updateTopicProgress(topicId, updated);
+            setLoading(false);
         })();
     }, [completedResourceIDs]);
 
@@ -185,7 +190,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                     {resources && (
                         <>
                             {resources.map((resource, index) => (
-                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === resources.length} onComplete={onResourceComplete} isCompleted={completedResourceIDs.includes(resource?.id)} />
+                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === resources.length} onComplete={onResourceComplete} isCompleted={completedResourceIDs?.includes(resource.id)} />
                             ))}
                         </>
                     )}
