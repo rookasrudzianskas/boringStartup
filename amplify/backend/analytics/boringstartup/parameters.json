@@ -1,0 +1,21 @@
+{
+    "appName": "boringstartup",
+    "roleName": "pinpointLambdaRole07eb7780",
+    "cloudformationPolicyName": "cloudformationPolicy07eb7780",
+    "cloudWatchPolicyName": "cloudWatchPolicy07eb7780",
+    "pinpointPolicyName": "pinpointPolicy07eb7780",
+    "authPolicyName": "pinpoint_amplify_07eb7780",
+    "unauthPolicyName": "pinpoint_amplify_07eb7780",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}
