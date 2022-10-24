@@ -26,7 +26,9 @@
       },
       "function": {
         "DailyReminderNotification": {
-          "userTable": "arn:aws:dynamodb:us-east-1:605111547475:table/User-mxcjnpwggfbdjbactdi7iezjaa-staging"
+          "userTable": "arn:aws:dynamodb:us-east-1:605111547475:table/User-mxcjnpwggfbdjbactdi7iezjaa-staging",
+          "deploymentBucketName": "amplify-boringstartup-staging-135701-deployment",
+          "s3Key": "amplify-builds/DailyReminderNotification-372f61624a4663624633-build.zip"
         }
       }
     }
