@@ -13,8 +13,14 @@ import ModuleContextProvider from "./src/contexts/ModuleContext";
 import {useEffect} from "react";
 import {registerForPushNotificationsAsync} from "./src/utils/pushNotifications";
 import UserContextProvider from "./src/contexts/userContext";
+import { connectToDevTools } from "react-devtools-core";
 
 Amplify.configure({...awsconfig });
+
+
+if (__DEV__) {
+    connectToDevTools({ host: "localhost", port: 8097, });
+}
 
 const App = () => {
     const isLoadingComplete = useCachedResources();

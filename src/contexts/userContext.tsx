@@ -31,8 +31,8 @@ const UserContextProvider = ({children}: any) => {
 
     useEffect(() => {
         (async () => {
-            const token = await registerForPushNotificationsAsync();
-            setExpoToken(token);
+            // const token = await registerForPushNotificationsAsync(); @TODO for the notifications
+            // setExpoToken(token);
         })();
     }, []);
 
