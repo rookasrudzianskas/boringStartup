@@ -19,6 +19,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     const [userTopicProgress, setUserTopicProgress] = useState<UserTopicProgress>();
     const [resources, setResources] = useState<Resource[]>([]);
     const [exercises, setExercises] = useState<Exercise[]>([]);
+    const [loading, setLoading] = useState(false);
 
     useLayoutEffect(() => {
         // @TODO does it work?
@@ -33,6 +34,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     useApplyHeaderWorkaround(navigation.setOptions);
 
     useEffect(() => {
+        setLoading(true);
         const fetchTopic = async () => {
             const topic = await DataStore.query(Topic, topicId);
             setTopic(topic);
@@ -70,6 +72,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                 }))
                 setUserTopicProgress(newUserProgress);
             }
+            setLoading(false);
         }
         fetchTopicDetails();
 
@@ -83,33 +86,37 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     };
 
     const onResourceComplete = async (resource: Resource) => {
-        if(!userTopicProgress) return;
+        if(loading || !userTopicProgress || userTopicProgress.completedResourceIDs.includes(resource.id)) {
+            console.log("Loading or already completed");
+            return;
+        };
         // recalculate progress
+        setLoading(true);
         const updated = await DataStore.save(UserTopicProgress.copyOf(userTopicProgress, (updated) => {
-            if(!updated.completedResourceIDs.includes(resource.id)) {
-                updated.completedResourceIDs.push(resource.id);
-                const progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
-                updated.progress = progress;
-            }
+            updated.completedResourceIDs.push(resource.id);
+            const progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
+            updated.progress = progress;
         }));
         setUserTopicProgress(updated);
         // console.log("TOPIC", topicId)
         updateTopicProgress(topicId, updated);
+        setLoading(false);
     }
 
     const onExerciseComplete = async (exercise: Exercise) => {
-        if(!userTopicProgress) return;
+        if(loading || !userTopicProgress || userTopicProgress.completedExerciseIDs.includes(exercise.id)) return;
         // recalculate progress
+        setLoading(true);
         const updated = await DataStore.save(UserTopicProgress.copyOf(userTopicProgress, (updated) => {
-            if(!updated.completedExerciseIDs.includes(exercise.id)) {
-                updated.completedExerciseIDs.push(exercise.id);
-                const progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
-                updated.progress = progress;
-            }
+            updated.completedExerciseIDs = [...updated.completedExerciseIDs, exercise.id];
+            console.log(updated.completedExerciseIDs)
+            updated.progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
         }));
+        console.log("UPDATED", updated)
         setUserTopicProgress(updated);
         // console.log("TOPIC", topicId)
         updateTopicProgress(topicId, updated);
+        setLoading(false);
     }
 
     if(!topic && !userTopicProgress) {
