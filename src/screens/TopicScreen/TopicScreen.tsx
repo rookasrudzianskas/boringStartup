@@ -155,6 +155,10 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             </View>
         )
     }
+
+    console.log("🚀", completedResourceIDs)
+    console.log(":🍏", completedExerciseIDs)
+
     console.error = (error) => error.apply; // @TODO Disables the error message of Courier font, have to be replaced to Courier New
 
     return (
