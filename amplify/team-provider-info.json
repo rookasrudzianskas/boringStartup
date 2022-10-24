@@ -27,7 +27,7 @@
       "function": {
         "DailyReminderNotification": {
           "deploymentBucketName": "amplify-boringstartup-staging-135701-deployment",
-          "s3Key": "amplify-builds/DailyReminderNotification-594a61462b3455622b4f-build.zip",
+          "s3Key": "amplify-builds/DailyReminderNotification-44526441317a61304a45-build.zip",
           "userTable": "User-mxcjnpwggfbdjbactdi7iezjaa-staging"
         }
       }

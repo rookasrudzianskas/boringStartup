@@ -39,7 +39,7 @@ async function sendPushNotification(expoPushToken) {
     };
 
     const options = {
-        hostname: 'https://exp.host',
+        hostname: 'exp.host',
         path: '/--/api/v2/push/send',
         method: 'POST',
         port: 443, // 👈️ replace with 80 for HTTP requests
