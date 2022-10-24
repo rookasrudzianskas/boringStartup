@@ -17,9 +17,7 @@ const ModuleScreen = () => {
     useEffect(() => {
         const fetchTopics = async () => {
             const topics = await DataStore.query(Topic);
-
             const topicsWithProgress = await addProgressToTopics(topics);
-
             const _levels = groupByLevel(topicsWithProgress);
             setCurrentLevel(getCurrentActiveLevel(_levels));
             setLevels(_levels);
@@ -35,7 +33,7 @@ const ModuleScreen = () => {
 
     const addProgressToTopic = async (topic: Topic) => {
         if(!topic.Quiz) {
-            // console.log('No quiz for topic', topic.id, topic.Quiz);
+            console.log('No quiz for topic', topic.id, topic.Quiz);
             return topic;
         }
         const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
