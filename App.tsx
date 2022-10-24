@@ -9,6 +9,7 @@ import awsconfig from './src/aws-exports';
 import {withAuthenticator} from "aws-amplify-react-native/src/Auth";
 import AmplifyTheme from 'aws-amplify-react-native/src/AmplifyTheme';
 import Colors from './src/constants/Colors';
+import ModuleContextProvider from "./src/contexts/ModuleContext";
 
 Amplify.configure({
     ...awsconfig, Analytics: { disabled: true } });
@@ -22,7 +23,9 @@ const App = () => {
     } else {
         return (
             <SafeAreaProvider>
-                <Navigation colorScheme={colorScheme} />
+                <ModuleContextProvider>
+                    <Navigation colorScheme={colorScheme} />
+                </ModuleContextProvider>
                 <StatusBar />
             </SafeAreaProvider>
         );

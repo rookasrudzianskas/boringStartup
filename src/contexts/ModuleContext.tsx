@@ -1,5 +1,5 @@
 // create context for module screen
-import { createContext } from "react";
+import {createContext, useContext} from "react";
 
 const ModuleContext = createContext({});
 
@@ -11,3 +11,7 @@ const ModuleContextProvider = ({ children }) => {
         </ModuleContext.Provider>
     );
 }
+
+export default ModuleContextProvider;
+
+export const useModule = () => useContext(ModuleContext);
