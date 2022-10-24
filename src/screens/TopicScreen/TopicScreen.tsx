@@ -127,6 +127,16 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         setLoading(false);
     }
 
+    useEffect(() => {
+        (async () => {
+            const updated = await DataStore.save(
+                UserTopicProgress.copyOf(userTopicProgress, (updated) => {
+                updated.completedResourceIDs = ids;
+                updated.progress = getNextProgress();
+            }));
+        })();
+    }, [completedResourceIDs]);
+
     const onExerciseComplete = async (exercise: Exercise) => {
         if(loading || !userTopicProgress ||completedExerciseIDs.includes(exercise.id)) return;
         // recalculate progress
