@@ -58,7 +58,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             navigation.setOptions({ title: topic.title });
         }
 
-        console.log("REFRESING TOPIC!")
+        // console.log("REFRESING TOPIC!")
         const fetchTopicDetails = async () => {
             if(!topic) return;
             const resource = await DataStore.query(Resource).then(resources => resources.filter(resource => resource.topicID === topic?.id));
@@ -180,8 +180,8 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         )
     }
 
-    console.log("🚀", completedResourceIDs)
-    console.log(":🍏", completedExerciseIDs)
+    // console.log("🚀", completedResourceIDs)
+    // console.log(":🍏", completedExerciseIDs)
 
     console.error = (error) => error.apply; // @TODO Disables the error message of Courier font, have to be replaced to Courier New
 

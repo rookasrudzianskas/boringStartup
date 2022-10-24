@@ -10,13 +10,22 @@ import {withAuthenticator} from "aws-amplify-react-native/src/Auth";
 import AmplifyTheme from 'aws-amplify-react-native/src/AmplifyTheme';
 import Colors from './src/constants/Colors';
 import ModuleContextProvider from "./src/contexts/ModuleContext";
+import {useEffect} from "react";
+import {registerForPushNotificationsAsync} from "./src/utils/pushNotifications";
 
-Amplify.configure({
-    ...awsconfig, Analytics: { disabled: true } });
+Amplify.configure({...awsconfig });
 
 const App = () => {
     const isLoadingComplete = useCachedResources();
     const colorScheme = useColorScheme();
+
+
+    useEffect(() => {
+        (async () => {
+            const token = await registerForPushNotificationsAsync();
+            console.log("TOKEN", token);
+        })();
+    }, [])
 
     if (!isLoadingComplete) {
         return null;
@@ -24,7 +33,7 @@ const App = () => {
         return (
             <SafeAreaProvider>
                 <ModuleContextProvider>
-                    <Navigation colorScheme={colorScheme} />
+                    <Navigation colorScheme={'light'} />
                 </ModuleContextProvider>
                 <StatusBar />
             </SafeAreaProvider>
