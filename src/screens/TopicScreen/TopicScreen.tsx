@@ -9,7 +9,7 @@ import TopicSection from "./TopicSection";
 import CustomButton from "../../components/CustomButton";
 import useApplyHeaderWorkaround from "../../hooks/useApplyHeaderWorkaround";
 import {Exercise, Resource, Topic, UserTopicProgress} from "../../models";
-import {Auth, DataStore} from "aws-amplify";
+import {Analytics, Auth, DataStore} from "aws-amplify";
 import {useModuleContext} from "../../contexts/ModuleContext";
 
 const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => {
@@ -22,6 +22,13 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     const [loading, setLoading] = useState(false);
     const [completedExerciseIDs, setCompletedExerciseIDs] = useState<string[]>([]);
     const [completedResourceIDs, setCompletedResourceIDs] = useState<string[]>([]);
+
+    useEffect(() => {
+        Analytics.record({
+            name: 'topicOpened',
+            attributes: { topicId: topicId, name: topic?.name }
+        });
+    }, []);
 
     useLayoutEffect(() => {
         // @TODO does it work?
