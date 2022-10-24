@@ -22,6 +22,7 @@ if (__DEV__) {
     connectToDevTools({ host: "localhost", port: 8097, });
 }
 
+
 const App = () => {
     const isLoadingComplete = useCachedResources();
     const colorScheme = useColorScheme();
