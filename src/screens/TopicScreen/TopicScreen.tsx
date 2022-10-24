@@ -20,8 +20,10 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     const [resources, setResources] = useState<Resource[]>([]);
     const [exercises, setExercises] = useState<Exercise[]>([]);
     const [loading, setLoading] = useState(false);
-    const [completedExercisesIDs, setCompletedExercisesIDs] = useState<string[]>([]);
-    const [completedResourcesIDs, setCompletedResourcesIDs] = useState<string[]>([]);
+    // const [completedExercisesIDs, setCompletedExercisesIDs] = useState<string[]>([]);
+    // const [completedResourcesIDs, setCompletedResourcesIDs] = useState<string[]>([]);
+    let completedExerciseIDs: string[] = [];
+    let completedResourceIDs: string[] = [];
 
     useLayoutEffect(() => {
         // @TODO does it work?
@@ -64,6 +66,9 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             // Checks if there's progress. If not, create a new one
             if(userProgress) {
                 setUserTopicProgress(userProgress);
+                completedExerciseIDs = (userProgress.completedExerciseIDs);
+                completedResourceIDs = (userProgress.completedResourceIDs);
+                console.log("🔫", completedExerciseIDs);
             } else {
                 const newUserProgress = await DataStore.save(new UserTopicProgress({
                     sub: userData?.attributes.sub,
@@ -105,7 +110,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     };
 
     const onResourceComplete = async (resource: Resource) => {
-        if(loading || !userTopicProgress || userTopicProgress.completedResourceIDs.includes(resource.id)) {
+        if(loading || !userTopicProgress || completedResourceIDs.includes(resource.id)) {
             console.log("Loading or already completed");
             return;
         }
@@ -114,8 +119,10 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         const original = await DataStore.query(UserTopicProgress, userTopicProgress.id);
         if(original) {
             const updated = await DataStore.save(UserTopicProgress.copyOf(original, (updated) => {
-                updated.completedResourceIDs = [...updated.completedResourceIDs, resource.id];
-                updated.progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
+                completedResourceIDs = [...completedResourceIDs, resource.id]
+                updated.completedResourceIDs = completedResourceIDs;
+                const progress = (completedResourceIDs.length + completedExerciseIDs.length + 1) / (resources.length + exercises.length);
+                updated.progress = progress;
             }));
             setUserTopicProgress(updated);
             updateTopicProgress(topicId, updated);
@@ -124,15 +131,15 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     }
 
     const onExerciseComplete = async (exercise: Exercise) => {
-        if(loading || !userTopicProgress || userTopicProgress.completedExerciseIDs.includes(exercise.id)) return;
+        if(loading || !userTopicProgress ||completedExerciseIDs.includes(exercise.id)) return;
         // recalculate progress
         setLoading(true);
         const original = await DataStore.query(UserTopicProgress, userTopicProgress.id);
         if(original) {
             const updated = await DataStore.save(UserTopicProgress.copyOf(original, (updated) => {
-                updated.completedExerciseIDs = [...updated.completedExerciseIDs, exercise.id];
-                console.log(updated.completedExerciseIDs)
-                updated.progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
+                completedExerciseIDs = [...completedExerciseIDs, exercise.id];
+                updated.completedExerciseIDs = completedExerciseIDs;
+                updated.progress = (completedResourceIDs.length + completedExerciseIDs.length + 1) / (resources.length + exercises.length);
             }));
             setUserTopicProgress(updated);
             updateTopicProgress(topicId, updated);
@@ -163,7 +170,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                     {resources && (
                         <>
                             {resources.map((resource, index) => (
-                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === resources.length} onComplete={onResourceComplete} isCompleted={userTopicProgress?.completedResourceIDs.includes(resource?.id)} />
+                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === resources.length} onComplete={onResourceComplete} isCompleted={completedResourceIDs.includes(resource?.id)} />
                             ))}
                         </>
                     )}
@@ -179,7 +186,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                         <>
                             {exercises.map((exercise, index) => (
                                 // @TODO resource or exercise?
-                                <ResourceListItem resource={exercise} key={exercise.id} index={index} isLast={index + 1 === exercises.length} onComplete={onExerciseComplete}  isCompleted={userTopicProgress?.completedExerciseIDs.includes(exercise?.id)} />
+                                <ResourceListItem resource={exercise} key={exercise.id} index={index} isLast={index + 1 === exercises.length} onComplete={onExerciseComplete}  isCompleted={completedExerciseIDs.includes(exercise?.id)} />
                             ))}
                         </>
                     )}
