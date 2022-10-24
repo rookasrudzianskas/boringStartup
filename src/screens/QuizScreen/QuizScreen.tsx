@@ -84,19 +84,25 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
                 const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
                 // @TODO does not work if restart
                 if(quiz && userData) {
+                    const percentage = numberOfCorrectAnswers / questions.length;
+                    const numberOfTries = previousResults?.try ? previousResults.try + 1 : 1;
                     await DataStore.save(new QuizResult({
                         sub: userData?.attributes.sub,
                         nofQuestions: questions.length,
                         nofCorrectAnswers: numberOfCorrectAnswers,
-                        percentage: numberOfCorrectAnswers / questions.length,
+                        percentage: percentage,
                         failedQuestionsIDs: wrongAnswersIDs,
-                        try: previousResults ? previousResults.try + 1 : 1,
+                        try: numberOfTries,
                         quizID: quiz?.id,
                     }));
 
                     Analytics.record({
                         name: 'quizFinished',
-                        attributes: { id: quizId, percentage: numberOfCorrectAnswers / questions.length }
+                        attributes: { id: quizId},
+                        metrics: {
+                            percentage: numberOfCorrectAnswers / questions.length,
+                            try: numberOfTries,
+                        }
                     })
                 }
                 // navigate to results screen
