@@ -17,7 +17,15 @@ const UserContextProvider = ({children}: any) => {
             const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
             const users = await DataStore.query(User);
             const me = users.find((user) => user.sub === userData.attributes.sub);
-            setUser(me);
+            if(me) {
+                setUser(me);
+            } else {
+                const newUser = await new User({
+                    sub: userData.attributes.sub,
+                });
+                const saved = await DataStore.save(newUser);
+                setUser(saved);
+            }
         })();
     }, [])
 
@@ -29,10 +37,16 @@ const UserContextProvider = ({children}: any) => {
     }, []);
 
     useEffect(() => {
-        if(user && expoToken && user.expoNotificationToken !== expoToken) {
+        (async () => {
+            if(user && expoToken && user.expoNotificationToken !== expoToken) {
+                const updatedUser = await DataStore.save(User.copyOf(user, updated => {
+                    updated.expoNotificationToken = expoToken;
+                }));
+                setUser(updatedUser);
+            }
+        })();
 
-        }
-    }, [user, token]);
+    }, [user, expoToken]);
 
     return (
         <UserContext.Provider value={{}}>

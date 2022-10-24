@@ -23,6 +23,11 @@
       },
       "analytics": {
         "boringstartup": {}
+      },
+      "function": {
+        "DailyReminderNotification": {
+          "userTable": "arn:aws:dynamodb:us-east-1:605111547475:table/User-mxcjnpwggfbdjbactdi7iezjaa-staging"
+        }
       }
     }
   }
