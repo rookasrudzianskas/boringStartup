@@ -8,6 +8,7 @@ Amplify Params - DO NOT EDIT */
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 const AWS = require('aws-sdk');
+const https = require('https');
 
 const {USER_TABLE} = process.env;
 
@@ -28,7 +29,7 @@ exports.handler = async (event) => {
     return "Finished";
 };
 
-export async function sendPushNotification(expoPushToken) {
+async function sendPushNotification(expoPushToken) {
     const message = {
         to: expoPushToken,
         sound: 'default',
@@ -37,13 +38,40 @@ export async function sendPushNotification(expoPushToken) {
         data: { someData: 'goes here' },
     };
 
-    await fetch('https://exp.host/--/api/v2/push/send', {
+    const options = {
+        hostname: 'https://exp.host',
+        path: '/--/api/v2/push/send',
         method: 'POST',
+        port: 443, // 👈️ replace with 80 for HTTP requests
         headers: {
-            Accept: 'application/json',
             'Accept-encoding': 'gzip, deflate',
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(message),
+    };
+
+    return new Promise((resolve, reject) => {
+        const req = https.request(options, res => {
+            let rawData = '';
+
+            res.on('data', chunk => {
+                rawData += chunk;
+            });
+
+            res.on('end', () => {
+                try {
+                    resolve(JSON.parse(rawData));
+                } catch (err) {
+                    reject(new Error(err));
+                }
+            });
+        });
+
+        req.on('error', err => {
+            reject(new Error(err));
+        });
+
+        // 👇️ write the body to the Request object
+        req.write(JSON.stringify(message));
+        req.end();
     });
 }
