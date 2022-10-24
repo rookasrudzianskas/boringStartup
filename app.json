@@ -25,11 +25,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.rooookas.uselessclub"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": ["expo-community-flipper"]
+    "plugins": [
+      "expo-community-flipper"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2b682df1-1326-4e78-8d0f-b7899204ae79"
+      }
+    }
   }
 }
