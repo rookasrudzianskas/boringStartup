@@ -20,6 +20,8 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     const [resources, setResources] = useState<Resource[]>([]);
     const [exercises, setExercises] = useState<Exercise[]>([]);
     const [loading, setLoading] = useState(false);
+    const [completedExercisesIDs, setCompletedExercisesIDs] = useState<string[]>([]);
+    const [completedResourcesIDs, setCompletedResourcesIDs] = useState<string[]>([]);
 
     useLayoutEffect(() => {
         // @TODO does it work?
