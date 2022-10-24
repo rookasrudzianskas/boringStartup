@@ -10,9 +10,11 @@ import CustomButton from "../../components/CustomButton";
 import useApplyHeaderWorkaround from "../../hooks/useApplyHeaderWorkaround";
 import {Exercise, Resource, Topic, UserTopicProgress} from "../../models";
 import {Auth, DataStore} from "aws-amplify";
+import {useModuleContext} from "../../contexts/ModuleContext";
 
 const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => {
     const topicId = route.params.id;
+    const {updateTopicProgress} = useModuleContext();
     const [topic, setTopic] = useState<Topic[]>();
     const [userTopicProgress, setUserTopicProgress] = useState<UserTopicProgress>();
     const [resources, setResources] = useState<Resource[]>([]);
@@ -91,6 +93,8 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             }
         }));
         setUserTopicProgress(updated);
+        // console.log("TOPIC", topicId)
+        updateTopicProgress(topicId, updated);
     }
 
     const onExerciseComplete = async (exercise: Exercise) => {
@@ -104,6 +108,8 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             }
         }));
         setUserTopicProgress(updated);
+        // console.log("TOPIC", topicId)
+        updateTopicProgress(topicId, updated);
     }
 
     if(!topic && !userTopicProgress) {

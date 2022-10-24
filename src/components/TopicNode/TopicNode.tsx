@@ -3,13 +3,10 @@ import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, Image, TouchableOpacity, useWindowDimensions} from 'react-native';
 import Colors from "../../constants/Colors";
 import {Topic, TopicWithResult} from "../../types/models";
-import Svg, { Circle, Rect } from 'react-native-svg';
 import CircularProgress from "../CircularProgress";
 import {useNavigation} from "@react-navigation/native";
 import { S3Image } from 'aws-amplify-react-native';
 import {AntDesign} from "@expo/vector-icons";
-import {Auth, DataStore} from "aws-amplify";
-import {UserTopicProgress} from "../../models";
 
 interface TopicNodeProps {
     topic: TopicWithResult;

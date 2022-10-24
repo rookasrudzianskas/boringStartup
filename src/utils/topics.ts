@@ -5,6 +5,7 @@ import {TopicWithResult} from "../types/models";
 export const groupByLevel = (topics: Topic[]) => {
     const levels: {[key: number]: Topic[]} = {};
 
+    // @TODO should be check
     topics.forEach((topic) => {
         if (!levels[topic.level]) {
             levels[topic.level] = [];

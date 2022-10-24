@@ -1,4 +1,5 @@
 // create context for module screen
+//@ts-nocheck
 import {createContext, useContext, useEffect, useState} from "react";
 import {TopicWithResult} from "../types/models";
 import {Auth, DataStore} from "aws-amplify";
@@ -8,13 +9,18 @@ import {LogBox} from "react-native";
 
 
 interface ModuleContextData {
-    levels?: TopicWithResult[][],
-    currentLevel?: number,
+    levels: TopicWithResult[][],
+    currentLevel: number,
+    updateTopicProgress: (topicID: string, newProgress: UserTopicProgress) => void,
 }
 
 LogBox.ignoreLogs(['DataStore - subscriptionError Connection failed: Connection handshake error', 'DataStore {"cause": {"error": {"errors"']);
 
-const ModuleContext = createContext<ModuleContextData>({});
+const ModuleContext = createContext<ModuleContextData>({
+    levels: [],
+    currentLevel: 0,
+    updateTopicProgress: () => {},
+});
 const ModuleContextProvider = ({ children }) => {
     const [topics, setTopics] = useState<TopicWithResult[]>([]);
     const [levels, setLevels] = useState<TopicWithResult[][]>([]);
@@ -66,10 +72,17 @@ const ModuleContextProvider = ({ children }) => {
         return topicWithProgress;
     }
 
+    const updateTopicProgress = (topicID: string, newProgress: UserTopicProgress) => {
+        setTopics(_topics => {
+            _topics.map((topic) => topic.id !== topicID ? topic : { ...topic, progress: newProgress} )
+        })
+    }
+
     return (
         <ModuleContext.Provider value={{
             levels,
             currentLevel,
+            updateTopicProgress,
         }}>{children}
         </ModuleContext.Provider>
     );
