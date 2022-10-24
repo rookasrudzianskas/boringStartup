@@ -1,16 +1,23 @@
 //@ts-nocheck
 import React, {useEffect, useState} from 'react';
-import {FlatList, LogBox, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, FlatList, LogBox, StyleSheet, View} from 'react-native';
 import TopicNode from "../../components/TopicNode";
 import TopicNodesRow from "../../components/TopicNodesRow";
-import {getCurrentActiveLevel, groupByLevel} from "../../utils/topics";
-import {Auth, DataStore} from "aws-amplify";
-import {QuizResult, Topic} from "../../models";
-import {TopicWithResult} from "../../types/models";
+import {useModuleContext} from "../../contexts/ModuleContext";
 
 LogBox.ignoreLogs(['DataStore - subscriptionError Connection failed: Connection handshake error', 'DataStore {"cause": {"error": {"errors"']);
 
 const ModuleScreen = () => {
+
+    const {levels, currentLevel} = useModuleContext();
+
+    if(!levels || !currentLevel) {
+        return (
+            <View className="h-screen items-center justify-center">
+                <ActivityIndicator />
+            </View>
+        )
+    }
 
     return (
         <View style={styles.container}>

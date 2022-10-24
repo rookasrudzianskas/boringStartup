@@ -1,4 +1,4 @@
-import {QuizResult, Topic} from "../models";
+import {QuizResult, Topic, UserTopicProgress} from "../models";
 
 export type ResourceItem = {
     id: string;
@@ -7,4 +7,4 @@ export type ResourceItem = {
     completed?: boolean;
 }
 
-export type TopicWithResult = Topic & { quizResult?: QuizResult, isQuizPassed?: boolean };
+export type TopicWithResult = Topic & { progress?: UserTopicProgress, quizResult?: QuizResult, isQuizPassed?: boolean };

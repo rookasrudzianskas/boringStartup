@@ -18,22 +18,8 @@ interface TopicNodeProps {
 
 const TopicNode = ({topic, isDisabled = false}: TopicNodeProps) => {
     const {width} = useWindowDimensions();
-    const [progress, setProgress] = useState(0);
     const navigation = useNavigation();
     const  itemsWidth = width / 3 - 30;
-
-    // console.log('TopicNode', topic.isQuizPassed);
-
-    useEffect(() => {
-        // if(!topic) return;
-        // @TODO subscribe on the user progress changes -- IMPROVEMENT
-        (async () => {
-            const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
-            const userTopicProgresses = await DataStore.query(UserTopicProgress);
-            const userProgress = userTopicProgresses.find((tp) => tp.topicID === topic?.id && tp.sub === userData?.attributes.sub);
-            setProgress(userProgress?.progress || 0);
-        })();
-    }, [topic]);
 
     const onPress = () => {
         navigation.navigate('Topic', { id: topic.id });
@@ -42,7 +28,7 @@ const TopicNode = ({topic, isDisabled = false}: TopicNodeProps) => {
     return (
         <TouchableOpacity disabled={isDisabled} onPress={onPress} activeOpacity={isDisabled ? 1 : 0.7} style={[styles.container, {width: itemsWidth}]}>
             <View style={[styles.progress]}>
-                <CircularProgress size={itemsWidth} strokeWidth={8} progress={progress} />
+                <CircularProgress size={itemsWidth} strokeWidth={8} progress={topic.progress?.progress || 0} />
                     <View style={[styles.circle, {width: itemsWidth - 20, backgroundColor: isDisabled ? Colors.light.tabIconDefault : Colors.light.primary}]}>
                         {topic.icon ? (
                             <S3Image imgKey={topic.icon} source={{uri: topic?.icon}} style={styles.image} />
