@@ -1,3 +1,9 @@
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  sub: String!
+  expoNotificationToken: String
+}
+
 type Exercise @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String!
@@ -59,3 +65,4 @@ type QuizResult @model @auth(rules: [{allow: public}]) {
   try: Int!
   quizID: ID!
 }
+ 

@@ -12,6 +12,7 @@ import Colors from './src/constants/Colors';
 import ModuleContextProvider from "./src/contexts/ModuleContext";
 import {useEffect} from "react";
 import {registerForPushNotificationsAsync} from "./src/utils/pushNotifications";
+import UserContextProvider from "./src/contexts/userContext";
 
 Amplify.configure({...awsconfig });
 
@@ -20,21 +21,16 @@ const App = () => {
     const colorScheme = useColorScheme();
 
 
-    useEffect(() => {
-        (async () => {
-            const token = await registerForPushNotificationsAsync();
-            console.log("TOKEN", token);
-        })();
-    }, [])
-
     if (!isLoadingComplete) {
         return null;
     } else {
         return (
             <SafeAreaProvider>
-                <ModuleContextProvider>
-                    <Navigation colorScheme={'light'} />
-                </ModuleContextProvider>
+                <UserContextProvider>
+                    <ModuleContextProvider>
+                        <Navigation colorScheme={colorScheme} />
+                    </ModuleContextProvider>
+                </UserContextProvider>
                 <StatusBar />
             </SafeAreaProvider>
         );
