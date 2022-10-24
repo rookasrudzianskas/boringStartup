@@ -20,5 +20,6 @@ export const groupByLevel = (topics: Topic[]) => {
 export const getCurrentActiveLevel = (levels: TopicWithResult[][]) => {
     // levels.filter((levelTopics) => levelTopics.every((topic) => topic.progress >= 1))
     // @ts-ignore
+    // if(!levels) return 0;
     return levels.reduce((acc, levelTopics) => levelTopics.every((topic) => topic.isQuizPassed) ? acc + 1 : acc, 1);
 }

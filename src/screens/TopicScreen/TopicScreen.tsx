@@ -79,6 +79,23 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
 
     }, [topic]);
 
+
+    useEffect(() => {
+        if(!userTopicProgress) return;
+        const sub = DataStore.observeQuery(UserTopicProgress, (c) =>
+            c.id("eq", userTopicProgress.id)
+        ).subscribe(({items}) => {
+            console.log("Subscription");
+            console.log(items);
+            setUserTopicProgress(items[0]);
+            updateTopicProgress(topicId, items[0]);
+        });
+
+        return () => {
+            sub.unsubscribe();
+        }
+    }, [userTopicProgress?.id])
+
     const onStartQuiz = () => {
         if(topic?.topicQuizId) {
             navigation.navigate("Quiz", {id: topic?.topicQuizId });
@@ -97,9 +114,9 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             const progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
             updated.progress = progress;
         }));
-        setUserTopicProgress(updated);
-        // console.log("TOPIC", topicId)
-        updateTopicProgress(topicId, updated);
+        // setUserTopicProgress(updated);
+        // // console.log("TOPIC", topicId)
+        // updateTopicProgress(topicId, updated);
         setLoading(false);
     }
 
@@ -112,10 +129,10 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
             console.log(updated.completedExerciseIDs)
             updated.progress = (userTopicProgress.completedResourceIDs.length + userTopicProgress.completedExerciseIDs.length + 1) / (resources.length + exercises.length);
         }));
-        console.log("UPDATED", updated)
-        setUserTopicProgress(updated);
-        // console.log("TOPIC", topicId)
-        updateTopicProgress(topicId, updated);
+        // console.log("UPDATED", updated)
+        // setUserTopicProgress(updated);
+        // // console.log("TOPIC", topicId)
+        // updateTopicProgress(topicId, updated);
         setLoading(false);
     }
 
