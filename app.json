@@ -20,7 +20,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "3"
+      "buildNumber": "3",
+      "bundleIdentifier": "com.rooookas.uselessclub"
     },
     "android": {
       "adaptiveIcon": {
