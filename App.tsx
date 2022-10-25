@@ -14,6 +14,9 @@ import {useEffect} from "react";
 import {registerForPushNotificationsAsync} from "./src/utils/pushNotifications";
 import UserContextProvider from "./src/contexts/userContext";
 import { connectToDevTools } from "react-devtools-core";
+import { activateAdapty } from 'react-native-adapty';
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['new NativeEventEmitter']);
 
 Amplify.configure({...awsconfig });
 
@@ -26,6 +29,10 @@ if (__DEV__) {
 const App = () => {
     const isLoadingComplete = useCachedResources();
     const colorScheme = useColorScheme();
+
+    useEffect(() => {
+        activateAdapty({ sdkKey: 'public_live_16w598A2.lJfSCGFKSKUqSjKpjH1p' });
+    },[]);
 
     if (!isLoadingComplete) {
         return null;
