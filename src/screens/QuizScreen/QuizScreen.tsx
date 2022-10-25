@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useMemo, useState} from 'react';
 import {Text, View, StyleSheet, Image, ScrollView, Alert, ActivityIndicator} from 'react-native';
 import Colors from "../../constants/Colors";
 import quiz from '../../../assets/data/quiz';
@@ -16,6 +16,7 @@ import {styles} from "./QuizScreen.styles";
 import {Analytics, Auth, DataStore} from "aws-amplify";
 import {Quiz, QuizQuestion, QuizResult, UserTopicProgress} from "../../models";
 import {S3Image} from "aws-amplify-react-native";
+import {shuffle} from "../../utils/utils";
 
 const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
     const [quiz, setQuiz] = useState<Quiz | undefined>();
@@ -29,6 +30,8 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
     const [numberOfCorrectAnswers, setNumberOfCorrectAnswers] = useState(0);
     const [wrongAnswersIDs, setWrongAnswersIDs] = useState<string[]>([]);
     const isButtonDisabled = selectedAnswers.length === 0;
+
+    const choices = useMemo(() => shuffle([...(question?.choices) || []]), [question]);
     const quizId = route.params.id;
     useApplyHeaderWorkaround(navigation.setOptions);
 
@@ -177,11 +180,11 @@ const QuizScreen = ({navigation, route}: RootStackScreenProps<"Quiz">) => {
                 {!!question.content && (<Markdown>{question.content}</Markdown>)}
 
                 {/*    Choices */}
-                {question.choices && (
+                {choices && (
                     <View style={styles.choicesContainer}>
-                        {question.choices && (
+                        {choices && (
                             <>
-                                {question.choices.map((choice, index) => (
+                                {choices.map((choice, index) => (
                                     <MultipleChoiceAnswer disabled={answeredCorrectly !== undefined} key={index} choice={choice} onPress={onChoicePress} isSelected={selectedAnswers.includes(choice)}/>
                                 ))}
                             </>
