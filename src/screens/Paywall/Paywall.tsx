@@ -1,7 +1,7 @@
 //@ts-nocheck
 import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, ActivityIndicator, ImageBackground, TouchableOpacity, ScrollView} from 'react-native';
-import {adapty, AdaptyError, AdaptyPaywall} from "react-native-adapty";
+import {adapty, AdaptyError, AdaptyPaywall, AdaptyProduct} from "react-native-adapty";
 import {AntDesign} from "@expo/vector-icons";
 
 const Paywall = () => {
@@ -19,6 +19,11 @@ const Paywall = () => {
             }
         ]
     });
+
+    const purchaseProduct = (product: AdaptyProduct) => {
+        console.log('purchaseProduct', product);
+    }
+
     useEffect(() => {
         const fetchPaywall = async () => {
             try {
@@ -70,7 +75,7 @@ const Paywall = () => {
 
                 <View className="absolute bottom-1 right-0 left-0 mt-5 space-y-3 px-4">
                     {paywall?.products.map((product, index) => (
-                        <TouchableOpacity  key={index} activeOpacity={0.7} className="bg-black/40 py-4 rounded-xl border justify-center border-[2px] border-gray-300">
+                        <TouchableOpacity onPress={() => purchaseProduct(product)} key={index} activeOpacity={0.7} className="bg-black/40 py-4 rounded-xl border justify-center border-[2px] border-gray-300">
                             <>
                                 <Text className="uppercase text-white ml-6 font-bold text-[13px] tracking-wider ">{product.localizedTitle}</Text>
                                 <Text className="uppercase text-purple-400 ml-6 font-bold text-[13px] tracking-wider ">${product.localizedPrice}/{product.localizedSubscriptionPeriod}</Text>
