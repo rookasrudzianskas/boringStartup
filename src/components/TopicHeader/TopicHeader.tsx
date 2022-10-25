@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Colors from "../../constants/Colors";
 import {AntDesign} from "@expo/vector-icons";
@@ -29,15 +29,14 @@ const TopicHeader = ({title}: {title: string}) => {
     const navigation = useNavigation();
     const [gradientIndex, setGradientIndex] = useState(0);
 
-    useEffect(() => {
-        // get random gradient
-        setGradientIndex(Math.floor(Math.random() * gradients.length));
+    const gradient = useMemo(() => {
+        return gradients[(Math.floor(Math.random() * gradients.length))];
     }, [title]);
 
     return (
         <LinearGradient
             // Background Linear Gradient
-            colors={gradients[gradientIndex]}
+            colors={gradients[gradient]}
             style={styles.background}
         >
             <View className="mt-10 relative h-[250px] mx-5 justify-end">
@@ -63,8 +62,8 @@ const styles = StyleSheet.create({
     },
     background: {
         height: 300,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        borderBottomLeftRadius: 10,
+        borderBottomRightRadius: 10,
     },
     title: {
         fontSize: 20,
