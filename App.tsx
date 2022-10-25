@@ -30,17 +30,17 @@ if (__DEV__) {
 const App = () => {
     const isLoadingComplete = useCachedResources();
     const colorScheme = useColorScheme();
-    const {sub} = useUserContext();
 
     useEffect(() => {
-        if(!sub) return;
-        activateAdapty({
-            sdkKey: 'public_live_16w598A2.lJfSCGFKSKUqSjKpjH1p',
-            customerUserId: sub,
-        });
-    },[sub]);
-
-        console.log('sub', sub);
+        (async () => {
+            const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
+            if(!userData) return;
+            activateAdapty({
+                sdkKey: 'public_live_16w598A2.lJfSCGFKSKUqSjKpjH1p',
+                customerUserId: userData?.attributes.sub,
+            });
+        })();
+    },[]);
 
     if (!isLoadingComplete) {
         return null;
