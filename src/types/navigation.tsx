@@ -12,6 +12,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
+  Paywall: undefined;
   Topic: { id: string };
   Quiz: { id: string };
   QuizEndScreen: { nOfQuestions: number; nOfCorrectAnswers: number; };
