@@ -32,7 +32,7 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
         }
         // Linking.openURL(resource.url || 'www.w3schools.com');
         if(!resource.url) return;
-        // WebBrowser.openBrowserAsync(resource?.url || 'https://expo.dev');
+        await WebBrowser.openBrowserAsync(resource?.url || 'https://expo.dev');
         onComplete(resource);
         Analytics.record({
             name: resource instanceof Exercise ? 'exerciseOpened' : 'resourceOpened',
