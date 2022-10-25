@@ -49,7 +49,7 @@ const Paywall = () => {
                 const {paywalls, products} = await adapty.paywalls.getPaywalls({ forceUpdate: true });
                 // if(paywall.length > 0) {
                 //     setPaywall(paywalls[0]);
-                //     adapty.paywalls.logShow(paywalls[0].variationId);
+                //     await adapty.paywalls.logShow(paywalls[0].variationId); // this tracks the user conversion to paid users
                 // }
             } catch (error: AdaptyError) {
                 // console.log("Error", error);
