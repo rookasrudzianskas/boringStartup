@@ -9,6 +9,7 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+pc-api-5002809308605525164-264-db3ce2ff01b0.json
 
 # macOS
 .DS_Store
@@ -33,3 +34,4 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+!/pc-api-5002809308605525164-264-db3ce2ff01b0.json
