@@ -198,7 +198,8 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                     <TouchableOpacity onPress={() => navigation.goBack()} className="absolute top-5 left-0" activeOpacity={0.7}>
                         <AntDesign name="closecircle" size={24} color="white" />
                     </TouchableOpacity>
-                    <Text className="text-3xl font-bold text-white justify-center items-center">{topic?.title || 'Loading...'}</Text>
+                    <Text className="text-4xl font-bold text-gray-100 justify-center items-center">{topic?.title || 'Loading...'}</Text>
+                    <Text className="text-2xl font-bold text-white">JS 1.01</Text>
                 </View>
             </LinearGradient>
             <SafeAreaView >
