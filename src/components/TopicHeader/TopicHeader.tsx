@@ -25,11 +25,13 @@ const gradients = [
 ];
 
 
-const TopicHeader = ({title}: {title: string}) => {
+const TopicHeader = ({title, id}: {title: string, id: string}) => {
     const navigation = useNavigation();
     const gradient = useMemo(() => {
         return gradients[Math.floor(Math.random() * gradients.length)];
     }, [title]);
+
+    console.log(Math.floor(id.split("").reduce((n, c) => n + c.charCodeAt(0), 0) / gradients.length));
 
     return (
         <LinearGradient

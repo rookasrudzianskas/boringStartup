@@ -189,7 +189,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
 
     return (
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 100, flexGrow: 1}} className="">
-            <TopicHeader title={topic.title} id={topic.id} />
+            <TopicHeader title={topic.title} id={topic.id || ''} />
             <SafeAreaView >
                 <View style={styles.container}>
                     <Image />
