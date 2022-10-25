@@ -7,6 +7,7 @@ import * as WebBrowser from 'expo-web-browser';
 import {Exercise, Resource} from "../../models";
 import {Analytics} from "aws-amplify";
 import {useNavigation} from "@react-navigation/native";
+import {adapty} from "react-native-adapty";
 
 interface ResourceListItemProps {
     resource: Resource | Exercise;
@@ -21,7 +22,12 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
     const navigation = useNavigation();
 
     const isUserPro = async () => {
-        return false;
+        try {
+            const info = await adapty.purchases.getInfo({forceUpdate: true});
+            console.log('info', info);
+        } catch (e) {
+            console.log("Whoops!", 'Could not get user info');
+        }
     }
 
     const onPress = async () => {
