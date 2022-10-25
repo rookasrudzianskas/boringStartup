@@ -2,7 +2,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Colors from "../../constants/Colors";
-import {Ionicons} from "@expo/vector-icons";
+import {Fontisto, Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
 import * as WebBrowser from 'expo-web-browser';
 import {Exercise, Resource} from "../../models";
 import {Analytics} from "aws-amplify";
@@ -16,6 +16,8 @@ interface ResourceListItemProps {
 }
 
 const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCompleted = false }: ResourceListItemProps) => {
+    const isPro = true;
+
     const onPress = () => {
         // Linking.openURL(resource.url || 'www.w3schools.com');
         if(!resource.url) return;
@@ -27,6 +29,8 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
         });
     }
 
+
+
     return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={styles.container}>
             <View style={[styles.indexContainer, isCompleted && styles.completed]}>
@@ -37,7 +41,10 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
                 )}
             </View>
             <Text>{resource?.title}</Text>
-            {resource?.url && (<Ionicons name="open-outline" size={21} color="black" style={styles.icon} />)}
+            <View style={styles.icon} className="flex-row items-center space-x-2">
+                <MaterialCommunityIcons name="professional-hexagon" size={15} color="red" />
+                {resource?.url && (<Ionicons name="open-outline" size={21} color="black" />)}
+            </View>
             {!isLast && (
                 <View style={[styles.lineIndicator, {backgroundColor: isCompleted ? Colors.light.primary : Colors.light.dark}]} />
             )}

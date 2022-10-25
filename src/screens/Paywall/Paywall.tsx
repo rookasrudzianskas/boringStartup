@@ -1,10 +1,21 @@
 //@ts-nocheck
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, ActivityIndicator, ImageBackground, TouchableOpacity, ScrollView} from 'react-native';
+import {
+    Text,
+    View,
+    StyleSheet,
+    ActivityIndicator,
+    ImageBackground,
+    TouchableOpacity,
+    ScrollView,
+    Alert
+} from 'react-native';
 import {adapty, AdaptyError, AdaptyPaywall, AdaptyProduct} from "react-native-adapty";
 import {AntDesign} from "@expo/vector-icons";
+import {useNavigation} from "@react-navigation/native";
 
 const Paywall = () => {
+    const navigation = useNavigation();
     const [paywall, setPaywall] = useState<AdaptyPaywall | null>({
         products: [
             {
@@ -20,8 +31,14 @@ const Paywall = () => {
         ]
     });
 
-    const purchaseProduct = (product: AdaptyProduct) => {
-        console.log('purchaseProduct', product);
+    const purchaseProduct = (buyProduct: AdaptyProduct) => {
+        try {
+            const {receipt, purchaserInfo, product} = adapty.purchases.makePurchase(buyProduct);
+            navigation.navigate('Home');
+        } catch (e) {
+            Alert.alert('Error', 'Whoops whoops! Could not purchase product');
+            navigation.navigate('Home');
+        }
     }
 
     useEffect(() => {
