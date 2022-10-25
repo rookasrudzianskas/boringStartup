@@ -1,17 +1,26 @@
 //@ts-nocheck
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, ActivityIndicator} from 'react-native';
 import {adapty, AdaptyError, AdaptyPaywall} from "react-native-adapty";
 
 const Paywall = () => {
-    const [paywall, setPaywall] = useState<AdaptyPaywall | null>([]);
+    const [paywall, setPaywall] = useState<AdaptyPaywall | null>({
+        products: [
+            {
+                localizedTitle: 'Pro Yearly'
+            },
+            {
+                localizedTitle: 'Pro Monthly'
+            }
+        ]
+    });
     useEffect(() => {
         const fetchPaywall = async () => {
             try {
                 const {paywalls, products} = await adapty.paywalls.getPaywalls({ forceUpdate: true });
-                if(paywall.length > 0) {
-                    setPaywall(paywalls[0]);
-                }
+                // if(paywall.length > 0) {
+                //     setPaywall(paywalls[0]);
+                // }
             } catch (error: AdaptyError) {
                 // console.log("Error", error);
             }
@@ -20,11 +29,19 @@ const Paywall = () => {
         fetchPaywall();
     }, []);
 
+    if(!paywall) {
+        return (
+            <View className="h-screen items-center justify-center">
+                <ActivityIndicator />
+            </View>
+        )
+    }
+
     return (
         <View>
-            <Text>
-                byrookas 🚀
-            </Text>
+            {paywall?.products.map((product, index) => (
+                <Text key={index}>{product.localizedTitle}</Text>
+            ))}
         </View>
     );
 };
