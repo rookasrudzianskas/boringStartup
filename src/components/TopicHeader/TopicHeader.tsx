@@ -6,6 +6,25 @@ import {AntDesign} from "@expo/vector-icons";
 import {LinearGradient} from "expo-linear-gradient";
 import {useNavigation} from "@react-navigation/native";
 
+const gradients = [
+    ['#FFA17F', '#00223E'],
+    ['#FF5F6D', '#FFC371'],
+    ['#FF9966', '#FF5E62'],
+    ['#FF4B2B', '#FF416C'],
+    // green gradient
+    ['#11998e', '#38ef7d'],
+    // blue gradient
+    ['#00c6ff', '#0072ff'],
+    // purple gradient
+    ['#8e2de2', '#4a00e0'],
+    // yellow gradient
+    ['#f5af19', '#f12711'],
+    // black gradient
+    ['#000000', '#434343'],
+    ['#1D976C', '#93F9B9'],
+];
+
+
 const TopicHeader = ({title}: {title: string}) => {
     const navigation = useNavigation();
     return (
