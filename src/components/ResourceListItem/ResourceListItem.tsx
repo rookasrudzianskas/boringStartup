@@ -18,7 +18,6 @@ interface ResourceListItemProps {
 }
 
 const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCompleted = false }: ResourceListItemProps) => {
-    const isPro = true;
     const navigation = useNavigation();
 
     const isUserPro = async () => {
@@ -32,7 +31,7 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
 
     const onPress = async () => {
         const userPro = await isUserPro();
-        if(isPro && !userPro) {
+        if(resource.pro && !userPro) {
             navigation.navigate("Paywall");
             return;
         }
@@ -58,7 +57,7 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
                 )}
             </View>
             <View className="flex-row items-center space-x-1">
-                {isPro && isUserPro() && <MaterialCommunityIcons name="professional-hexagon" size={17} color="gray" />}
+                {!!resource.pro && <MaterialCommunityIcons name="professional-hexagon" size={17} color="gray" />}
                 <Text>{resource?.title}</Text>
             </View>
             {resource?.url && (<Ionicons name="open-outline" size={21} color="black" style={styles.icon} />)}

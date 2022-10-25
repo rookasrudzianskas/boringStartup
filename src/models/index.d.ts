@@ -61,6 +61,7 @@ type EagerExercise = {
   readonly title: string;
   readonly url?: string | null;
   readonly topicID: string;
+  readonly pro?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -70,6 +71,7 @@ type LazyExercise = {
   readonly title: string;
   readonly url?: string | null;
   readonly topicID: string;
+  readonly pro?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -137,6 +139,7 @@ type EagerResource = {
   readonly title: string;
   readonly url?: string | null;
   readonly topicID: string;
+  readonly pro?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -146,6 +149,7 @@ type LazyResource = {
   readonly title: string;
   readonly url?: string | null;
   readonly topicID: string;
+  readonly pro?: boolean | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
