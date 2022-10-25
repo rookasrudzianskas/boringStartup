@@ -46,7 +46,10 @@ const Paywall = () => {
         <ImageBackground blurRadius={25} source={{uri: 'https://images.unsplash.com/photo-1627645835237-0743e52b991f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'}} className="flex-1 bg-black">
             <View className="px-7 justify-center h-screen ">
                 <View className="space-y-2">
-                    <Text className="text-3xl text-white font-bold">Unlock premium features</Text>
+                    <View>
+                        <Text className="text-4xl text-purple-300 font-bold mb-2">Become a Pro</Text>
+                        <Text className="text-3xl text-white font-bold">Unlock premium features</Text>
+                    </View>
                     <View>
                         <ScrollView className="space-x-3" horizontal={true} showsHorizontalScrollIndicator={false}>
                             <TouchableOpacity activeOpacity={0.7} className="border border-gray-400/40 bg-black/60 h-24 w-36 justify-center space-y-2 px-2 rounded-md">
