@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Colors from "../../constants/Colors";
 import {AntDesign} from "@expo/vector-icons";
@@ -7,30 +7,37 @@ import {LinearGradient} from "expo-linear-gradient";
 import {useNavigation} from "@react-navigation/native";
 
 const gradients = [
-    ['#FFA17F', '#00223E'],
-    ['#FF5F6D', '#FFC371'],
-    ['#FF9966', '#FF5E62'],
-    ['#FF4B2B', '#FF416C'],
+    ['#FFA17F', '#00223E55'],
+    ['#FF5F6D', '#FFC37155'],
+    ['#FF9966', '#FF5E6255'],
+    ['#FF4B2B', '#FF416C55'],
     // green gradient
-    ['#11998e', '#38ef7d'],
+    ['#11998e', '#38ef7d55'],
     // blue gradient
-    ['#00c6ff', '#0072ff'],
+    ['#00c6ff', '#0072ff55'],
     // purple gradient
-    ['#8e2de2', '#4a00e0'],
+    ['#8e2de2', '#4a00e055'],
     // yellow gradient
-    ['#f5af19', '#f12711'],
+    ['#f5af19', '#f1271155'],
     // black gradient
-    ['#000000', '#434343'],
-    ['#1D976C', '#93F9B9'],
+    ['#000000', '#43434355'],
+    ['#1D976C', '#93F9B955'],
 ];
 
 
 const TopicHeader = ({title}: {title: string}) => {
     const navigation = useNavigation();
+    const [gradientIndex, setGradientIndex] = useState(0);
+
+    useEffect(() => {
+        // get random gradient
+        setGradientIndex(Math.floor(Math.random() * gradients.length));
+    }, [title]);
+
     return (
         <LinearGradient
             // Background Linear Gradient
-            colors={['#1D976C', '#93F9B9']}
+            colors={gradients[gradientIndex]}
             style={styles.background}
         >
             <View className="mt-10 relative h-[250px] mx-5 justify-end">
