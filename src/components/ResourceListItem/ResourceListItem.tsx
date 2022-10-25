@@ -24,7 +24,7 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
     const isUserPro = async () => {
         try {
             const info = await adapty.purchases.getInfo({forceUpdate: true});
-            return info.accessLevels.premium.isActive || true; // should be false
+            return info.accessLevels?.premium?.isActive || true; // should be false
         } catch (e) {
             // Alert.alert("Whoops!", 'Could not get user info');
         }
@@ -58,7 +58,7 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
                 )}
             </View>
             <View className="flex-row items-center space-x-1">
-                {isUserPro() && <MaterialCommunityIcons name="professional-hexagon" size={17} color="gray" />}
+                {isPro && isUserPro() && <MaterialCommunityIcons name="professional-hexagon" size={17} color="gray" />}
                 <Text>{resource?.title}</Text>
             </View>
             {resource?.url && (<Ionicons name="open-outline" size={21} color="black" style={styles.icon} />)}
