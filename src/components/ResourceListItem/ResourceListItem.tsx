@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import Colors from "../../constants/Colors";
 import {Fontisto, Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
 import * as WebBrowser from 'expo-web-browser';
@@ -24,9 +24,9 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
     const isUserPro = async () => {
         try {
             const info = await adapty.purchases.getInfo({forceUpdate: true});
-            console.log('info', info);
+            return info.accessLevels.premium.isActive || true; // should be false
         } catch (e) {
-            console.log("Whoops!", 'Could not get user info');
+            // Alert.alert("Whoops!", 'Could not get user info');
         }
     }
 
@@ -38,8 +38,8 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
         }
         // Linking.openURL(resource.url || 'www.w3schools.com');
         if(!resource.url) return;
-        await WebBrowser.openBrowserAsync(resource?.url || 'https://expo.dev');
-        onComplete(resource);
+        // await WebBrowser.openBrowserAsync(resource?.url || 'https://expo.dev');
+        // onComplete(resource);
         Analytics.record({
             name: resource instanceof Exercise ? 'exerciseOpened' : 'resourceOpened',
             attributes: { id: resource.id }
@@ -58,7 +58,7 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
                 )}
             </View>
             <View className="flex-row items-center space-x-1">
-                {isPro && <MaterialCommunityIcons name="professional-hexagon" size={17} color="gray" />}
+                {isUserPro() && <MaterialCommunityIcons name="professional-hexagon" size={17} color="gray" />}
                 <Text>{resource?.title}</Text>
             </View>
             {resource?.url && (<Ionicons name="open-outline" size={21} color="black" style={styles.icon} />)}

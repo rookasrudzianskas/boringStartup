@@ -67,6 +67,9 @@ const Paywall = () => {
     return (
         <ImageBackground blurRadius={25} source={{uri: 'https://images.unsplash.com/photo-1627645835237-0743e52b991f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'}} className="flex-1 bg-black">
             <View className="px-7 justify-center h-screen ">
+                <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.7} className="absolute top-10 left-4">
+                    <AntDesign name="closecircle" size={24} color="white" />
+                </TouchableOpacity>
                 <View className="space-y-2">
                     <View>
                         <Text className="text-4xl text-purple-300 font-bold mb-2">Become a Pro</Text>
