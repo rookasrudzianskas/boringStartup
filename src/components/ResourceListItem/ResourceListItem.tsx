@@ -6,6 +6,7 @@ import {Fontisto, Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
 import * as WebBrowser from 'expo-web-browser';
 import {Exercise, Resource} from "../../models";
 import {Analytics} from "aws-amplify";
+import {useNavigation} from "@react-navigation/native";
 
 interface ResourceListItemProps {
     resource: Resource | Exercise;
@@ -17,11 +18,21 @@ interface ResourceListItemProps {
 
 const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCompleted = false }: ResourceListItemProps) => {
     const isPro = true;
+    const navigation = useNavigation();
 
-    const onPress = () => {
+    const isUserPro = async () => {
+        return false;
+    }
+
+    const onPress = async () => {
+        const userPro = await isUserPro();
+        if(isPro && !userPro) {
+            navigation.navigate("Paywall");
+            return;
+        }
         // Linking.openURL(resource.url || 'www.w3schools.com');
         if(!resource.url) return;
-        WebBrowser.openBrowserAsync(resource?.url || 'https://expo.dev');
+        // WebBrowser.openBrowserAsync(resource?.url || 'https://expo.dev');
         onComplete(resource);
         Analytics.record({
             name: resource instanceof Exercise ? 'exerciseOpened' : 'resourceOpened',
