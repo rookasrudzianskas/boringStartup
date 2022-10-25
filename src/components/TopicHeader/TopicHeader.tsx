@@ -14,7 +14,6 @@ const TopicHeader = ({title}: {title: string}) => {
             colors={['#1D976C', '#93F9B9']}
             style={styles.background}
         >
-            {/*<Text>Roookas</Text>*/}
             <View className="mt-10 relative h-[250px] mx-5 justify-end">
                 <TouchableOpacity onPress={() => navigation.goBack()} className="absolute top-5 left-0" activeOpacity={0.7}>
                     <AntDesign name="closecircle" size={24} color="white" />
