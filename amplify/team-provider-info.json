@@ -18,17 +18,10 @@
       "storage": {
         "s3boringstartupstorage1d02bbb4": {}
       },
-      "api": {
-        "boringStartup": {}
-      },
-      "analytics": {
-        "boringstartup": {}
-      },
       "function": {
         "DailyReminderNotification": {
           "deploymentBucketName": "amplify-boringstartup-staging-135701-deployment",
-          "s3Key": "amplify-builds/DailyReminderNotification-44526441317a61304a45-build.zip",
-          "userTable": "User-mxcjnpwggfbdjbactdi7iezjaa-staging"
+          "s3Key": "amplify-builds/DailyReminderNotification-44526441317a61304a45-build.zip"
         }
       }
     }

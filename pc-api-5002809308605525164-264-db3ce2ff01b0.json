@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "pc-api-5002809308605525164-264",
+  "private_key_id": "db3ce2ff01b05b1b50deffdb6586f1e3683a54f2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDKpFeRpAWXwTNe\nPcinVuVduyNup3dIaYVlMoMH+ScTW+zd3EOR9Qzyp+5SLO7YVROY4SacrnlAzW8h\nPQODEjZVPaotp+HZIFgNhKuwAsI8TraYeI1cbYxJtThqbRqTcZjWlfk/geRg3fzP\nT/+h3c/pVYWc0dYvIfEyri/CxxyZXW2WmlADQn6wBgIgtegS7/ZUIuALCd5OfaBq\nMCPTtaNXvnK7sdDAidgtbsHx/fpxIlnrlj9mwHJOk2b41Q8UPufnicoVwMVJN/1d\nosWVFcjAW1t5fTcv+11u4nlpOqwv2RXSpqKinD8Clf+dk5aL6tqmqogYFU+ujq6P\nPU5gNmmbAgMBAAECggEAE+bdFNgzlmpqpZxSyyCNKU36VmFLJUj7yWsTFGLjdBLI\nqid6WWjkSya0EM0J7iQ45wBh3uyByxwCCJUp9aMBxBBo2NAOrdjv3PAFPqWetvaS\nF1pro8K8jval4knx3L5A4P5cuuCCcgMLU78LH7Ydt9Bm7XZsXzeprS0PUsVkaSln\nf7N/MNS2X/Xh6iclqQEd7RxguzmuUIqqIrCSEg/35nfd0R4aDw+O+WGCaM4zWGcW\nVDwXDcvFtLI1Z5QSCPIOy4g6r2nARfdHmN9f3Tl4+l3fS3xE18gbBxdG7Xo0jSHj\nnUYNOXV8C1QgRPtTDzJKvJUGwVBrMKAa9nmATRKpWQKBgQD1UetvlU2pURu9+2BN\naYmL1mHKnSY5wSqDFPP2mz/lFx6OIjhY5m5EZwfNvhoU0kmZ1UIAMkecWBwdvRNA\nXOenEPi/IZu8eh6LoyqjmHq/ZoBhNGdwSIWHMhhkrnQA0dCjEtAxA/08K5gGpqRN\nahN7Bg7k50kS2kHe1tv0/NMKkwKBgQDTdscQJO/LQvG/nseAhlQ49u5U+5CTLqU9\nN4lEPnG6Qfx0JDn2mkRiFLJAu8+G77VNoItIDxyuaNtkIOlCCa//XjEuSVdhPGnx\nUI3wXaOFIalvB5fcqHYuuZXgwX4P9co2mxm9d3TFmLhs2/wSNGGq4hqZkmTtOLcu\nZadMmSSh2QKBgQCoxV4C2yWdqaY7UphTSZsOMEQA35Jvw1va6GxaqT4Q/pHP2O0J\nBCayOmuc+P76eh2WjqekePLZNajKMMzwx7m7LyriW13IEf+3s15fRESWLw99UE8l\naU8rzqQHiBlYgwBVYFkIj6UFYzxovvZkJ+kVBvryMcgNB0iv5QNYDSOnrwKBgQDN\nHFjZf/pX3gc/JnO8Zo8q8dka9Se2m3gLeOLcHvWRBJAq1zihyeCqggikYYdaCwiA\n00hGDOJ1CaBD7uhR9bOQr3xkuR7YYhEg0FHc4/bIG26NE4Bpt71qdPi7mPL96BrL\n/IVrEYNiZk/8xyQpREW3yriiXS0oK+sCRfeQhLrTgQKBgQC+ba8muJfCI5kqVSVJ\nS2UwsJE5SC4t+I5JZevOfsseDXZfUWgoKALp0ZrdKEJiE3qaLBzmD8XYZLUxXtgF\n/uu9HQwOe+JUXKTclIKZnfuDyclU8kPaOVWDTkTmwLhl03Xds3HcUbtR4/hPjrne\nEhLYY8EXQ5tPNT3xdtgVc+JmBA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "watchkingdom@pc-api-5002809308605525164-264.iam.gserviceaccount.com",
+  "client_id": "101250707363201760080",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/watchkingdom%40pc-api-5002809308605525164-264.iam.gserviceaccount.com"
+}
