@@ -34,6 +34,7 @@ const App = () => {
         activateAdapty({ sdkKey: 'public_live_16w598A2.lJfSCGFKSKUqSjKpjH1p' });
     },[]);
 
+
     if (!isLoadingComplete) {
         return null;
     } else {
