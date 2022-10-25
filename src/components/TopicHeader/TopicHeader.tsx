@@ -20,7 +20,6 @@ const gradients = [
     // yellow gradient
     ['#f5af19', '#f1271155'],
     // black gradient
-    ['#000000', '#43434355'],
     ['#1D976C', '#93F9B955'],
 ];
 
@@ -33,10 +32,8 @@ const TopicHeader = ({title, id}: {title: string, id: string}) => {
     }
 
     const gradient = useMemo(() => {
-        return gradients[Math.floor(Math.random() * gradients.length)];
+        return gradients[kindaRandomNumber(id, gradients.length)];
     }, [title]);
-
-    console.log(kindaRandomNumber(id, gradients.length));
 
     return (
         <LinearGradient
