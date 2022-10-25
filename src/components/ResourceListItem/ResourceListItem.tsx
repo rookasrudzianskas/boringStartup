@@ -45,8 +45,6 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
         });
     }
 
-
-
     return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={styles.container}>
             <View style={[styles.indexContainer, isCompleted && styles.completed]}>
