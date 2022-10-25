@@ -27,16 +27,14 @@ const gradients = [
 
 const TopicHeader = ({title}: {title: string}) => {
     const navigation = useNavigation();
-    const [gradientIndex, setGradientIndex] = useState(0);
-
     const gradient = useMemo(() => {
-        return gradients[(Math.floor(Math.random() * gradients.length))];
+        return gradients[Math.floor(Math.random() * gradients.length)];
     }, [title]);
 
     return (
         <LinearGradient
             // Background Linear Gradient
-            colors={gradients[gradient]}
+            colors={gradient}
             style={styles.background}
         >
             <View className="mt-10 relative h-[250px] mx-5 justify-end">
