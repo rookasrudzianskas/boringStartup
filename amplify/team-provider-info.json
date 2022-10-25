@@ -21,8 +21,15 @@
       "function": {
         "DailyReminderNotification": {
           "deploymentBucketName": "amplify-boringstartup-staging-135701-deployment",
-          "s3Key": "amplify-builds/DailyReminderNotification-44526441317a61304a45-build.zip"
+          "s3Key": "amplify-builds/DailyReminderNotification-44526441317a61304a45-build.zip",
+          "userTable": "arn:aws:dynamodb:us-east-1:605111547475:table/User-mxcjnpwggfbdjbactdi7iezjaa-staging"
         }
+      },
+      "api": {
+        "boringStartup": {}
+      },
+      "analytics": {
+        "boringstartup": {}
       }
     }
   }
