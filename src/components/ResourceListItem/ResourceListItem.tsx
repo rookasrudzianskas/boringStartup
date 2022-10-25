@@ -40,11 +40,11 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
                     <Text>{index + 1}</Text>
                 )}
             </View>
-            <Text>{resource?.title}</Text>
-            <View style={styles.icon} className="flex-row items-center space-x-2">
-                <MaterialCommunityIcons name="professional-hexagon" size={15} color="red" />
-                {resource?.url && (<Ionicons name="open-outline" size={21} color="black" />)}
+            <View className="flex-row items-center space-x-1">
+                {isPro && <MaterialCommunityIcons name="professional-hexagon" size={17} color="gray" />}
+                <Text>{resource?.title}</Text>
             </View>
+            {resource?.url && (<Ionicons name="open-outline" size={21} color="black" style={styles.icon} />)}
             {!isLast && (
                 <View style={[styles.lineIndicator, {backgroundColor: isCompleted ? Colors.light.primary : Colors.light.dark}]} />
             )}
