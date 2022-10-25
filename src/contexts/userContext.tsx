@@ -10,11 +10,14 @@ const UserContext = createContext({});
 const UserContextProvider = ({children}: any) => {
     const [user, setUser] = useState(null);
     const [expoToken, setExpoToken] = useState(null);
+    const [sub, setSub] = useState<string>("");
 
     useEffect(() => {
 
         (async () => {
             const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
+            // console.log('userData', userData.attributes.sub);
+            setSub(userData.attributes.sub);
             const users = await DataStore.query(User);
             const me = users.find((user) => user.sub === userData.attributes.sub);
             if(me) {
@@ -49,7 +52,7 @@ const UserContextProvider = ({children}: any) => {
     }, [user, expoToken]);
 
     return (
-        <UserContext.Provider value={{}}>
+        <UserContext.Provider value={{sub}}>
             {children}
         </UserContext.Provider>
     );

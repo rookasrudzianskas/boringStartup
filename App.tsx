@@ -1,10 +1,11 @@
+// @ts-nocheck
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import useCachedResources from './src/hooks/useCachedResources';
 import useColorScheme from './src/hooks/useColorScheme';
 import Navigation from './src/navigation';
-import { Amplify } from 'aws-amplify';
+import {Amplify, Auth} from 'aws-amplify';
 import awsconfig from './src/aws-exports';
 import {withAuthenticator} from "aws-amplify-react-native/src/Auth";
 import AmplifyTheme from 'aws-amplify-react-native/src/AmplifyTheme';
@@ -12,7 +13,7 @@ import Colors from './src/constants/Colors';
 import ModuleContextProvider from "./src/contexts/ModuleContext";
 import {useEffect} from "react";
 import {registerForPushNotificationsAsync} from "./src/utils/pushNotifications";
-import UserContextProvider from "./src/contexts/userContext";
+import UserContextProvider, {useUserContext} from "./src/contexts/userContext";
 import { connectToDevTools } from "react-devtools-core";
 import { activateAdapty } from 'react-native-adapty';
 import { LogBox } from 'react-native';
@@ -29,11 +30,17 @@ if (__DEV__) {
 const App = () => {
     const isLoadingComplete = useCachedResources();
     const colorScheme = useColorScheme();
+    const {sub} = useUserContext();
 
     useEffect(() => {
-        activateAdapty({ sdkKey: 'public_live_16w598A2.lJfSCGFKSKUqSjKpjH1p' });
-    },[]);
+        if(!sub) return;
+        activateAdapty({
+            sdkKey: 'public_live_16w598A2.lJfSCGFKSKUqSjKpjH1p',
+            customerUserId: sub,
+        });
+    },[sub]);
 
+        console.log('sub', sub);
 
     if (!isLoadingComplete) {
         return null;
