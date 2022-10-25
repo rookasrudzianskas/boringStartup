@@ -5,11 +5,15 @@ import {registerForPushNotificationsAsync} from "../utils/pushNotifications";
 import {Auth, DataStore} from "aws-amplify";
 import {User} from "../models";
 
-const UserContext = createContext({});
+const UserContext = createContext<{sub: string, email: string}>({
+    sub: "",
+    email: "",
+});
 
 const UserContextProvider = ({children}: any) => {
     const [user, setUser] = useState(null);
     const [expoToken, setExpoToken] = useState(null);
+    const [email, setEmail] = useState(null);
     const [sub, setSub] = useState<string>("");
 
     useEffect(() => {
@@ -18,6 +22,7 @@ const UserContextProvider = ({children}: any) => {
             const userData = await Auth.currentAuthenticatedUser({ bypassCache: true });
             // console.log('userData', userData.attributes.sub);
             setSub(userData.attributes.sub);
+            setEmail(userData.attributes.email);
             const users = await DataStore.query(User);
             const me = users.find((user) => user.sub === userData.attributes.sub);
             if(me) {
@@ -52,7 +57,10 @@ const UserContextProvider = ({children}: any) => {
     }, [user, expoToken]);
 
     return (
-        <UserContext.Provider value={{sub}}>
+        <UserContext.Provider value={{
+            sub,
+            email,
+        }}>
             {children}
         </UserContext.Provider>
     );
