@@ -199,7 +199,9 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
                         <AntDesign name="closecircle" size={24} color="white" />
                     </TouchableOpacity>
                     <Text className="text-4xl font-bold text-gray-100 justify-center items-center">{topic?.title || 'Loading...'}</Text>
-                    <Text className="text-2xl font-bold text-white">JS 1.01</Text>
+                    <TouchableOpacity activeOpacity={0.7} className="">
+                        <Text className="text-xl font-semibold text-white">JS 1.01</Text>
+                    </TouchableOpacity>
                 </View>
             </LinearGradient>
             <SafeAreaView >
@@ -255,6 +257,8 @@ const styles = StyleSheet.create({
     },
     background: {
         height: 300,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
     },
     title: {
         fontSize: 20,
