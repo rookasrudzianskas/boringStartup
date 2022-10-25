@@ -21,12 +21,14 @@ const Paywall = () => {
             {
                 localizedTitle: 'Pro Yearly',
                 localizedSubscriptionPeriod: 'Year',
-                localizedPrice: 24.99
+                localizedPrice: 24.99,
+                variationId: 'pro_yearly',
             },
             {
                 localizedTitle: 'Pro Monthly',
                 localizedSubscriptionPeriod: 'Month',
-                localizedPrice: 4.99
+                localizedPrice: 4.99,
+                variationId: 'pro_monthly',
             }
         ]
     });
@@ -47,6 +49,7 @@ const Paywall = () => {
                 const {paywalls, products} = await adapty.paywalls.getPaywalls({ forceUpdate: true });
                 // if(paywall.length > 0) {
                 //     setPaywall(paywalls[0]);
+                //     adapty.paywalls.logShow(paywalls[0].variationId);
                 // }
             } catch (error: AdaptyError) {
                 // console.log("Error", error);
