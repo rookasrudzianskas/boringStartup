@@ -8,10 +8,14 @@ const Paywall = () => {
     const [paywall, setPaywall] = useState<AdaptyPaywall | null>({
         products: [
             {
-                localizedTitle: 'Pro Yearly'
+                localizedTitle: 'Pro Yearly',
+                localizedSubscriptionPeriod: '1 Year',
+                localizedPrice: 24.99
             },
             {
-                localizedTitle: 'Pro Monthly'
+                localizedTitle: 'Pro Monthly',
+                localizedSubscriptionPeriod: '1 Month',
+                localizedPrice: 4.99
             }
         ]
     });
@@ -63,8 +67,11 @@ const Paywall = () => {
 
                 <View className="absolute bottom-1 right-0 left-0 mt-5 space-y-3 px-4">
                     {paywall?.products.map((product, index) => (
-                        <TouchableOpacity activeOpacity={0.7} className="bg-black/40 py-4 rounded-xl border justify-center border-[2px] border-gray-300">
-                            <Text className="uppercase text-white ml-6 font-bold text-[13px] tracking-wider " key={index}>{product.localizedTitle}</Text>
+                        <TouchableOpacity  key={index} activeOpacity={0.7} className="bg-black/40 py-4 rounded-xl border justify-center border-[2px] border-gray-300">
+                            <>
+                                <Text className="uppercase text-white ml-6 font-bold text-[13px] tracking-wider ">{product.localizedTitle}</Text>
+                                <Text className="uppercase text-purple-400 ml-6 font-bold text-[13px] tracking-wider ">{product.localizedPrice}</Text>
+                            </>
                         </TouchableOpacity>
                     ))}
                 </View>
