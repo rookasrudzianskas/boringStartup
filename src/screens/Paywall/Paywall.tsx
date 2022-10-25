@@ -9,12 +9,12 @@ const Paywall = () => {
         products: [
             {
                 localizedTitle: 'Pro Yearly',
-                localizedSubscriptionPeriod: '1 Year',
+                localizedSubscriptionPeriod: 'Year',
                 localizedPrice: 24.99
             },
             {
                 localizedTitle: 'Pro Monthly',
-                localizedSubscriptionPeriod: '1 Month',
+                localizedSubscriptionPeriod: 'Month',
                 localizedPrice: 4.99
             }
         ]
@@ -70,7 +70,7 @@ const Paywall = () => {
                         <TouchableOpacity  key={index} activeOpacity={0.7} className="bg-black/40 py-4 rounded-xl border justify-center border-[2px] border-gray-300">
                             <>
                                 <Text className="uppercase text-white ml-6 font-bold text-[13px] tracking-wider ">{product.localizedTitle}</Text>
-                                <Text className="uppercase text-purple-400 ml-6 font-bold text-[13px] tracking-wider ">{product.localizedPrice}</Text>
+                                <Text className="uppercase text-purple-400 ml-6 font-bold text-[13px] tracking-wider ">${product.localizedPrice}/{product.localizedSubscriptionPeriod}</Text>
                             </>
                         </TouchableOpacity>
                     ))}
