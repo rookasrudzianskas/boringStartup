@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Colors from "../../constants/Colors";
 import ResourceListItem from "../../components/ResourceListItem";
 import {NativeStackScreenProps} from "@react-navigation/native-stack";
@@ -11,6 +11,8 @@ import useApplyHeaderWorkaround from "../../hooks/useApplyHeaderWorkaround";
 import {Exercise, Resource, Topic, UserTopicProgress} from "../../models";
 import {Analytics, Auth, DataStore} from "aws-amplify";
 import {useModuleContext} from "../../contexts/ModuleContext";
+import { LinearGradient } from 'expo-linear-gradient';
+import {AntDesign} from "@expo/vector-icons";
 
 const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => {
     const topicId = route.params.id;
@@ -36,8 +38,7 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
         // @TODO does it work?
         // if(!topic) return;
         navigation.setOptions({
-            headerShown: true,
-            title: topic?.title || "Loading...",
+            headerShown: false,
         })
     }, []);
 
@@ -186,43 +187,58 @@ const TopicScreen = ({ route, navigation }: NativeStackScreenProps<"Topic">) => 
     console.error = (error) => error.apply; // @TODO Disables the error message of Courier font, have to be replaced to Courier New
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 100, flexGrow: 1}} className="" style={styles.container}>
-            <SafeAreaView>
-                <Image />
-                <TopicSection display={!!topic?.description} title={'Intro'} >
-                    <Markdown>
-                        {topic?.description || 'Loading...'}
-                    </Markdown>
-                </TopicSection>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom: 100, flexGrow: 1}} className="">
+            <LinearGradient
+                // Background Linear Gradient
+                colors={['#1D976C', '#93F9B9']}
+                style={styles.background}
+            >
+                {/*<Text>Roookas</Text>*/}
+                <View className="mt-10 relative h-[250px] mx-5 justify-end">
+                    <TouchableOpacity onPress={() => navigation.goBack()} className="absolute top-5 left-0" activeOpacity={0.7}>
+                        <AntDesign name="closecircle" size={24} color="white" />
+                    </TouchableOpacity>
+                    <Text className="text-3xl font-bold text-white justify-center items-center">{topic?.title || 'Loading...'}</Text>
+                </View>
+            </LinearGradient>
+            <SafeAreaView >
+                <View style={styles.container}>
+                    <Image />
+                    <TopicSection display={!!topic?.description} title={'Intro'} >
+                        <Markdown>
+                            {topic?.description || 'Loading...'}
+                        </Markdown>
+                    </TopicSection>
 
-                <TopicSection display={!!resources.length} title={'Resources'} >
-                    {resources && (
-                        <>
-                            {resources.map((resource, index) => (
-                                <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === resources.length} onComplete={onResourceComplete} isCompleted={completedResourceIDs?.includes(resource.id)} />
-                            ))}
-                        </>
-                    )}
-                </TopicSection>
+                    <TopicSection display={!!resources.length} title={'Resources'} >
+                        {resources && (
+                            <>
+                                {resources.map((resource, index) => (
+                                    <ResourceListItem resource={resource} key={resource.id} index={index} isLast={index + 1 === resources.length} onComplete={onResourceComplete} isCompleted={completedResourceIDs?.includes(resource.id)} />
+                                ))}
+                            </>
+                        )}
+                    </TopicSection>
 
-                {/* @TODO Fix Context section */}
-                {/*<TopicSection title={'Context'} display={!!topic?.context}>*/}
-                {/*    <Markdown>{topic?.context || 'Loading...'}</Markdown>*/}
-                {/*</TopicSection>*/}
+                    {/* @TODO Fix Context section */}
+                    {/*<TopicSection title={'Context'} display={!!topic?.context}>*/}
+                    {/*    <Markdown>{topic?.context || 'Loading...'}</Markdown>*/}
+                    {/*</TopicSection>*/}
 
-                <TopicSection title={'Practice'} display={!!exercises.length}>
-                    {exercises && (
-                        <>
-                            {exercises.map((exercise, index) => (
-                                // @TODO resource or exercise?
-                                <ResourceListItem resource={exercise} key={exercise.id} index={index} isLast={index + 1 === exercises.length} onComplete={onExerciseComplete}  isCompleted={completedExerciseIDs.includes(exercise?.id)} />
-                            ))}
-                        </>
-                    )}
-                </TopicSection>
+                    <TopicSection title={'Practice'} display={!!exercises.length}>
+                        {exercises && (
+                            <>
+                                {exercises.map((exercise, index) => (
+                                    // @TODO resource or exercise?
+                                    <ResourceListItem resource={exercise} key={exercise.id} index={index} isLast={index + 1 === exercises.length} onComplete={onExerciseComplete}  isCompleted={completedExerciseIDs.includes(exercise?.id)} />
+                                ))}
+                            </>
+                        )}
+                    </TopicSection>
 
-                {topic?.topicQuizId && (<CustomButton text={'Start Quiz'} onPress={onStartQuiz} />)}
+                    {topic?.topicQuizId && (<CustomButton text={'Start Quiz'} onPress={onStartQuiz} />)}
 
+                </View>
             </SafeAreaView>
         </ScrollView>
     );
@@ -234,7 +250,10 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: Colors.light.white,
         flex: 1,
-        padding: 20
+        padding: 20,
+    },
+    background: {
+        height: 300,
     },
     title: {
         fontSize: 20,
