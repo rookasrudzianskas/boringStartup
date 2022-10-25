@@ -27,11 +27,16 @@ const gradients = [
 
 const TopicHeader = ({title, id}: {title: string, id: string}) => {
     const navigation = useNavigation();
+
+    const kindaRandomNumber = (seed: string, max: number) => {
+        return Math.floor(seed.split("").reduce((n, c) => n + c.charCodeAt(0), 0) % gradients.length);
+    }
+
     const gradient = useMemo(() => {
         return gradients[Math.floor(Math.random() * gradients.length)];
     }, [title]);
 
-    console.log(Math.floor(id.split("").reduce((n, c) => n + c.charCodeAt(0), 0) / gradients.length));
+    console.log(kindaRandomNumber(id, gradients.length));
 
     return (
         <LinearGradient
