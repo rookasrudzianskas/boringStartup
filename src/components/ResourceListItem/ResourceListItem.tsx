@@ -9,6 +9,8 @@ import {Analytics} from "aws-amplify";
 import {useNavigation} from "@react-navigation/native";
 import {adapty} from "react-native-adapty";
 
+// COMPLETED 🔥
+
 const ResourceTypeIcon = {
     VIDEO: <Entypo name="youtube" size={17} color="gray" />,
     DOCS: <SimpleLineIcons name="docs" size={17} color="gray" />,
