@@ -371,6 +371,22 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": {
+                        "enum": "ResourceTypes"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "credits": {
+                    "name": "credits",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -750,8 +766,20 @@ export const schema = {
             ]
         }
     },
-    "enums": {},
+    "enums": {
+        "ResourceTypes": {
+            "name": "ResourceTypes",
+            "values": [
+                "DOCS",
+                "VIDEO",
+                "BLOG",
+                "BOOK",
+                "COURSE",
+                "NEWSLETTER"
+            ]
+        }
+    },
     "nonModels": {},
     "codegenVersion": "3.2.0",
-    "version": "7043628fd8fc21e9cf2a8df896b9dc80"
+    "version": "9cefb90a3986d41793868416d77ab258"
 };

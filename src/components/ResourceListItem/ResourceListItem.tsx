@@ -15,7 +15,8 @@ const ResourceTypeIcon = {
     BLOG: <Entypo name="book" size={17} color="gray" />,
     BOOK: <Entypo name="bookmarks" size={17} color="gray" />,
     COURSE: <Ionicons name="construct-outline" size={17} color="gray" />,
-    NEWSLETTER: <MaterialIcons name="email" size={17} color="gray" />
+    NEWSLETTER: <MaterialIcons name="email" size={17} color="gray" />,
+    unknown: <Entypo name="lab-flask" size={17} color="gray" />
 }
 
 interface ResourceListItemProps {
@@ -69,7 +70,7 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
                 <Text>{resource?.title}</Text>
                 {!!resource?.type && (
                     <View className="flex-row items-center space-x-1">
-                        {ResourceTypeIcon[resource?.type]}
+                        {!!resource?.type && ResourceTypeIcon[resource?.type || "unknown"]}
                         <Text className="text-xs font-semibold">{resource?.credits || ''}</Text>
                     </View>
                 )}
@@ -109,10 +110,10 @@ const styles = StyleSheet.create({
     },
     lineIndicator: {
         position: 'absolute',
-        height: 27,
+        height: 24,
         width: 2,
         left: 15,
-        top: 32,
+        top: 28,
         backgroundColor: Colors.light.primary,
     }
 });

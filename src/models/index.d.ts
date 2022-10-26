@@ -2,6 +2,15 @@ import { ModelInit, MutableModel } from "@aws-amplify/datastore";
 // @ts-ignore
 import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from "@aws-amplify/datastore";
 
+export enum ResourceTypes {
+  DOCS = "DOCS",
+  VIDEO = "VIDEO",
+  BLOG = "BLOG",
+  BOOK = "BOOK",
+  COURSE = "COURSE",
+  NEWSLETTER = "NEWSLETTER"
+}
+
 type UserMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -140,6 +149,8 @@ type EagerResource = {
   readonly url?: string | null;
   readonly topicID: string;
   readonly pro?: boolean | null;
+  readonly type?: ResourceTypes | keyof typeof ResourceTypes | null;
+  readonly credits?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -150,6 +161,8 @@ type LazyResource = {
   readonly url?: string | null;
   readonly topicID: string;
   readonly pro?: boolean | null;
+  readonly type?: ResourceTypes | keyof typeof ResourceTypes | null;
+  readonly credits?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
