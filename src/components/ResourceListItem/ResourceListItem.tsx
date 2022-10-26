@@ -2,12 +2,21 @@
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import Colors from "../../constants/Colors";
-import {Entypo, Fontisto, Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
+import {Entypo, Fontisto, Ionicons, MaterialCommunityIcons, MaterialIcons, SimpleLineIcons} from "@expo/vector-icons";
 import * as WebBrowser from 'expo-web-browser';
 import {Exercise, Resource} from "../../models";
 import {Analytics} from "aws-amplify";
 import {useNavigation} from "@react-navigation/native";
 import {adapty} from "react-native-adapty";
+
+const ResourceTypeIcon = {
+    VIDEO: <Entypo name="youtube" size={17} color="gray" />,
+    DOCS: <SimpleLineIcons name="docs" size={17} color="gray" />,
+    BLOG: <Entypo name="book" size={17} color="gray" />,
+    BOOK: <Entypo name="bookmarks" size={17} color="gray" />,
+    COURSE: <Ionicons name="construct-outline" size={17} color="gray" />,
+    NEWSLETTER: <MaterialIcons name="email" size={17} color="gray" />
+}
 
 interface ResourceListItemProps {
     resource: Resource | Exercise;
@@ -56,9 +65,12 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
                     <Text>{index + 1}</Text>
                 )}
             </View>
-            <View className="flex-row items-center space-x-1">
-                <Entypo name="youtube" size={17} color="gray" />
+            <View className="flex-col">
                 <Text>{resource?.title}</Text>
+                <View className="flex-row items-center space-x-1">
+                    <Entypo name="youtube" size={17} color="gray" />
+                    <Text className="text-xs font-semibold">Rokas</Text>
+                </View>
             </View>
             {resource?.url && (<Ionicons name="open-outline" size={21} color="black" style={styles.icon} />)}
             {!isLast && (
@@ -95,10 +107,10 @@ const styles = StyleSheet.create({
     },
     lineIndicator: {
         position: 'absolute',
-        height: 20,
+        height: 27,
         width: 2,
         left: 15,
-        top: 30,
+        top: 32,
         backgroundColor: Colors.light.primary,
     }
 });

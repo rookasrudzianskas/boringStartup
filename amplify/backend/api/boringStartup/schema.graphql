@@ -28,12 +28,23 @@ type QuizQuestion @model @auth(rules: [{allow: private}]) {
   quizID: ID! @index(name: "byQuiz")
 }
 
+enum ResourceTypes {
+  DOCS,
+  VIDEO,
+  BLOG,
+  BOOK,
+  COURSE,
+  NEWSLETTER
+}
+
 type Resource @model @auth(rules: [{allow: private}]) {
   id: ID!
   title: String!
   url: String
   topicID: ID! @index(name: "byTopic")
-  pro: Boolean
+  pro: Boolean,
+  type: ResourceTypes
+  credits: String
 }
 
 type Topic @model @auth(rules: [{allow: private}]) {
