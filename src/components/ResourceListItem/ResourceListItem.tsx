@@ -2,7 +2,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import Colors from "../../constants/Colors";
-import {Fontisto, Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
+import {Entypo, Fontisto, Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
 import * as WebBrowser from 'expo-web-browser';
 import {Exercise, Resource} from "../../models";
 import {Analytics} from "aws-amplify";
@@ -48,14 +48,16 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
     return (
         <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={styles.container}>
             <View style={[styles.indexContainer, isCompleted && styles.completed]}>
-                {isCompleted ? (
+                {!!resource.pro ? (
+                    <MaterialCommunityIcons name="professional-hexagon" size={17} color="gray" />
+                )  : isCompleted ? (
                     <Ionicons name="checkmark" size={22} color="white" />
                 ) : (
                     <Text>{index + 1}</Text>
                 )}
             </View>
             <View className="flex-row items-center space-x-1">
-                {!!resource.pro && <MaterialCommunityIcons name="professional-hexagon" size={17} color="gray" />}
+                <Entypo name="youtube" size={17} color="gray" />
                 <Text>{resource?.title}</Text>
             </View>
             {resource?.url && (<Ionicons name="open-outline" size={21} color="black" style={styles.icon} />)}
