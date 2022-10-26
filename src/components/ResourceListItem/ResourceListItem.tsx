@@ -67,10 +67,12 @@ const ResourceListItem = ({ resource, index, isLast, onComplete = () => {}, isCo
             </View>
             <View className="flex-col">
                 <Text>{resource?.title}</Text>
-                <View className="flex-row items-center space-x-1">
-                    <Entypo name="youtube" size={17} color="gray" />
-                    <Text className="text-xs font-semibold">Rokas</Text>
-                </View>
+                {!!resource?.type && (
+                    <View className="flex-row items-center space-x-1">
+                        {ResourceTypeIcon[resource?.type]}
+                        <Text className="text-xs font-semibold">{resource?.credits || ''}</Text>
+                    </View>
+                )}
             </View>
             {resource?.url && (<Ionicons name="open-outline" size={21} color="black" style={styles.icon} />)}
             {!isLast && (
